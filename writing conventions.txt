@@ -1,0 +1,72 @@
+//_Comandos para comenzar server (ver development unicamente)
+------------------------------------------------------
+Development
+1) nodemon server.js  (en concurrencia con npm start)
+2) npm start          (en concurrencia a nodemon server.js)
+
+Production
+serve - s build
+-------------------------------------------------------
+
+
+//_Lineamientos generales de escritura
+
+- Siempre que se pueda usa const antes que let.
+- Siempre que se pueda nombrá todas las funciones.Evitá funciones anonimas("const x = function(){}").Excepcion las arrow function para obviar el bind en el constructor.Así
+- Empezá las llaves en el mismo renglon de la funcíon:
+Así sí:
+function someFunction() {
+  // code block
+}
+
+Así no:
+function someFunction()
+{
+  // code block
+}
+
+- Preferí siempre que se pueda la igualación estricta "===" sobre "=="
+
+//_ Lineamientos para nombrar variables, funciones y objetos:
+* Funciones, variables, archivos ==> camelCase PALABRAS COMPLETAS. ("incCart" => MAL. "increaseCart" => BIEN. "handleChange(e)" =>MAL. "handleChange(event)" => BIEN)
+* Carpetas ==> underscored(ej. "node_modul"es)
+* TODO SIEMPRE EN INGLES("Cart"=> BIEN. "Carrito"=> MAL)
+
+//^Funciones siempre con verbo primero.
+1) fetch... ==> funciones para traer cosas de una API(fetchAlbums, fetchMovies, etc)
+2) get... ==> funciones para hacer pedidos GET a nuestro back. (getUsers, getFavorites, etc)
+3) post... ==> funciones para hacer pedidos POST a nuestro back... (postNewClient, postLogIn)
+      ...y así sucesivamente con nuestros pedidos DELETE, PUT, etc
+4) set ==> funciones que setean nuestro estado global(setFavoriteMovie)
+
+5) Si tenemos una función que setea nuestro estado global y ademas hace un pedido axios a nuestras rutas, dividila en dos funciones con los naming conventions anteriores.
+
+//^Variables y objetos con sustantivo+tipo de dato, camelCase. Ejemplo: "movieRatingNum, userPreferencesObj, moviesArr".
+
+Opcional recomendado: los parametros de las funciones con el mismo formato de las variables mencionadas antes: "sutantivo"+"tipo de dato" (Tipos de datos: "Str, Obj, Arr, Num, Bool")
+(Ej: "moviesArr", "actorObj", "genresStr", "ratingNum", "loggedInBool") 
+
+Entonces una función para cambiar el rating de una pelicula en el estado local sería algo asi:
+  function setMovieRating(movieStr, movieRatingNum) {
+    this.setState(previousState => ({
+      ...previousState, movies: {
+        ...previousState.movies, [movieStr]: {
+          ...previousState.movies[movieStr], rating: movieRatingNum
+        }
+      }
+    }))
+  }
+
+  state={
+      pelicula1:{...}
+      pelicula2:{}
+      pelicula:{
+        nombre:
+        rating:
+      }
+    }
+  }
+  
+
+
+
