@@ -1,0 +1,5 @@
+Products
+ver la lista de productos
+filtrar productos por categoria
+buscar productos por nombre
+ver los detalles de un producto individual, incluyendo descripciones (descripción de producto y precio), fotos y reviews)
