@@ -1,10 +1,10 @@
 const express = require("express");
 const passport = require("passport");
-const {User} = require("../models");
+const { User } = require("../models");
 const router = express.Router();
-const usersRouter = require("./users")
+const usersRouter = require("./users");
 
-router.use("/users", usersRouter)
+router.use("/users", usersRouter);
 
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
@@ -25,7 +25,6 @@ router.get("/me", (req, res) => {
   if (!req.user) return res.sendStatus(401);
   res.send(req.user);
 });
-
 
 router.use("/", function (req, res) {
   res.sendStatus(404);
