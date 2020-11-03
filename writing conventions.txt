@@ -1,8 +1,8 @@
 //_Comandos para comenzar server (ver development unicamente)
 ------------------------------------------------------
 Development
-1) nodemon server.js  (en concurrencia con npm start)
-2) npm start          (en concurrencia a nodemon server.js)
+1) npm run server  (en concurrencia con npm start)
+2) npm start          (en concurrencia a npm run server)
 
 Production
 serve - s build

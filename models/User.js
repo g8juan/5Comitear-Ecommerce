@@ -42,7 +42,7 @@ User.init({
     type: DataTypes.STRING
   },
   phone: {
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   },
   userType: {
     type: DataTypes.ENUM("1","2","3"), //1:user, 2:admin, 3:SUDO!
@@ -54,6 +54,7 @@ User.init({
   {
     sequelize: database,
     modelName: "user",
+
   }
 );
 
