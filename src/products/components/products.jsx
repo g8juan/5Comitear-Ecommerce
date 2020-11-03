@@ -1,12 +1,12 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-const Products = (products) => {
-    
+const Products = ({products}) => {
+  console.log(products)
   return (
     <div>
       <ul>
-      {products.forEach(product => {
+      {products && products.map((product) => {
         return (
           <li>
             <Link to={`/products/${product.id}`}><img src={product.thumbnail} alt=''/></Link>

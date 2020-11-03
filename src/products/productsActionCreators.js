@@ -8,8 +8,9 @@ export const actionSingleProduct = (singleProduct) => {
     return { type: 'SELECT_PRODUCT', singleProduct: singleProduct }
 }
 
-export const getProducts = (name) => (dispatch) => {
-    axios.get('http://localhost.com/8000/api/products', name)
+export const getProducts = () => (dispatch) => {
+    console.log('AXIOS')
+    axios.get('/api/products')
     .then(res => res.data)
     .then(products => {
         console.log(products)
