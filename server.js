@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
-const http = require("http")
 
 const {User} = require('./models')
 
@@ -46,22 +45,22 @@ passport.serializeUser(function (user, done) {done(null, user.id)})
 // How we look for the user
 passport.deserializeUser(function (id, done) {User.findByPk(id).then(user => done(null, user))})
 
+
 //*Routing
-// const routes = require("./routes");
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: false}))
-// app.use("/api", routes)
+const routes = require("./routes");
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use("/api", routes)
 
 app.use((q,r,next)=>{console.log("Ruta Static"); next()},express.static(path.join(__dirname, 'build')));
+
+//app.use(express.static(__dirname + "/public"));
 
 app.get('/api/ping', function (req, res) {
   console.log("ruta PONG")
   return res.send('pong');
 });
 
-app.get("/test", (req,res)=>{
-  User.create({firstName: "Juan", lastName: "Loza", email: "juan@gmail.com", password: "1231", address: "Pachanga 3032", phone: "2332432", userType: "3"})
-})
 
 app.get('/*', function (req, res) {
   console.log("localhost:8000 ruta => /*")
