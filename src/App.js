@@ -1,40 +1,36 @@
+import React from 'react'
 import './App.css';
-function App() {
-  return (
-    <div className="App" >
-      <header className="App-header">
-        <p>
-          Hola chicos!
-        </p>
-      </header>
-    </div>
+import { Route, Switch } from "react-router-dom";
+import axios from 'axios'
+import ProductsContainer from './products/components/productsContainer'
 
-  );
+class App extends React.Component {
+  constructor() {
+    super()
+  }
+  componentDidMount(){
+    axios.get("/api/users").then(users=>console.log(users))
+  } 
+
+  render() {
+
+    return (
+      <div className="App" >
+        <header className="App-header">
+          <p>
+            APP / MAIN
+          </p>
+        </header>
+
+        <Switch>
+          <Route path="/products" component={ProductsContainer}/>
+          <Route path="/orders"/>
+          <Route path="users" />
+          <Route path="/" />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
-
-// import React from 'react';
-// import Rating from '@material-ui/lab/Rating';
-// import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     '& > * + *': {
-//       marginTop: theme.spacing(1),
-//     },
-//   },
-// }));
-
-// export default function App() {
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-//       <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-//       <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
-//     </div>
-//   );
-// }
