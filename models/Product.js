@@ -26,7 +26,7 @@ Product.init({
     type: DataTypes.INTEGER
   },
   reviews: {
-    type: DataTypes.ARRAY
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
   }
 },
   {

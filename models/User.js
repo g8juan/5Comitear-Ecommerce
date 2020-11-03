@@ -8,7 +8,6 @@ class User extends Model {
   }
 }
 
-
 User.init({
   firstName: {
     type: DataTypes.STRING,
@@ -36,16 +35,15 @@ User.init({
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
   },
   address: {
     type: DataTypes.STRING
   },
   phone: {
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   },
   userType: {
-    type: DataTypes.ENUM("1","2","3"), //1:user, 2:admin, 3:SUDO!
+    type: DataTypes.ENUM("1", "2", "3"), //1:user, 2:admin, 3:SUDO!
   },
   salt: {
     type: DataTypes.STRING,
@@ -54,10 +52,21 @@ User.init({
   {
     sequelize: database,
     modelName: "user",
+    // hooks: {
+    //   beforeCreate: ((user) => {
+    //     return bcrypt.genSalt(16).then((salt) => {
+    //       user.salt = salt;
+    //       return user.hash(user.password, salt)
+    //     }).then((hash) => {
+    //       user.password = hash;
+    //     })
+    //   })
+    // }
   }
 );
 
 User.beforeCreate((user) => {
+  console.log("ENTRA EN EL BEFORE CREATE")
   return bcrypt.genSalt(16).then((salt) => {
     user.salt = salt;
     return user.hash(user.password, salt)
