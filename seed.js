@@ -1,4 +1,4 @@
-const User = require("./models/User") //Puede haber errores con { Task } 
+const User = require("./models/User")  
 
 User.bulkCreate([
   {firstName: "Carlos", lastName: "Rodriguez", email: "carlos@gmail.com", password: 1234, address: "La Pichucha 3031"},

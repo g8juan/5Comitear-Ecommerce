@@ -21,3 +21,5 @@ database.sync({force: true})
         console.log("SERVER LISTENING AT PORT 8000")
       })
   });
+
+ // database.sync({force: false}).then(() => {app.listen(8000, () => console.log('escuchando en puerto 8000'))})
