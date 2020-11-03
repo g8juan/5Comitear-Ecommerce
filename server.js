@@ -1,10 +1,11 @@
-const database = require('../database/database')
+const database = require('./database/database')
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
 const http = require("http")
-const {User} = require('../models')
+
+const {User} = require('./models')
 
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
@@ -45,23 +46,31 @@ passport.serializeUser(function (user, done) {done(null, user.id)})
 // How we look for the user
 passport.deserializeUser(function (id, done) {User.findByPk(id).then(user => done(null, user))})
 
+//*Routing
+// const routes = require("./routes");
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({extended: false}))
+// app.use("/api", routes)
 
+app.use((q,r,next)=>{console.log("Ruta Static"); next()},express.static(path.join(__dirname, 'build')));
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/ping', function (req, res) {
+app.get('/api/ping', function (req, res) {
+  console.log("ruta PONG")
   return res.send('pong');
 });
 
+app.get("/test", (req,res)=>{
+  User.create({firstName: "Juan", lastName: "Loza", email: "juan@gmail.com", password: "1231", address: "Pachanga 3032", phone: "2332432", userType: "3"})
+})
+
 app.get('/*', function (req, res) {
+  console.log("localhost:8000 ruta => /*")
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 // 
 
-database.sync({force: true})
-  .then(() => {
-    http.createServer(app)
-      .listen(process.env.PORT || 8000, () => {
-        console.log("SERVER LISTENING AT PORT 8000")
-      })
-  });
+database.sync({force: true}).then(() => {
+  app.listen(process.env.PORT || 8000, () => {
+      console.log("SERVER LISTENING AT PORT 8000")
+    })
+});
