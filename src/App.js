@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import axios from 'axios'
+import ProductsContainer from './products/components/productsContainer'
 
 class App extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class App extends React.Component {
         </header>
 
         <Switch>
-          <Route path="/products"/>
+          <Route path="/products" component={ProductsContainer}/>
           <Route path="/orders"/>
           <Route path="users" />
           <Route path="/" />
