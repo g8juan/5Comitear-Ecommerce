@@ -32,6 +32,7 @@ class App extends React.Component {
           <Route path="/orders" />
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
+
         </Switch>
       </div>
 

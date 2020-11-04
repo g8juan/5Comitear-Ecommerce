@@ -8,9 +8,9 @@ async function seed() {
   console.log("usuarios generados")
 
   await Product.bulkCreate([
-    {name: "Camisa", price: 2000, description: "una bella camisa", thumbnail: "una bella thumbnail", image: "una bella image", stock: 4, reviews: [7, 6, 9]},
-    {name: "Pantalon", price: 2200, description: "un pantalon gris", thumbnail: "una bella thumbnail de pantalon", image: "una bella imagen de pantalon", stock: 14, reviews: [8, 8, 9]},
-    {name: "Remera", price: 1000, description: "una remera dark", thumbnail: "thumbnail de remera", image: "una bella image", stock: 6, reviews: [7, 5, 6]},
+    {name: "camisa", price: 2000, description: "una bella camisa", thumbnail: "una bella thumbnail", image: "una bella image", stock: 4, reviews: [7, 6, 9]},
+    {name: "pantalon", price: 2200, description: "un pantalon gris", thumbnail: "una bella thumbnail de pantalon", image: "una bella imagen de pantalon", stock: 14, reviews: [8, 8, 9]},
+    {name: "remera", price: 1000, description: "una remera dark", thumbnail: "thumbnail de remera", image: "una bella image", stock: 6, reviews: [7, 5, 6]},
     {name: "campera", price: 4800, description: "una campera muy abrigada", thumbnail: "thumbnail de campera", image: "una bella imagen de campera", stock: 2, reviews: [8, 10, 10]}
   ]).then(() => {
     console.log("productos generados")

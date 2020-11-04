@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const {Product} = require("../models/index")
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 router.get("/", (req, res, next) => {
   if (Object.keys(req.query).length !== 0) {
-    Product.findAll({where: req.query}).then(filteredProducts=>res.send(filteredProducts))
+    const filterObj = {name:{[Op.like]:`%${req.query.name.toLowerCase()}%`}}
+    Product.findAll({where: filterObj}).then(filteredProducts=>res.send(filteredProducts))
   } else {
     Product.findAll()
       .then(products => res.send(products))
