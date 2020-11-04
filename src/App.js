@@ -4,15 +4,13 @@ import { Route, Switch } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import ProductsContainer from "./products/components/productsContainer";
+import ProductsContainer from './products/components/productsContainer'
+import SingleProductContainer from './products/components/singleProductContainer'
 import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
 import NavigationBarContainer from './navbar/NavigationBarContainer.js'
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
   componentDidMount() {
     axios.get("/api/users").then((users) => console.log(users));
   }
@@ -31,11 +29,12 @@ class App extends React.Component {
           <Route path="users" />
           <Route exact path="/" />
           <Route path="/products" component={ProductsContainer} />
+          <Route exact path="/products/:id" component={SingleProductContainer}/>
           <Route path="/orders"/>
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
         </Switch>
-      </div>
+      
     );
   }
 }

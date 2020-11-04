@@ -14,3 +14,12 @@ export const getProducts = (productName) => (dispatch) => {
     .then(products => dispatch(actionProducts(products)))
     .catch(err => console.log(err))
 }
+
+export const getSingleProduct = (id) => (dispatch) => {
+    axios.get('/api/products/singleProduct', { params: id })
+    .then(res => res.data)
+    .then(product => {
+        return dispatch(actionSingleProduct(product))
+    })
+    .catch(err => console.log(err))
+}
