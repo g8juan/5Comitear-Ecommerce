@@ -1,15 +1,15 @@
-/* const defaultState = {
+const defaultState = {
     categories: [],
     categorySelected: {}
 }
 
-export default (state = defaultState, action) => {
-    switch (action.type) {
-    case 'GET_PRODUCTS':
-      return {...state, products: action.products}
-    case 'SELECT_PRODUCT':
-      return {...state, singleProduct: action.singleProduct}
+export default function categoriesReducer (state = defaultState, action) {
+  switch (action.type) {
+    case 'GET_CATEGORIES':
+      return {...state, categories: action.categories}
+    case 'SELECT_CATEGORY':
+      return {...state, categorySelected: action.categorySelected}
     default:
       return state;
-    }
-  } */
+  }
+}

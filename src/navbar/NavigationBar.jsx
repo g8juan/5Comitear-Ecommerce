@@ -12,7 +12,7 @@ export default function NavigationBar({ handleSubmit }) {
         <Nav.Link as={Link} to="/categories">Categories</Nav.Link>
       </Nav>
 
-      <Form onSubmit={handleSubmit} >
+      <Form inline onSubmit={handleSubmit} >
         <FormControl  type="text" placeholder="Search" className="mr-sm-2"/>
         <Button type="submit" variant="outline-info">Search</Button>
       </Form>
