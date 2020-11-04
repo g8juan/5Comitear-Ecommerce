@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+
 const { User } = require("../models");
 const router = express.Router();
 
@@ -10,7 +11,6 @@ const productsRouter = require("./products")
 router.use("/users", usersRouter)
 router.use("/products", productsRouter)
 // router.use("/orders", require("./orders"))
-
 
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {

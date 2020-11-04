@@ -9,6 +9,8 @@ import SingleProductContainer from './products/components/singleProductContainer
 import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
 import NavigationBarContainer from './navbar/NavigationBarContainer.js'
+import CartContainer from "./cart/CartContainer";
+//import { fetchIsLogged } from "../store/action-creators/users";
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,6 +33,7 @@ class App extends React.Component {
           <Route path="/products/:id" component={SingleProductContainer} />
           <Route path="/orders" />
           <Route path="/login" component={LoginContainer} />
+            <Route exact path="/cart" component={CartContainer} />
           <Route path="/register" component={RegisterContainer} />
         </Switch>
       </div>
