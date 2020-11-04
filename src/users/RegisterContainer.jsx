@@ -13,6 +13,7 @@ class RegisterContainer extends React.Component {
       password: "",
       address: "",
       phone: "",
+      error: false,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -20,20 +21,41 @@ class RegisterContainer extends React.Component {
 
   onChangeHandler(e) {
     let value = e.target.value;
+    if (e.target.value === "") {
+      this.setState({ [e.target.id]: true });
+    }
     this.setState({ [e.target.id]: value });
   }
 
   onSubmitHandler(e) {
     e.preventDefault();
-    this.props.register(this.state);
-    this.setState({
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      address: "",
-      phone: "",
-    });
+    if (
+      this.state.email === "" ||
+      this.state.firstName === "" ||
+      this.state.lastName === "" ||
+      this.state.password === "" ||
+      this.state.address === "" ||
+      this.state.phone === ""
+    ) {
+      this.setState({ error: true });
+    } else {
+      this.props.register({
+        email: this.state.email,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        password: this.state.password,
+        address: this.state.address,
+        phone: this.state.phone,
+      });
+      this.setState({
+        email: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        address: "",
+        phone: "",
+      });
+    }
   }
 
   render() {
@@ -47,6 +69,7 @@ class RegisterContainer extends React.Component {
         password={this.state.password}
         onChange={this.onChangeHandler}
         onSubmit={this.onSubmitHandler}
+        error={this.state.error}
       />
     );
   }
