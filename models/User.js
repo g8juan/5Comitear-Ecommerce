@@ -8,6 +8,7 @@ class User extends Model {
   }
 }
 
+
 User.init(
   {
     firstName: {
@@ -50,6 +51,7 @@ User.init(
     salt: {
       type: DataTypes.STRING,
     },
+
   },
   {
     sequelize: database,

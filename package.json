@@ -2,11 +2,8 @@
   "name": "front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "http://localhost:8000/",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.56",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -18,7 +15,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fontsource-roboto": "^3.0.3",
-    "material-ui": "^0.20.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^8.4.2",
@@ -34,6 +30,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.3.5",
+    "volleyball": "^1.5.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

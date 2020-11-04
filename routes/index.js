@@ -9,6 +9,7 @@ const productsRouter = require("./products")
 
 router.use("/users", usersRouter)
 router.use("/products", productsRouter)
+// router.use("/orders", require("./orders"))
 
 
 router.post("/register", (req, res) => {

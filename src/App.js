@@ -1,10 +1,13 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import ProductsContainer from "./products/components/productsContainer";
 import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
+import NavigationBarContainer from './navbar/NavigationBarContainer.js'
 
 class App extends React.Component {
   constructor() {
@@ -14,18 +17,21 @@ class App extends React.Component {
     axios.get("/api/users").then((users) => console.log(users));
   }
 
+
   render() {
     return (
       <div className="App">
+      <NavigationBarContainer />
         {/*    <header className="App-header">
           <p>APP / MAIN</p>
         </header> */}
 
+       
         <Switch>
-          <Route path="/products" component={ProductsContainer} />
-          <Route path="/orders" />
           <Route path="users" />
           <Route exact path="/" />
+          <Route path="/products" component={ProductsContainer}
+          <Route path="/orders"/>
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
         </Switch>
