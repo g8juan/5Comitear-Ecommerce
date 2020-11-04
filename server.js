@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+const volleyball = require('volleyball')
 
 const {User} = require('./models')
 
@@ -45,7 +46,7 @@ passport.serializeUser(function (user, done) {done(null, user.id)})
 // How we look for the user
 passport.deserializeUser(function (id, done) {User.findByPk(id).then(user => done(null, user))})
 
-
+app.use(volleyball)
 //*Routing
 const routes = require("./routes");
 app.use(bodyParser.json())
@@ -68,7 +69,7 @@ app.get('/*', function (req, res) {
 });
 // 
 
-database.sync({force: true}).then(() => {
+database.sync({force: false}).then(() => {
   app.listen(process.env.PORT || 8000, () => {
       console.log("SERVER LISTENING AT PORT 8000")
     })
