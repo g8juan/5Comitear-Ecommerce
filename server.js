@@ -5,12 +5,12 @@ const bodyParser = require('body-parser')
 
 const app = express();
 const volleyball = require('volleyball')
+app.use(volleyball)
 
 const { User } = require("./models");
 
 
-const volleyball = require('volleyball')
-app.use(volleyball)
+
 
 const cookieParser = require("cookie-parser")
 const session = require("express-session")

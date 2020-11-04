@@ -9,6 +9,7 @@ const mapDispatchToProps = (dispatch) => ({ getSingleProduct : (id) => dispatch(
 class SingleProductContainer extends React.Component {
   
   componentDidMount(){
+    console.log(this.props.match.params)
     const id = (this.props.match.params)
     this.props.getSingleProduct(id)
   }
