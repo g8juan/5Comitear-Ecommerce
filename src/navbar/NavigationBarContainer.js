@@ -2,18 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux'
 import NavigationBar from './NavigationBar.jsx'
 import {getProducts} from '../products/productsActionCreators'
+import {withRouter} from 'react-router-dom'
 
-function mapDispatchToProps(dispatch, props) {
+
+function mapDispatchToProps(dispatch, ownprops) {
   return {
     getProducts: (searchTermStr) => dispatch(getProducts(searchTermStr))
   }
 }
+
 
 class NavigationBarContainer extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
     const searchTermStr = event.target[0].value
+    this.props.history.push(`/products/?name=${searchTermStr}`)
     this.props.getProducts(searchTermStr)
     event.target[0].value = ''
   }
@@ -27,4 +31,4 @@ class NavigationBarContainer extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(NavigationBarContainer)
+export default withRouter(connect(null, mapDispatchToProps)(NavigationBarContainer))

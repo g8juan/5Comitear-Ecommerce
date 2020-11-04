@@ -17,7 +17,7 @@ Product.init({
     type: DataTypes.TEXT,
   },
   thumbnail: {
-    type: DataTypes.STRING, //? consultar blob
+    type: DataTypes.STRING, //? consultar blob // guardar las imagenes en firebase y requerimos de esa api
   },
   image: {
     type: DataTypes.STRING

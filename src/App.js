@@ -9,6 +9,9 @@ import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
 import NavigationBarContainer from './navbar/NavigationBarContainer.js'
 import CategoriesContainer from './categories/components/categoriesContainer'
+import CartContainer from "./cart/CartContainer";
+//import { fetchIsLogged } from "../store/action-creators/users";
+
 
 class App extends React.Component {
   
@@ -28,6 +31,7 @@ class App extends React.Component {
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
+          <Route exact path="/cart" component={CartContainer} />
         </Switch>
       </div>
 

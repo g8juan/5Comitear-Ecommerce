@@ -1,9 +1,9 @@
 import React from 'react'
  import {Link} from 'react-router-dom'
  import {Navbar, Nav, FormControl, Button, Form} from 'react-bootstrap';
+  
 
 export default function NavigationBar({ handleSubmit }) {
-
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/home">Navbar</Navbar.Brand>
@@ -14,7 +14,7 @@ export default function NavigationBar({ handleSubmit }) {
 
       <Form inline onSubmit={handleSubmit} >
         <FormControl  type="text" placeholder="Search" className="mr-sm-2"/>
-        <Button type="submit" variant="outline-info">Search</Button>
+        <Button type="submit" variant="outline-info" >Search</Button>
       </Form>
 
     </Navbar>

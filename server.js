@@ -9,9 +9,6 @@ app.use(volleyball)
 
 const { User } = require("./models");
 
-
-
-
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const passport = require("passport")
@@ -62,9 +59,9 @@ passport.deserializeUser(function (id, done) {
   User.findByPk(id).then((user) => done(null, user));
 });
 
+
 //*Routing
 const routes = require("./routes");
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 

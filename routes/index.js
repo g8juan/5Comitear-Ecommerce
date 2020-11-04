@@ -1,17 +1,18 @@
 const express = require("express");
 const passport = require("passport");
+
 const { User } = require("../models");
 const router = express.Router();
 
 const categoriesRouter = require('./categories')
 const usersRouter = require("./users")
 const productsRouter = require("./products")
+const ordersRouter = require("./orders")
 
 router.use("/categories", categoriesRouter)
 router.use("/users", usersRouter)
 router.use("/products", productsRouter)
-// router.use("/orders", require("./orders"))
-
+router.use("/orders", ordersRouter)
 
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
