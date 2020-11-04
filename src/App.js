@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
@@ -19,22 +19,22 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <NavigationBarContainer />
+        <NavigationBarContainer />
         {/*    <header className="App-header">
           <p>APP / MAIN</p>
         </header> */}
 
-       
         <Switch>
           <Route path="users" />
           <Route exact path="/" />
-          <Route path="/products" component={ProductsContainer} />
-          <Route exact path="/products/:id" component={SingleProductContainer}/>
-          <Route path="/orders"/>
+          <Route exact path="/products" component={ProductsContainer} />
+          <Route path="/products/:id" component={SingleProductContainer} />
+          <Route path="/orders" />
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
         </Switch>
-      
+      </div>
+
     );
   }
 }
