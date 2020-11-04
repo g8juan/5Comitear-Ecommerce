@@ -9,17 +9,13 @@ const mapDispatchToProps = (dispatch) => ({ getSingleProduct : (id) => dispatch(
 class SingleProductContainer extends React.Component {
   
   componentDidMount(){
-    console.log(this.props.match.params)
-    const id = (this.props.match.params)
-    this.props.getSingleProduct(id)
+    this.props.getSingleProduct(this.props.match.params)
   }
 
   render() {
-    console.log(this.props.singleProduct)
     const {singleProduct} = this.props
     return (
       <div>
-        SINGLE PRODUCT CONTAINER
         <SingleProduct singleProduct={singleProduct}/> 
       </div>
     );
