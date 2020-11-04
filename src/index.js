@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import LoginContainer from "./users/LoginContainer";
+
 //import reportWebVitals from './reportWebVi
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -12,7 +12,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-        <LoginContainer />
+        <App />
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,
