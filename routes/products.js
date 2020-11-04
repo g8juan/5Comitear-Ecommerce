@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const {Product} = require("../models/index")
 
-router.get("/", (req, res) => {
-  Product.findAll()
-  .then(products => {
-    res.send(products)
-})
+router.get("/", (req, res, next) => {
+  if (Object.keys(req.query).length !== 0) {
+    Product.findAll({where: req.query}).then(filteredProducts=>res.send(filteredProducts))
+  } else {
+    Product.findAll()
+      .then(products => res.send(products))
+  }
 })
 
 router.post("/", (req, res) => {
