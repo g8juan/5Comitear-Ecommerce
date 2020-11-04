@@ -1,69 +1,45 @@
-/* import './App.css';
-function App() {
-  return (
-    <div className="App" >
-      <header className="App-header">
-        <p>
-          Hola chicos!
-        </p>
-      </header>
-    </div>
+import React from "react";
+import "./App.css";
+import {Route, Switch} from "react-router-dom";
 
-  );
-}
-
-export default App; */
-
-// import React from 'react';
-// import Rating from '@material-ui/lab/Rating';
-// import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     '& > * + *': {
-//       marginTop: theme.spacing(1),
-//     },
-//   },
-// }));
-
-// export default function App() {
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-//       <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-//       <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-import React, { Component } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-//import { fetchIsLogged } from "../store/action-creators/users";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
+import ProductsContainer from './products/components/productsContainer'
+import SingleProductContainer from './products/components/singleProductContainer'
+import RegisterContainer from "./users/RegisterContainer";
+import LoginContainer from "./users/LoginContainer";
+import NavigationBarContainer from './navbar/NavigationBarContainer.js'
 import CartContainer from "./cart/CartContainer";
+//import { fetchIsLogged } from "../store/action-creators/users";
 
+class App extends React.Component {
+  componentDidMount() {
+    axios.get("/api/users").then((users) => console.log(users));
+  }
 
-class App extends Component {
 
   render() {
     return (
       <div className="App">
+        <NavigationBarContainer />
+        {/*    <header className="App-header">
+          <p>APP / MAIN</p>
+        </header> */}
+
         <Switch>
-          <Route exact path="/cart" component={CartContainer} />
-          {/* <Route exact path="/order" component={OrderContainer} /> */}
-          <Redirect from="/" to="#" />
+          <Route path="users" />
+          <Route exact path="/" />
+          <Route exact path="/products" component={ProductsContainer} />
+          <Route path="/products/:id" component={SingleProductContainer} />
+          <Route path="/orders" />
+          <Route path="/login" component={LoginContainer} />
+            <Route exact path="/cart" component={CartContainer} />
+          <Route path="/register" component={RegisterContainer} />
         </Switch>
       </div>
+
     );
   }
 }
 
-export default connect(null, null)(App);
+export default App;
