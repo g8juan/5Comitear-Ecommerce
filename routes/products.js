@@ -12,7 +12,6 @@ router.get("/", (req, res, next) => {
       .then(products => res.send(products))
   }
 })
-})
 
 router.get("/:query", (req, res, next) => {
     Product.findAll({where:{name: req.params.query}})

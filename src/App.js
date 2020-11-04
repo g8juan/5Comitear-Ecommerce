@@ -30,7 +30,7 @@ class App extends React.Component {
         <Switch>
           <Route path="users" />
           <Route exact path="/" />
-          <Route path="/products" component={ProductsContainer}
+          <Route path="/products" component={ProductsContainer} />
           <Route path="/orders"/>
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
