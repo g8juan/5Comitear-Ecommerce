@@ -1,28 +1,25 @@
 import React from 'react'
 import './App.css';
 import { Route, Switch } from "react-router-dom";
-import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBarContainer from './navbar/NavigationBarContainer.js'
 
 class App extends React.Component {
-  constructor() {
-    super()
-  }
-  componentDidMount(){
-    axios.get("/api/users").then(users=>console.log(users))
-  } 
 
   render() {
 
     return (
       <div className="App" >
+         <NavigationBarContainer />
         <header className="App-header">
           <p>
             APP / MAIN
           </p>
         </header>
 
+       
         <Switch>
-          <Route path="/products"/>
+          <Route path="/products" />
           <Route path="/orders"/>
           <Route path="users" />
           <Route path="/" />

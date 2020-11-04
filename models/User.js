@@ -43,7 +43,7 @@ User.init({
     type: DataTypes.STRING
   },
   userType: {
-    type: DataTypes.ENUM("1", "2", "3"), //1:user, 2:admin, 3:SUDO!
+    type: DataTypes.INTEGER, //1:user, 2:admin, 3:SUDO!
   },
   salt: {
     type: DataTypes.STRING,

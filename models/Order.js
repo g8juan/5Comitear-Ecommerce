@@ -4,11 +4,15 @@ const database = require("../database/database.js");
 class Order extends Model {}
 
 Order.init({
-
+  userId: {
+    type:DataTypes.INTEGER,
+    model:"users",
+    key:"id"
+  },
   ammount: {
     type: DataTypes.INTEGER,
   },
-  adress: {
+  address: {
     type: DataTypes.STRING,
     allowNull: false
   },
