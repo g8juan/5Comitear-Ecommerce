@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {Product} = require("../models/index")
 
 router.get("/", (req, res, next) => {
+
   console.log("Llego a ruta GET")
   console.log(req.query)
   if (Object.keys(req.query).length !== 0) {
@@ -11,6 +12,12 @@ router.get("/", (req, res, next) => {
       .then(products => res.send(products))
   }
 })
+})
+
+router.get("/:query", (req, res, next) => {
+    Product.findAll({where:{name: req.params.query}})
+    .then(products => res.send(products))
+  })
 
 router.post("/", (req, res, next) => {
   Product.create(req.body)

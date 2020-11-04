@@ -1,5 +1,31 @@
-// import axios from "axios";
+import axios from "axios";
 // import {SET_USERS} from "../redux/constants"
+
+const setUser = (user) => ({
+  type: "SET_USER",
+  payload: user,
+});
+
+const loginUser = (user) => ({
+  type: "LOGIN_USER",
+  payload: user,
+});
+
+export const register = (user) => (dispatch) => {
+  axios
+    .post("api/register", user)
+    .then((res) => res.data)
+    .then((logInfo) => dispatch(setUser(logInfo)));
+};
+
+export const login = (user) => (dispatch) => {
+  axios
+    .post("http://localhost:8000/api/login", user)
+    .then((res) => res.data)
+    .then((logInfo) => dispatch(loginUser(logInfo)));
+};
+
+//     .post("http://localhost:8000/api/register", user)
 
 // function setUser(usersArr) {
 //   return {
@@ -25,4 +51,3 @@
 //       .catch(err => {throw err});
 //   }
 // }
-
