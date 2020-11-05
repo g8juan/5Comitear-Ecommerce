@@ -1,20 +1,22 @@
 import React from "react";
 import "./App.css";
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ProductsContainer from './products/components/productsContainer'
-import SingleProductContainer from './products/components/singleProductContainer'
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import ProductsContainer from "./products/components/productsContainer";
+import SingleProductContainer from "./products/components/singleProductContainer";
 import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
-import NavigationBarContainer from './navbar/NavigationBarContainer.js'
+import NavigationBarContainer from "./navbar/NavigationBarContainer.js";
 import CategoriesContainer from './categories/components/categoriesContainer'
 import CartContainer from "./cart/CartContainer";
+import OrderContainer from "./orders/OrderContainer";
+import PaymentContainer from "./payment/MainScreen";
+
 //import { fetchIsLogged } from "../store/action-creators/users";
 
-
 class App extends React.Component {
-  
   render() {
     return (
       <div className="App">
@@ -32,9 +34,9 @@ class App extends React.Component {
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
+          <Route exact path="/payment" component={PaymentContainer} />
         </Switch>
       </div>
-
     );
   }
 }
