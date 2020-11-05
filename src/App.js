@@ -29,7 +29,7 @@ class App extends React.Component {
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
-          <Route exact path="/orders" />
+          <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
