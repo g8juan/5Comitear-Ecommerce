@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => {
+const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete, cart }) => {
   const classes = useStyles();
   return (
     <div>
@@ -42,6 +42,7 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => 
                 <div className="col-lg-9">
                   <div className="row shop-listing">
                     <table className="table shop-table">
+                      <tbody>
                       <tr>
                         <th className="b-0">Photo</th>
                         <th className="b-0">Name</th>
@@ -50,8 +51,11 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => 
                         <th className="b-0 text-center">Total Price</th>
                         <th className="b-0"></th>
                       </tr>
+                      {cart.map((item,i)=>(
+                        <p key={i}>{item.name}</p>
+                      ))}
                       {products.map((item, i) => (
-                        <tr>
+                        <tr key={i}>
                           <td>{item.thumbnail}</td>
                           <td>{item.name}</td>
                           <td>{item.price}</td>
@@ -82,10 +86,10 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => 
                         </tr>
                       ))}
                       <tr>
-                        <td colspan="3" align="right">
+                        <td colSpan="3" align="right">
                           Subtotal :{payload.subTotal}
                         </td>
-                        <td colspan="4" align="right">
+                        <td colSpan="4" align="right">
                           <Link to="/orders">
                             <button className="btn btn-primary">
                               Proceed to checkout
@@ -93,6 +97,7 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => 
                           </Link>
                         </td>
                       </tr>
+                      </tbody>
                     </table>
                   </div>
                 </div>

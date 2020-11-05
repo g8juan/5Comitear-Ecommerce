@@ -3,7 +3,7 @@ import React from 'react'
  import {Navbar, Nav, FormControl, Button, Form} from 'react-bootstrap';
   
 
-export default function NavigationBar({ handleSubmit }) {
+export default function NavigationBar({ handleSubmit, user }) {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/home">5mitear</Navbar.Brand>
@@ -15,6 +15,7 @@ export default function NavigationBar({ handleSubmit }) {
       <Form inline onSubmit={handleSubmit} >
         <FormControl  type="text" placeholder="Search" className="mr-sm-2"/>
         <Button type="submit" variant="outline-info" >Search</Button>
+          {user.id ? <p>{user.name}</p>:null}
         <Nav.Link as={Link} to="/register">Sign up</Nav.Link>
         <Nav.Link as={Link} to="/login">Log in</Nav.Link>
       </Form>

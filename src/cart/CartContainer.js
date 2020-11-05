@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Cart from "./Cart";
@@ -7,14 +6,16 @@ import { increaseProductQuantity, decreaseProductQuantity, getProductsInCart } f
 
 const mapStateToProps = (state) => {
   return {
-    products: state.cart.productsInCart
+    products: state.cart.productsInCart,
+    userId: state.users.user.id,
+    cart: state.cart
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     oneMore: (productId) => dispatch(increaseProductQuantity(productId)),
     oneLess: (productId) => dispatch(decreaseProductQuantity(productId)),
-    productsInCart: () => dispatch(getProductsInCart())
+    getProductsInCart: (userId) => dispatch(getProductsInCart(userId))
   };
 };
 
@@ -47,7 +48,8 @@ class CartContainer extends React.Component {
     // this.handleDelete = this.handleDelete.bind(this);  // borrar productos del carrito
   }
   componentDidMount() {
-    //this.props.productsInCart()
+    console.log(this.props)
+    if(this.props.userId) this.props.getProductsInCart(this.props.userId)
   }
 
   componentWillUnmount() {
@@ -110,6 +112,7 @@ class CartContainer extends React.Component {
     return (
       <div>
         <Cart 
+          cart = {this.props.cart}
           increaseQty ={this.increaseQty} 
           decreaseQty={this.decreaseQty} 
           // products={this.props.products}  cuando podamos traer la data que Juan envia al back

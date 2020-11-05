@@ -13,18 +13,32 @@ import CategoriesContainer from './categories/components/categoriesContainer'
 import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
+import { setUser } from "./users/usersActionCreators";
 
 //import { fetchIsLogged } from "../store/action-creators/users";
 
 class App extends React.Component {
-  render() {
+
+
+    mapStateToProps(dispatch){
+      return {
+        setUser: (user) => dispatch(setUser(user))
+      }
+    }
+
+    componentDidMount(){
+      console.log("entre al componentDidMount de app.js")
+        axios.get("/api/me").then(res => res.data).then(user => {
+          console.log(`found user ${user.email}`);
+          this.props.setUser(user)
+        }).catch(err => console.log(err))
+    }
+
+    render() {
     return (
       <div className="App">
         <NavigationBarContainer />
-        {/*    <header className="App-header">
-          <p>APP / MAIN</p>
-        </header> */}
-
+      
         <Switch>
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/search" component={ProductsContainer} />

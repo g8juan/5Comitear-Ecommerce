@@ -32,7 +32,7 @@ export default function SingleProduct ({singleProduct}) {
       <CardActionArea>
       <CardMedia
         className={classes.media}
-        image={singleProduct.image}
+        image={singleProduct.thumbnail}
         title={singleProduct.name}
       />
         <CardContent>
