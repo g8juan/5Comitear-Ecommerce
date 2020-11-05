@@ -11,6 +11,16 @@ const loginUser = (user) => ({
   payload: user,
 });
 
+const getUsers = (users) => ({
+  type: "GET_USERS",
+  payload: users,
+});
+
+export const errorLogin = (error) => ({
+  type: "ERROR_LOGIN",
+  error,
+});
+
 export const register = (user) => (dispatch) => {
   axios
     .post("api/register", user)
@@ -22,7 +32,15 @@ export const login = (user) => (dispatch) => {
   axios
     .post("http://localhost:8000/api/login", user)
     .then((res) => res.data)
-    .then((logInfo) => dispatch(loginUser(logInfo)));
+    .then((logInfo) => dispatch(loginUser(logInfo)))
+    .catch((err) => dispatch(errorLogin(true)));
+};
+
+export const getUser = () => (dispatch) => {
+  axios
+    .get("http://localhost:8000/api/users")
+    .then((res) => res.data)
+    .then((users) => dispatch(getUsers(users)));
 };
 
 //     .post("http://localhost:8000/api/register", user)

@@ -14,7 +14,6 @@ import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
 
-//import { fetchIsLogged } from "../store/action-creators/users";
 
 class App extends React.Component {
   render() {
@@ -26,6 +25,7 @@ class App extends React.Component {
         </header> */}
 
         <Switch>
+
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
@@ -35,6 +35,7 @@ class App extends React.Component {
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
+
         </Switch>
       </div>
     );

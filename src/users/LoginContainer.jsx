@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import { connect } from "react-redux";
-import { login } from "./usersActionCreators";
+import { login, errorLogin } from "./usersActionCreators";
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class LoginContainer extends React.Component {
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   onSubmitHandler(e) {
@@ -24,6 +25,10 @@ class LoginContainer extends React.Component {
     this.setState({ [e.target.id]: value });
   }
 
+  handleClose() {
+    this.props.errorLogin(false);
+  }
+
   render() {
     return (
       <Login
@@ -31,19 +36,26 @@ class LoginContainer extends React.Component {
         onSubmit={this.onSubmitHandler}
         email={this.state.email}
         password={this.state.password}
+        error={this.props.error}
+        handleClose={this.handleClose}
       />
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    error: state.users.error,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (user) => {
       dispatch(login(user));
+    },
+    errorLogin: (bool) => {
+      dispatch(errorLogin(bool));
     },
   };
 };

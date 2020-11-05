@@ -7,19 +7,20 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+
+mport Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
+import Modal from "@material-ui/core/Modal";
+
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Grupo 5 E-Commerce P5,
-      </Link>{" "}
-      {new Date().getFullYear()}
+      <Link to="#">Grupo 5 E-Commerce P5,</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -45,7 +46,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ onSubmit, onChange, email, password }) {
+export default function SignIn({
+  onSubmit,
+  onChange,
+  email,
+  password,
+  error,
+  handleClose,
+}) {
   const classes = useStyles();
 
   return (
@@ -96,6 +104,43 @@ export default function SignIn({ onSubmit, onChange, email, password }) {
           >
             Iniciar sesión
           </Button>
+          {error ? (
+            <div>
+              <Modal
+                open={true}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    width: 200,
+                    height: 100,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    flexDirection: "column",
+                    margin: "0 auto",
+
+                    marginTop: 200,
+                  }}
+                >
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      width: "100%",
+                      height: "100%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <h2 id="simple-modal-title">Error</h2>
+                    <p id="simple-modal-description">El usuario no es válido</p>
+                  </div>
+                  <button onClick={handleClose}>Cerrar</button>
+                </div>
+              </Modal>
+              ;
+            </div>
+          ) : null}
           <Grid container>
             <Grid item xs>
               <Link to="/login" variant="body2">
