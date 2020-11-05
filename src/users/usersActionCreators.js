@@ -12,10 +12,23 @@ const getUsers = (users) => ({
   payload: users,
 });
 
+const setOrder = (order) => ({
+  type: "SET_ORDER",
+  payload: order,
+});
+
 export const errorLogin = (error) => ({
   type: "ERROR_LOGIN",
   error,
 });
+
+export const getOrderId = (id) => (dispatch) =>{
+  axios.get("/api/orders/getClientOrder/2" )
+  .then(res => res.data)
+  .then(products => dispatch(setOrder(products)))
+  .catch(err => console.log(err))
+}
+
 
 export const register = (user) => (dispatch) => {
   axios
@@ -25,7 +38,7 @@ export const register = (user) => (dispatch) => {
 
 export const login = (user) => (dispatch) => {
   axios
-    .post("http://localhost:8000/api/login", user)
+    .post("/api/login", user, {withCredentials:true})
     .then((res) => res.data)
     .then((logInfo) => dispatch(setUser(logInfo)))
     .catch((err) => dispatch(errorLogin(true)));

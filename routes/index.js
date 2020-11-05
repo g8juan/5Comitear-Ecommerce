@@ -27,7 +27,9 @@ router.get("/404", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.send(req.user).catch((err) => res.redirect("/404").send(err));
+  console.log("/login",req.isAuthenticated())
+  console.log(req.user);
+  res.send(req.user)
 });
 
 router.post("/logout", (req, res) => {
@@ -36,9 +38,15 @@ router.post("/logout", (req, res) => {
 });
 
 router.get("/me", (req, res) => {
+  console.log("authenticate",req.isAuthenticated())
+  console.log("/ME",req.user)
   if (!req.user) return res.sendStatus(401);
   res.send(req.user);
 });
+
+router.get("/test",(req, res) =>{
+  console.log(req.user);
+})
 
 router.use("/", function (req, res) {
   res.sendStatus(404);
