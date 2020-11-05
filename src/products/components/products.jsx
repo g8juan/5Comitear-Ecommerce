@@ -1,62 +1,88 @@
-import React from 'react'
+//DEFAULT
+import React from 'react';
 import {Link} from "react-router-dom";
-
-// STYLES
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+
+// GRID
+import Grid from '@material-ui/core/Grid';
+
+// CARD
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
+    margin: 50,
   },
-  gridList: {
-    padding: 50,
-    width: 'auto',
-    height: 'auto',
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+  rootCard: {
+    marginTop: 50,
+    maxWidth: 500,
+    margin: '0 auto'
   },
+  media: {
+    height: 250,
+    maxWidth: 250,
+    margin: '0 auto'
+  },
+  buttons: {
+    margin: '0 auto'
+  }
 }));
 
-const Products = ({products}) => {
-
+export default function Products({products}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={180} cols={3} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={3} style={{ height: 'auto'}}>
-          <ListSubheader component="div">PRODUCTS</ListSubheader>
-        </GridListTile>
-        {products.map((product) => (
-          <GridListTile key={product.id} style={{ height: 'auto'}}>
-            <img src={product.thumbnail} alt={product.name}/>
-            <GridListTileBar
-              title={product.name}
-              subtitle={<span>Price: {product.price} $ARS</span>}
-              actionIcon={
-                <Link to={`/products/${product.id}`}>
-                  <IconButton aria-label={`info about ${product.description}`} className={classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                </Link>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
+      <p className={classes.buttons}> PRODUCTS </p>
+      <Grid container spacing={3}>
+        {products.map(product => {
+          return (
+        <Grid item xs={3}>
+          <Card className={classes.rootCard}>
+            <CardActionArea>
+            <Link to={`/products/${product.id}`}>
+              <CardMedia
+                className={classes.media}
+                image={product.image}
+                title={product.name}
+              />
+            </Link>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                {product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                {product.description}
+                <br/>
+                Precio: $ {product.price} ARS
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions >
+              <Button size="small" color="primary" className={classes.buttons}>
+                Añadir al carrito
+              </Button>
+                <Button size="small" color="primary" className={classes.buttons}>
+                <Link to={`/products/${product.id}`}>Ver Producto</Link>
+                </Button> 
+            </CardActions>
+          </Card>
+        </Grid>
+        )
+        })}
+      </Grid>
     </div>
-  )
+  );
 }
-
-export default Products
