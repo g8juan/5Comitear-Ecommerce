@@ -19,9 +19,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Grupo 5 E-Commerce P5.
-      </Link>{" "}
+      <Link to="#">Grupo 5 E-Commerce P5.</Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -176,7 +174,11 @@ export default function SignUp({
             Registrar
           </Button>
           {error ? (
-            <Alert variant="outlined" severity="error">
+            <Alert
+              style={{ margin: "15px" }}
+              variant="outlined"
+              severity="error"
+            >
               Pst! Todos los campos deben estar completos.
             </Alert>
           ) : null}

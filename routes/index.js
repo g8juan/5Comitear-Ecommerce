@@ -3,13 +3,11 @@ const passport = require("passport");
 const { User } = require("../models");
 const router = express.Router();
 
-const usersRouter = require("./users")
-const productsRouter = require("./products")
+const usersRouter = require("./users");
+const productsRouter = require("./products");
 
-
-router.use("/users", usersRouter)
-router.use("/products", productsRouter)
-
+router.use("/users", usersRouter);
+router.use("/products", productsRouter);
 
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
@@ -17,8 +15,12 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.get("/404", (req, res) => {
+  res.send("No existe el usuario");
+});
+
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.send(req.user);
+  res.send(req.user).catch((err) => res.redirect("/404").send(err));
 });
 
 router.post("/logout", (req, res) => {
