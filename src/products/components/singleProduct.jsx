@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
+  rootCard: {
     marginTop: 50,
     maxWidth: 500,
     margin: '0 auto'
@@ -25,10 +25,10 @@ const useStyles = makeStyles({
   }
 });
 
-const SingleProduct = ({singleProduct}) => {
+export default function SingleProduct ({singleProduct}) {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.rootCard}>
       <CardActionArea>
       <CardMedia
         className={classes.media}
@@ -57,5 +57,3 @@ const SingleProduct = ({singleProduct}) => {
     </Card>
   )
 }
-
-export default SingleProduct

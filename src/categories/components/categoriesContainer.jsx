@@ -15,7 +15,6 @@ class CategoriesContainer extends React.Component {
   render() {
     return ( 
     <div>
-      CATEGORIES
       <Categories categories={this.props.categories}/>
     </div>
     );
