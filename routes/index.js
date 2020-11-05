@@ -18,8 +18,8 @@ router.use("/orders", ordersRouter)
 
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
-    res.status(201).send(user);
-  });
+    res.status(201).send(user)
+  }).catch(err=>console.log(err));;
 });
 
 router.get("/404", (req, res) => {
