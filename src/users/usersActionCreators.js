@@ -12,10 +12,10 @@ const loginUser = (user) => ({
 });
 
 export const register = (user) => (dispatch) => {
-  axios
+  return axios
     .post("api/register", user)
     .then((res) => res.data)
-    .then((logInfo) => dispatch(setUser(logInfo)));
+    .then((logInfo) => dispatch(setUser(logInfo)))
 };
 
 export const login = (user) => (dispatch) => {

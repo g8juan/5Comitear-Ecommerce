@@ -25,9 +25,9 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/products" component={ProductsContainer} />
+          <Route exact path="/products/search" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
-          <Route exact path="/orders" />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />

@@ -17,8 +17,7 @@ class NavigationBarContainer extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const searchTermStr = event.target[0].value
-    this.props.history.push(`/products/?name=${searchTermStr}`)
-    this.props.getProducts(searchTermStr)
+    this.props.history.push({pathname:'/products', search: `?s=${searchTermStr}`})
     event.target[0].value = ''
   }
 
