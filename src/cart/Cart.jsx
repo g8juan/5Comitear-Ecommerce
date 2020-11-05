@@ -105,7 +105,3 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => 
   );
 };
 export default Cart;
-
-{
-  /* <button onClick={() => handleDelete(product.id)}>Eliminar</button> */
-}
