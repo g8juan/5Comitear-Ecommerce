@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     oneMore: (productId) => dispatch(increaseProductQuantity(productId)),
     oneLess: (productId) => dispatch(decreaseProductQuantity(productId)),
-    getProductsInCart: (userId) => dispatch(getProductsInCart(userId))
+    productsInCart: (userId) => dispatch(getProductsInCart(userId))
   };
 };
 
