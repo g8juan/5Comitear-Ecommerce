@@ -49,6 +49,13 @@ router.post('/addItemToCart', (req, res) => {
     .then(() => res.sendStatus(200)).catch(err => console.log(err))
 })
 
+router.get('/getClientOrder/:userId', (req, res)=>{
+  console.log("llego a la ruta del back, reqbody=",req.params)
+  Order.findOne({where:{userId:req.params.userId, orderStatus:"pending"}})
+  .then(order => res.send(order))
+  .catch(err=> console.log(err))
+})
+
 //update order quantity // item quantity (BOTONES - / +) //JSON modelo a enviar  {"quantity": 12, "orderId": 2, "productId":2}
 //La logica de aumentar o disminuir la cantidad se hace desde el front
 router.put('/updateItemQuantity', (req, res) => {

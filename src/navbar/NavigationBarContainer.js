@@ -14,7 +14,6 @@ function mapDispatchToProps(dispatch, ownprops) {
   }
 }
 
-
 class NavigationBarContainer extends React.Component {
 
   handleSubmit = (event) => {
@@ -25,6 +24,7 @@ class NavigationBarContainer extends React.Component {
   }
 
   render() {
+    console.log("PROPS NAVBAR",this.props.user)
     return (
       <div>
         <NavigationBar handleSubmit={this.handleSubmit} user={this.props.user}/>

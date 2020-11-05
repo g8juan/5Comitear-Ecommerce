@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import { connect } from "react-redux";
-import { login, errorLogin } from "./usersActionCreators";
+import { login, errorLogin, getOrderId } from "./usersActionCreators";
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class LoginContainer extends React.Component {
   onSubmitHandler(e) {
     e.preventDefault();
     this.props.login(this.state);
+    this.props.getOrderId(this.props.userId)
   }
 
   onChangeHandler(e) {
@@ -46,6 +47,7 @@ class LoginContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     error: state.users.error,
+    userId: state.users.user.id
   };
 };
 
@@ -57,6 +59,7 @@ const mapDispatchToProps = (dispatch) => {
     errorLogin: (bool) => {
       dispatch(errorLogin(bool));
     },
+    getOrderId: (id) => dispatch(getOrderId(id))
   };
 };
 
