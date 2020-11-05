@@ -16,13 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = ({
-  increaseQty,
-  decreaseQty,
-  products,
-  payload,
-  handleDelete,
-}) => {
+const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete }) => {
   const classes = useStyles();
   return (
     <div>
@@ -34,8 +28,7 @@ const Cart = ({
                 <div className="col-md-6 align-self-center text-center">
                   <h1 className="title">Cart Listing</h1>
                   <h6 className="subtitle op-8">
-                    We are small team (5mitear) of creative people working
-                    together
+                    We are small team (5mitear) of creative people working together
                   </h6>
                 </div>
               </div>
@@ -69,9 +62,7 @@ const Cart = ({
                             >
                               -
                             </button>
-                            <span className={classes.quantity}>
-                              {item.quantity}
-                            </span>
+                            <span className={classes.quantity}>{item.quantity}</span>
                             <button
                               onClick={() => increaseQty(item)}
                               className="btn btn-primary btn-sm"
@@ -95,7 +86,7 @@ const Cart = ({
                           Subtotal :{payload.subTotal}
                         </td>
                         <td colspan="4" align="right">
-                          <Link to="/order">
+                          <Link to="/orders">
                             <button className="btn btn-primary">
                               Proceed to checkout
                             </button>
