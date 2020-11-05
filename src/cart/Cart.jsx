@@ -114,7 +114,3 @@ const Cart = ({
   );
 };
 export default Cart;
-
-{
-  /* <button onClick={() => handleDelete(product.id)}>Eliminar</button> */
-}
