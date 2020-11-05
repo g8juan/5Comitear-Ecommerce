@@ -15,7 +15,6 @@ import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
 import { setUser } from "./users/usersActionCreators";
 
-//import { fetchIsLogged } from "../store/action-creators/users";
 
 class App extends React.Component {
 
@@ -40,6 +39,7 @@ class App extends React.Component {
         <NavigationBarContainer />
       
         <Switch>
+
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/search" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
@@ -50,6 +50,7 @@ class App extends React.Component {
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
+
         </Switch>
       </div>
     );

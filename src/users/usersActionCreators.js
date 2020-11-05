@@ -7,8 +7,18 @@ export const setUser = (user) => ({
 });
 
 
-export const register = (user) => () => {
-  return axios
+const getUsers = (users) => ({
+  type: "GET_USERS",
+  payload: users,
+});
+
+export const errorLogin = (error) => ({
+  type: "ERROR_LOGIN",
+  error,
+});
+
+export const register = (user) => (dispatch) => {
+  axios
     .post("api/register", user)
     .then((res) => res.data)
 };
@@ -17,7 +27,15 @@ export const login = (user) => (dispatch) => {
   axios
     .post("http://localhost:8000/api/login", user)
     .then((res) => res.data)
-    .then((user) => dispatch(setUser(user)));
+    .then((logInfo) => dispatch(setUser(logInfo)))
+    .catch((err) => dispatch(errorLogin(true)));
+};
+
+export const getUser = () => (dispatch) => {
+  axios
+    .get("http://localhost:8000/api/users")
+    .then((res) => res.data)
+    .then((users) => dispatch(getUsers(users)));
 };
 
 //export const getUserData = ()
