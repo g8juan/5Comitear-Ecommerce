@@ -2,6 +2,7 @@
 const database = require('./database/database')
 const express = require('express');
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express();
 const volleyball = require('volleyball')
@@ -9,6 +10,7 @@ app.use(volleyball)
 
 const { User } = require("./models");
 
+app.use(cors())
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const passport = require("passport")
