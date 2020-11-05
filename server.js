@@ -1,18 +1,19 @@
-const database = require("./database/database");
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+
+const database = require('./database/database')
+const express = require('express');
+const bodyParser = require('body-parser')
+
 const app = express();
-const cors = require("cors");
+const volleyball = require('volleyball')
+app.use(volleyball)
 
 const { User } = require("./models");
 
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser")
+const session = require("express-session")
+const passport = require("passport")
+const LocalStrategy = require('passport-local').Strategy;
 
-app.use(cors());
 app.use(cookieParser()); // popula req.cookie
 app.use(
   session({
@@ -58,31 +59,20 @@ passport.deserializeUser(function (id, done) {
   User.findByPk(id).then((user) => done(null, user));
 });
 
+
 //*Routing
 const routes = require("./routes");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/api", routes);
-
-app.use((q, r, next) => {
-  console.log("Ruta Static");
-  next();
-}, express.static(path.join(__dirname, "build")));
-
-//app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
 
 app.get("/api/ping", function (req, res) {
   console.log("ruta PONG");
   return res.send("pong");
 });
 
-app.get("/*", function (req, res) {
-  console.log("localhost:8000 ruta => /*");
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-//
+app.use("/api", routes)
 
-database.sync({ force: false }).then(() => {
+database.sync({force: false}).then(() => {
   app.listen(process.env.PORT || 8000, () => {
     console.log("SERVER LISTENING AT PORT 8000");
   });

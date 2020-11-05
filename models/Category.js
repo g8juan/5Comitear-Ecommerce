@@ -5,7 +5,7 @@ class Category extends Model {}
 
 Category.init({
   name: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
 },
