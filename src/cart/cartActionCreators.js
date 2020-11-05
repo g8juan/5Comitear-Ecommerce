@@ -26,8 +26,9 @@ export const decreaseProductQuantity = (product) => dispatch => {
 }
 
 // chequear ruta del back
-export const getProductsInCart = () => dispatch => {
-    axios.get("/api/products")
+export const getProductsInCart = (userId) => dispatch => {
+  console.log("entre al axios")
+    axios.get("/api/orders/getUserCartData", {params:{userId:2}})
     .then(res => res.data)
     .then(products => dispatch(setProductsInCart(products)))
 }

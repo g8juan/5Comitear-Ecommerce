@@ -1,15 +1,11 @@
 import axios from "axios";
 // import {SET_USERS} from "../redux/constants"
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: "SET_USER",
   payload: user,
 });
 
-const loginUser = (user) => ({
-  type: "LOGIN_USER",
-  payload: user,
-});
 
 const getUsers = (users) => ({
   type: "GET_USERS",
@@ -25,14 +21,13 @@ export const register = (user) => (dispatch) => {
   axios
     .post("api/register", user)
     .then((res) => res.data)
-    .then((logInfo) => dispatch(setUser(logInfo)));
 };
 
 export const login = (user) => (dispatch) => {
   axios
     .post("http://localhost:8000/api/login", user)
     .then((res) => res.data)
-    .then((logInfo) => dispatch(loginUser(logInfo)))
+    .then((logInfo) => dispatch(setUser(logInfo)))
     .catch((err) => dispatch(errorLogin(true)));
 };
 
@@ -43,6 +38,7 @@ export const getUser = () => (dispatch) => {
     .then((users) => dispatch(getUsers(users)));
 };
 
+//export const getUserData = ()
 //     .post("http://localhost:8000/api/register", user)
 
 // function setUser(usersArr) {
