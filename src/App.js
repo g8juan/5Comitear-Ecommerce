@@ -3,21 +3,18 @@ import "./App.css";
 import {Route, Switch} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from "axios";
 import ProductsContainer from './products/components/productsContainer'
 import SingleProductContainer from './products/components/singleProductContainer'
 import RegisterContainer from "./users/RegisterContainer";
 import LoginContainer from "./users/LoginContainer";
 import NavigationBarContainer from './navbar/NavigationBarContainer.js'
+import CategoriesContainer from './categories/components/categoriesContainer'
 import CartContainer from "./cart/CartContainer";
 //import { fetchIsLogged } from "../store/action-creators/users";
 
+
 class App extends React.Component {
-  componentDidMount() {
-    axios.get("/api/users").then((users) => console.log(users));
-  }
-
-
+  
   render() {
     return (
       <div className="App">
@@ -27,15 +24,14 @@ class App extends React.Component {
         </header> */}
 
         <Switch>
-          <Route path="users" />
-          <Route exact path="/" />
           <Route exact path="/products" component={ProductsContainer} />
-          <Route path="/products/:id" component={SingleProductContainer} />
-          <Route path="/orders" />
-          <Route path="/login" component={LoginContainer} />
-            <Route exact path="/cart" component={CartContainer} />
-          <Route path="/register" component={RegisterContainer} />
-
+          <Route exact path="/products/:id" component={SingleProductContainer} />
+          <Route exact path="/categories" component={CategoriesContainer} />
+          <Route exact path="/orders" />
+          <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/register" component={RegisterContainer} />
+          <Route exact path="/users" />
+          <Route exact path="/cart" component={CartContainer} />
         </Switch>
       </div>
 
