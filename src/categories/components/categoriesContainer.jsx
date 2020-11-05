@@ -1,18 +1,25 @@
 import React from "react";
 import { connect } from 'react-redux'
-import Products from './products'
+import Categories from './categories'
+import { getCategories } from '../categoriesActionCreators'
 
-const mapStateToProps = (state) => ({ products : state.products })
-/* const mapDispatchToProps = (dispatch) => ({ searchMovies : (title) => dispatch(searchMovies(title))}) */
+const mapStateToProps = (state) => ({ categories : state.categories.categories})
+const mapDispatchToProps = (dispatch) => ({ getCategories : () => dispatch(getCategories())})
 
 class CategoriesContainer extends React.Component {
 
+  componentDidMount(){ 
+    this.props.getCategories()
+  }
+
   render() {
-    const {products} = this.props
-    return (
-        <Products movies={products}/>
+    return ( 
+    <div>
+      CATEGORIES
+      <Categories categories={this.props.categories}/>
+    </div>
     );
   }
 }
 
-export default connect(mapStateToProps, null)(CategoriesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)

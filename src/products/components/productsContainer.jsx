@@ -7,18 +7,10 @@ const mapStateToProps = (state) => ({ products : state.products.products })
 const mapDispatchToProps = (dispatch) => ({ getProducts : () => dispatch(getProducts())})
 
 class ProductsContainer extends React.Component {
-  
-  componentDidMount(){
-    this.props.getProducts()
-  }
 
-  render() {    
-    return (
-      <div>
-        <Products products={this.props.products}/>
-      </div>
-    )
-  }
+  componentDidMount(){ this.props.getProducts() }
+
+  render() { return <div> <Products products={this.props.products}/> </div> } 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
