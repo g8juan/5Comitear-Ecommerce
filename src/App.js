@@ -15,7 +15,7 @@ import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
 import Home from './home/home'
-import { setUser } from "./users/usersActionCreators";
+import { setUser, getOrderId } from "./users/usersActionCreators";
 
 
 
@@ -28,6 +28,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch) {
   return {
     setUser: (user) => dispatch(setUser(user)),
+    getOrderId: (id) => dispatch(getOrderId(id))
   };
 }
 
@@ -38,12 +39,14 @@ class App extends React.Component {
       headers: {"Content-Type": "application/json"}
     })
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .then((user) => {
-        console.log(`found user ${user.email}`);
+        console.log(`found user ${user}`);
         this.props.setUser(user);
+        return user
+      }).then((user)=>{
+        this.props.getOrderId(user.id)
       })
       .catch((err) => console.log(err));
   }
@@ -58,7 +61,7 @@ class App extends React.Component {
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/order" component={OrderContainer} />
+          <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
