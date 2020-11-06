@@ -11,7 +11,6 @@ router.post("/new", (req, res) => { //+DONE
   .catch((err) => console.log(err))
 })
 
-
 //+Get order (for current user)
 router.get("/:userId", (req, res) => { 
   Order.findOne({where: { userId: req.params.userId, orderStatus: "pending" }})

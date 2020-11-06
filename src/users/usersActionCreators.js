@@ -21,25 +21,50 @@ export const errorLogin = (error) => ({
   error,
 });
 
-export const getOrderId = (userId) => (dispatch) => {
-  axios
-    .get(`/api/orders/:${userId}`)
+// export const getOrderId = () => (dispatch, getState) => {
+//   axios
+//     .get(`/api/orders/${getState().users.user.id}`)
+//     .then((res) => res.data)
+//     .then((order) => dispatch(setOrder(order)))
+//     .catch((err) => console.log(err));
+// };
+
+export const getOrderId = (id) => (dispatch, getState) => {
+  console.log("AXIOS GETORDER")
+  return axios
+    .get(`/api/orders/${id}`)
     .then((res) => res.data)
     .then((order) => dispatch(setOrder(order)))
     .catch((err) => console.log(err));
 };
 
+// export function getOrderId() {
+//   return async (dispatch, getState) => {
+//     try {
+//       const res = await axios.get(`/api/orders/${getState().users.user.id}`)
+//       dispatch(setOrder(res.data))
+//     } catch (err) {console.log(err)}
+//   }
+// }
+
 export const register = (user) => (dispatch) => {
-  axios
-    .post("api/register", user)
-    .then((res) => res.data)
-    .then((user) => {
-      console.log("soy user", user);
-      return axios.post("/api/orders/new", {userId: user.id}).then((order)=>{
-        dispatch(setOrder(order))
-      });
+  axios.post("api/register", user)
+    .then((res) => res.data).then((user) => {
+      console.log("Registrado usuario", user);
+      return newOrder()
+      // return axios.post("/api/orders/new", {userId: user.id}).then((order)=>{
+      //   dispatch(setOrder(order))
+      //   console.log(`Orden generada para usuario ${user.name}`)
+      // }).catch((err) => console.log(err));
     });
 };
+
+export const newOrder = () => (dispatch, getState) => {
+  const user = getState().users.user
+  axios.post("/api/orders/new", {userId: user.id}).then((order)=>{
+    dispatch(setOrder(order))
+    console.log(`Orden generada para usuario ${user.name}`)
+}).catch((err) => console.log(err))}
 
 /* export const addCart = (userId, ammount, address) => (dispatch) => {
   axios.post("/api/newCart", { userId, ammount: 0, address });

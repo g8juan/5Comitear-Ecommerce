@@ -38,10 +38,10 @@ class LoginContainer extends React.Component {
     if (this.props.userId) this.props.history.push("/");
   }
 
-  async onSubmitHandler(e) {
+  onSubmitHandler(e) {
     e.preventDefault();
-    await this.props.login(this.state);
-    this.props.getOrderId(this.props.userId);
+    console.log("USER ID",this.props.userId)
+      this.props.login(this.state);
   }
 
   onChangeHandler(e) {
@@ -54,6 +54,7 @@ class LoginContainer extends React.Component {
   }
 
   render() {
+
     return (
       <Login
         onChange={this.onChangeHandler}

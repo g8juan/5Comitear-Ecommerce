@@ -2,7 +2,7 @@ import React from "react";
 import Register from "./Register";
 import { connect } from "react-redux";
 import { register } from "./usersActionCreators";
-import { newOrder , getCart } from '../cart/cartActionCreators'
+import { newOrder } from '../cart/cartActionCreators'
 import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state) => {

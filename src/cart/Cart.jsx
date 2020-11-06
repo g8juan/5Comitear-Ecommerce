@@ -51,9 +51,9 @@ const Cart = ({ increaseQty, decreaseQty, products, payload, handleDelete, cart 
                         <th className="b-0 text-center">Total Price</th>
                         <th className="b-0"></th>
                       </tr>
-                      {cart.map((item,i)=>(
+                      {/* {cart.id ? cart.map((item,i)=>(
                         <p key={i}>{item.name}</p>
-                      ))}
+                      )):null} */}
                       {products.map((item, i) => (
                         <tr key={i}>
                           <td>{item.thumbnail}</td>
