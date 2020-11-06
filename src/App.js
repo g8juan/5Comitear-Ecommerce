@@ -14,7 +14,9 @@ import CategoriesContainer from './categories/components/categoriesContainer'
 import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
+import Home from './home/home'
 import { setUser } from "./users/usersActionCreators";
+
 
 function mapStateToProps(state){
   return {
@@ -61,6 +63,7 @@ class App extends React.Component {
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
+          <Route exact path="/home" component={Home} />
 
         </Switch>
       </div>

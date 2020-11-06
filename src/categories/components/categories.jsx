@@ -26,7 +26,7 @@ export default function Categories({categories}) {
   return (
     <div className={classes.root}>
       <p className={classes.title}><DehazeIcon />CATEGORIES</p>
-      <Divider />
+      <Divider/>
       <div className={classes.title}></div>
       <List component="nav" aria-label="main mailbox folders">
       {categories.map(category => {
