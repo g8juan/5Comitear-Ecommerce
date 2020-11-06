@@ -88,7 +88,6 @@ class CartContainer extends React.Component {
     selectedItem[0].quantity = selectedItem[0].quantity - 1;
     //this.props.setProductQuantity('+', selectedItem.name)
       this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-      , console.log(this.state)
     ))
   } 
 

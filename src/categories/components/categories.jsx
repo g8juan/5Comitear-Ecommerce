@@ -11,13 +11,13 @@ import DehazeIcon from '@material-ui/icons/Dehaze';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: 1000,
-    backgroundColor: theme.palette.background.paper,
+    width: '90%',
+    backgroundColor: theme.palette.background,
     margin: '0 auto'
   },
   title: {
-    margin: 15,  
+    margin: '1.5rem',
+    fontSize: '1.5rem'  
   }
 }));
 
@@ -25,13 +25,13 @@ export default function Categories({categories}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <p className={classes.title}><DehazeIcon />CATEGORIES</p>
-      <Divider />
+      <p className={classes.title}><DehazeIcon /> CATEGORIES </p>
+      <Divider/>
       <div className={classes.title}></div>
       <List component="nav" aria-label="main mailbox folders">
-      {categories.map(category => {
+      {categories.map((category) => {
         return (
-          <div>
+          <div key={category.id}>
             <ListItem button>
               <ListItemText primary={(category.name).toUpperCase()} />
             </ListItem>

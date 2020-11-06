@@ -14,8 +14,6 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
 
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

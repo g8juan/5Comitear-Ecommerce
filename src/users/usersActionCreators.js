@@ -6,7 +6,6 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-
 const getUsers = (users) => ({
   type: "GET_USERS",
   payload: users,
@@ -17,23 +16,38 @@ export const errorLogin = (error) => ({
   error,
 });
 
-export const getOrderId = (id) => (dispatch) =>{
-  axios.get("/api/orders/getClientOrder/2" )
-  .then(res => res.data)
-  .then(products => dispatch(setOrder(products)))
-  .catch(err => console.log(err))
-}
+const setOrder = (order) => ({ type: "SET_ORDER", payload: order });
 
+export const getOrderId = (userId) => (dispatch) => {
+  axios
+    .get(`/api/orders/getClientOrder/2`)
+    .then((res) => res.data)
+    .then((products) => dispatch(setOrder(products)))
+    .catch((err) => console.log(err));
+};
 
 export const register = (user) => (dispatch) => {
   axios
     .post("api/register", user)
     .then((res) => res.data)
+    .then((user) => {
+      console.log("soy user", user);
+      return axios.post("/api/orders/newCart", {
+        userId: user.id,
+        ammount: 0,
+        address: user.address,
+      });
+    });
 };
+
+/* export const addCart = (userId, ammount, address) => (dispatch) => {
+  axios.post("/api/newCart", { userId, ammount: 0, address });
+}; */
+
 
 export const login = (user) => (dispatch) => {
   axios
-    .post("/api/login", user, {withCredentials:true})
+    .post("/api/login", user, { withCredentials: true })
     .then((res) => res.data)
     .then((logInfo) => dispatch(setUser(logInfo)))
     .catch((err) => dispatch(errorLogin(true)));
@@ -47,11 +61,8 @@ export const getUser = () => (dispatch) => {
     .catch((err) => dispatch(errorLogin(true)));
 };
 
-export const getUser = () => (dispatch) => {
-  axios
-    .get("http://localhost:8000/api/users")
-    .then((res) => res.data)
-    .then((users) => dispatch(getUsers(users)));
+export const logOut = () => (dispatch) => {
+  axios.get("/api/logout").then(() => dispatch(setUser({})));
 };
 
 //export const getUserData = ()

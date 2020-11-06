@@ -15,10 +15,14 @@ class LoginContainer extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.props.userId) this.props.history.push("/");
+  }
+
   onSubmitHandler(e) {
     e.preventDefault();
     this.props.login(this.state);
-    this.props.getOrderId(this.props.userId)
+    this.props.getOrderId(this.props.userId);
   }
 
   onChangeHandler(e) {
@@ -47,6 +51,7 @@ class LoginContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     error: state.users.error,
+    userId: state.users.user.id,
   };
 };
 
@@ -58,6 +63,7 @@ const mapDispatchToProps = (dispatch) => {
     errorLogin: (bool) => {
       dispatch(errorLogin(bool));
     },
+    getOrderId: (id) => dispatch(getOrderId(id)),
   };
 };
 
