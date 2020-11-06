@@ -12,17 +12,8 @@ const cookieParser = require("cookie-parser");
 
 app.use(volleyball);
 app.use(cookieParser()); // popula req.cookie
-app.use(
-  session({
-    secret: ["superfluous cat", "ultra dog"],
-    resave: false,
-    saveUninitialized: false,
-  })
-); // popula req.session
-app.use((req, res, next) => {
-  console.log(req.cookie);
-  next();
-});
+app.use(session({secret: ["superfluous cat", "ultra dog"], resave: false, saveUninitialized: false})) // popula req.session
+app.use((req, res, next) => { next() });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
@@ -56,12 +47,10 @@ passport.use(
 );
 // How we save the user
 passport.serializeUser(function (user, done) {
-  console.log("serialize");
   done(null, user.id);
 });
 // How we look for the user
 passport.deserializeUser(function (id, done) {
-  console.log("DEserialize");
   User.findByPk(id).then((user) => done(null, user));
 });
 

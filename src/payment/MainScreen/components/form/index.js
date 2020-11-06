@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const currentYear = new Date().getFullYear();
 const monthsArr = Array.from({ length: 12 }, (x, i) => {

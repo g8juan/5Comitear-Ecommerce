@@ -33,7 +33,6 @@ export default function SingleProduct ({singleProduct}) {
       <CardMedia
         className={classes.media}
         image={singleProduct.thumbnail}
-        title={singleProduct.name}
       />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

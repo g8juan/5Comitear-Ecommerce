@@ -1,4 +1,4 @@
-import { SET_PRODUCTS_IN_CART, INCREMENT_PRODUCT_QUANTITY, DECREMENT_PRODUCT_QUANTITY } from "../redux/constants";
+import { SET_PRODUCTS_IN_CART, /* INCREMENT_PRODUCT_QUANTITY, DECREMENT_PRODUCT_QUANTITY */ } from "../redux/constants";
 
 // const initialState = {
 //  productsInCart:[]
