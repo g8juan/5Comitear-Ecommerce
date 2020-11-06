@@ -1,9 +1,7 @@
 const express = require("express");
 const passport = require("passport");
-
 const { User } = require("../models");
 const router = express.Router();
-
 const categoriesRouter = require("./categories");
 const usersRouter = require("./users");
 const productsRouter = require("./products");
@@ -27,17 +25,23 @@ router.get("/404", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.json(req.user);
+  res.send(req.user);
 });
 
-router.post("/logout", (req, res) => {
-  req.logOut();
-  res.sendStatus(200);
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 router.get("/me", (req, res) => {
-  console.log("SOY REQ USER", req.user);
-  res.json(req.user);
+  console.log("authenticate", req.isAuthenticated());
+  console.log("/ME", req.user);
+  if (!req.user) return res.sendStatus(401);
+  res.send(req.user);
+});
+
+router.get("/test", (req, res) => {
+  console.log(req.user);
 });
 
 router.use("/", function (req, res) {

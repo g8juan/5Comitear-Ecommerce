@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./App.scss";
 import "./index.css";
 import App from "./App";
-
 //import reportWebVitals from './reportWebVi
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

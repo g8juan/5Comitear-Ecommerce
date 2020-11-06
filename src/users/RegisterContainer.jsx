@@ -1,8 +1,8 @@
 import React from "react";
 import Register from "./Register";
-import {connect} from "react-redux";
-import {register} from "./usersActionCreators";
-import {withRouter} from 'react-router-dom'
+import { connect } from "react-redux";
+import { register } from "./usersActionCreators";
+import { withRouter } from "react-router-dom";
 
 class RegisterContainer extends React.Component {
   constructor(props) {
@@ -20,17 +20,16 @@ class RegisterContainer extends React.Component {
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
 
-
   onChangeHandler(e) {
     let value = e.target.value;
     if (e.target.value === "") {
-      this.setState({[e.target.id]: true});
+      this.setState({ [e.target.id]: true });
     }
-    this.setState({[e.target.id]: value});
+    this.setState({ [e.target.id]: value });
   }
 
   onSubmitHandler(e) {
-    console.log("HISTORY", this.props.history)
+    console.log("HISTORY", this.props.history);
     e.preventDefault();
     if (
       this.state.email === "" ||
@@ -40,19 +39,18 @@ class RegisterContainer extends React.Component {
       this.state.address === "" ||
       this.state.phone === ""
     ) {
-      this.setState({error: true});
+      this.setState({ error: true });
     } else {
+      this.props.register({
+        email: this.state.email,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        password: this.state.password,
+        address: this.state.address,
+        phone: this.state.phone,
+        userType: "1",
+      });
 
-        this.props.register({
-          email: this.state.email,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          password: this.state.password,
-          address: this.state.address,
-          phone: this.state.phone,
-          userType: "1"
-        })
-      
       this.setState({
         email: "",
         firstName: "",
@@ -61,7 +59,7 @@ class RegisterContainer extends React.Component {
         address: "",
         phone: "",
       });
-
+      this.props.history.push("/login");
     }
   }
 
@@ -83,7 +81,9 @@ class RegisterContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.users.user,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -94,4 +94,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterContainer))
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
+);
