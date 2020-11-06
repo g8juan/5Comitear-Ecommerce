@@ -18,6 +18,7 @@ class LoginContainer extends React.Component {
   onSubmitHandler(e) {
     e.preventDefault();
     this.props.login(this.state);
+    this.props.getOrderId(this.props.userId)
   }
 
   onChangeHandler(e) {

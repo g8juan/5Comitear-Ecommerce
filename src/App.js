@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
+import {connect} from 'react-redux'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -45,7 +46,7 @@ class App extends React.Component {
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/order" component={OrderContainer} />
+          <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
@@ -57,4 +58,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

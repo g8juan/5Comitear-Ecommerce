@@ -36,9 +36,15 @@ router.post("/logout", (req, res) => {
 });
 
 router.get("/me", (req, res) => {
+  console.log("authenticate",req.isAuthenticated())
+  console.log("/ME",req.user)
   if (!req.user) return res.sendStatus(401);
   res.send(req.user);
 });
+
+router.get("/test",(req, res) =>{
+  console.log(req.user);
+})
 
 router.use("/", function (req, res) {
   res.sendStatus(404);
