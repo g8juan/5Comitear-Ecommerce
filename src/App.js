@@ -66,7 +66,7 @@ class App extends React.Component {
           />
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/order" component={OrderContainer} />
+          <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />

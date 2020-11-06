@@ -2,7 +2,21 @@ import React from "react";
 import Register from "./Register";
 import { connect } from "react-redux";
 import { register } from "./usersActionCreators";
+import { newOrder , getCart } from '../cart/cartActionCreators'
 import { withRouter } from "react-router-dom";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.users.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    register: (user) => dispatch(register(user)),
+    newOrder: (userId) => dispatch(newOrder(userId))
+  };
+};
 
 class RegisterContainer extends React.Component {
   constructor(props) {
@@ -79,20 +93,6 @@ class RegisterContainer extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.users.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    register: (user) => {
-      dispatch(register(user));
-    },
-  };
-};
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)

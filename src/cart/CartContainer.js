@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Cart from "./Cart";
 //import { getFavorites, deleteFavorites } from "../store/action-creators/users";
-import { increaseProductQuantity, decreaseProductQuantity, getProductsInCart } from "./cartActionCreators";
+import { increaseProductQuantity, decreaseProductQuantity, getCart } from "./cartActionCreators";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     oneMore: (productId) => dispatch(increaseProductQuantity(productId)),
     oneLess: (productId) => dispatch(decreaseProductQuantity(productId)),
-    productsInCart: (userId) => dispatch(getProductsInCart(userId))
+    getCart: (userId) => dispatch(getCart(userId))
   };
 };
 
@@ -49,7 +49,7 @@ class CartContainer extends React.Component {
   }
   componentDidMount() {
     console.log(this.props)
-    if(this.props.userId) this.props.getProductsInCart(this.props.userId)
+    if(this.props.userId){} this.props.getCart(this.props.userId)
   }
 
   componentWillUnmount() {

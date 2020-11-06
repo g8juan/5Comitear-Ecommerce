@@ -3,6 +3,25 @@ import Login from "./Login";
 import { connect } from "react-redux";
 import { login, errorLogin, getOrderId } from "./usersActionCreators";
 
+const mapStateToProps = (state) => {
+  return {
+    error: state.users.error,
+    userId: state.users.user.id,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (user) => {
+      dispatch(login(user));
+    },
+    errorLogin: (bool) => {
+      dispatch(errorLogin(bool));
+    },
+    getOrderId: (id) => dispatch(getOrderId(id)),
+  };
+};
+
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +38,9 @@ class LoginContainer extends React.Component {
     if (this.props.userId) this.props.history.push("/");
   }
 
-  onSubmitHandler(e) {
+  async onSubmitHandler(e) {
     e.preventDefault();
-    this.props.login(this.state);
+    await this.props.login(this.state);
     this.props.getOrderId(this.props.userId);
   }
 
@@ -48,23 +67,5 @@ class LoginContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    error: state.users.error,
-    userId: state.users.user.id,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (user) => {
-      dispatch(login(user));
-    },
-    errorLogin: (bool) => {
-      dispatch(errorLogin(bool));
-    },
-    getOrderId: (id) => dispatch(getOrderId(id)),
-  };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
