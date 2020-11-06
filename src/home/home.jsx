@@ -1,29 +1,58 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    margin: 15,
-  },
+const useStyles = makeStyles(() => ({
   div: {
-    padding: theme.spacing(2),
+    position: 'relative',
     textAlign: 'center',
-    color: theme.palette.text.secondary,
-    width: 'auto',
   },
+  title: {
+    position: 'absolute',
+    top: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: '#545454',
+    fontSize: '2.5rem',
+    textShadow: '1px 1px 10px black',
+  },
+  categories: {
+    position: 'absolute',
+    top: '70%',
+    left: '20%',
+    transform: 'translate(-50%, -50%)',
+    color: '#545454',
+    fontSize: '1.5rem',
+    textShadow: '1px 1px 10px black',
+  },
+  featured: {
+    position: 'absolute',
+    top: '70%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: '#545454',
+    fontSize: '1.5rem',
+    textShadow: '1px 1px 10px black',
+  },
+  user: {
+    position: 'absolute',
+    top: '70%',
+    left: '80%',
+    transform: 'translate(-50%, -50%)',
+    color: '#545454',
+    fontSize: '1.5rem',
+    textShadow: '1px 1px 10px black',
+  }
 }));
 
 export default function Home() {
   const classes = useStyles();
 
   return (
-        <div>
-            {/* <img src="home-images/home.jpg" alt="home-image"/> */}
-            <div className={classes.paper}>
-                IMAGEN -- WELCOME TO 5MITTEAR CLOTHING BRAND
-            </div>
+        <div className={classes.div}>
+            <img style={{width: '100%'}} src="home-images/home-back.jpg" alt="home"/>
+            <div className={classes.title}> 5MITTEAR CLOTHING </div>
             <div className={classes.root}>
                 <Grid container 
                 spacing={3}
@@ -31,16 +60,16 @@ export default function Home() {
                 justify="center"
                 alignItems="stretch"
                 >
-                    <Grid item xs={4}>
-                        <div className={classes.paper}>CATEGORIES</div>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <div className={classes.paper}>FEATURED</div>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <div className={classes.paper}>USER ACCESS</div>
-                    </Grid>
-                </Grid>
+                  <Link to="/categories">
+                    <Grid className={classes.categories} item xs={4}> CATEGORIES </Grid>
+                  </Link>
+                  <Link to="/products">
+                    <Grid className={classes.featured} item xs={4}> FEATURED </Grid>
+                  </Link>
+                  <Link to="/login">
+                    <Grid className={classes.user} item xs={4}> USER ACCESS </Grid> 
+                  </Link>
+                  </Grid>
             </div>
         </div>    
   );

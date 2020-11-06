@@ -5,7 +5,7 @@ import { Navbar, Nav, FormControl, Button, Form } from "react-bootstrap";
 export default function NavigationBar({ handleSubmit, user, logOut }) {
   return (
     <Navbar bg="info" variant="dark">
-      <Navbar.Brand as={Link} to="/home">
+      <Navbar.Brand as={Link} to="/">
         5mitear
       </Navbar.Brand>
       <Nav className="mr-auto">
@@ -19,17 +19,19 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
 
       <Form inline onSubmit={handleSubmit}>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button type="submit" variant="outline-info">
+        <Button type="submit" variant="outline-info" style={{ color: "#cccccc" }}>
           Search
         </Button>
         {!user.id ? (
           <div>
-            <Nav.Link as={Link} to="/register">
-              Sign up
-            </Nav.Link>
-            <Nav.Link as={Link} to="/login">
-              Log in
-            </Nav.Link>
+            <Nav className="mr-auto" >
+              <Nav.Link as={Link} to="/register" style={{ color: "#cccccc" }}>
+                Sign up
+              </Nav.Link>
+              <Nav.Link as={Link} to="/login" style={{ color: "#cccccc" }}>
+                Log in
+              </Nav.Link>
+            </Nav>
           </div>
         ) : (
           <div style={{ color: "red" }}>
