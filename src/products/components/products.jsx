@@ -47,9 +47,9 @@ export default function Products({products}) {
     <div className={classes.root}>
       <p className={classes.buttons}> PRODUCTS </p>
       <Grid container spacing={3}>
-        {products.map(product => {
+        {products.map((product) => {
           return (
-        <Grid item xs={3}>
+        <Grid item xs={3} key={product.id}>
           <Card className={classes.rootCard}>
             <CardActionArea>
             <Link to={`/products/${product.id}`}>

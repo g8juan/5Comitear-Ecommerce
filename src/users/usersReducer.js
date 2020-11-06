@@ -1,12 +1,5 @@
 const initialState = {
-  user: {
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    address: "",
-    phone: "",
-  },
+  user: {},
   userList: [],
 };
 
