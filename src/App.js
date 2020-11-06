@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
+import {connect} from 'react-redux'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -14,33 +15,60 @@ import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
 import Home from './home/home'
+import { setUser } from "./users/usersActionCreators";
 
-//import { fetchIsLogged } from "../store/action-creators/users";
+
+function mapStateToProps(state){
+  return {
+    user: state.users.user
+  }
+}
+
+ function mapDispatchToProps(dispatch){
+    return {
+      setUser: (user) => dispatch(setUser(user))
+    }
+  }
 
 class App extends React.Component {
-  render() {
+
+
+    componentDidMount(){
+        axios.get("/api/me", {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          }}).then(res => {
+          console.log(res.data)
+          return res.data}).then(user => {
+          console.log(`found user ${user.email}`);
+          this.props.setUser(user)
+        }).catch(err => console.log(err))
+    }
+
+    render() {
     return (
       <div className="App">
         <NavigationBarContainer />
-        {/*    <header className="App-header">
-          <p>APP / MAIN</p>
-        </header> */}
-
+      
         <Switch>
+
           <Route exact path="/products" component={ProductsContainer} />
+          <Route exact path="/products/search" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
-          <Route exact path="/orders" />
           <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/order" component={OrderContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
           <Route exact path="/home" component={Home} />
+
         </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -55,7 +55,7 @@ export default function Products({products}) {
             <Link to={`/products/${product.id}`}>
               <CardMedia
                 className={classes.media}
-                image={product.image}
+                image={product.thumbnail}
                 title={product.name}
               />
             </Link>

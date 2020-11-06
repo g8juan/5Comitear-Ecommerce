@@ -49,6 +49,13 @@ router.post('/addItemToCart', (req, res) => {
     .then(() => res.sendStatus(200)).catch(err => console.log(err))
 })
 
+router.get('/getClientOrder/:userId', (req, res)=>{
+  console.log("llego a la ruta del back, reqbody=",req.params)
+  Order.findOne({where:{userId:req.params.userId, orderStatus:"pending"}})
+  .then(order => res.send(order))
+  .catch(err=> console.log(err))
+})
+
 //update order quantity // item quantity (BOTONES - / +) //JSON modelo a enviar  {"quantity": 12, "orderId": 2, "productId":2}
 //La logica de aumentar o disminuir la cantidad se hace desde el front
 router.put('/updateItemQuantity', (req, res) => {
@@ -63,7 +70,7 @@ router.get('/getUserCartData', (req, res) => {
   `SELECT * FROM products as p
    JOIN order_product as op ON p.id = op."productId"
    JOIN orders as o ON op."orderId" = o.id
-   WHERE o."userId" = ${req.body.userId} && o."orderStatus = "pending"`,
+   WHERE o."userId" = ${req.body.userId} AND o."orderStatus" = 'pending'`, //&& o."orderStatus" = pending
     {type: QueryTypes.SELECT})
     .then((query) => res.status(200).send(query))
     .catch(err => console.log(err))

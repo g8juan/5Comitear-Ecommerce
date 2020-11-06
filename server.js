@@ -2,26 +2,23 @@
 const database = require('./database/database')
 const express = require('express');
 const bodyParser = require('body-parser')
-
-const app = express();
-const volleyball = require('volleyball')
-app.use(volleyball)
-
 const { User } = require("./models");
-
-const cookieParser = require("cookie-parser")
+const app = express();
+const cors = require('cors')
+const volleyball = require('volleyball')
 const session = require("express-session")
 const passport = require("passport")
 const LocalStrategy = require('passport-local').Strategy;
+const cookieParser = require("cookie-parser")
 
+
+app.use(volleyball)
 app.use(cookieParser()); // popula req.cookie
-app.use(
-  session({
-    secret: ["superfluous cat", "ultra dog"],
-    resave: false,
-    saveUninitialized: true,
-  })
-); // popula req.session
+app.use(session({secret: ["superfluous cat", "ultra dog"], resave: false, saveUninitialized: false})); // popula req.session
+app.use((req,res,next)=>{console.log(req.cookie); next()})
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(cors({credentials: true, origin:"http://localhost:3000"}))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,23 +49,17 @@ passport.use(
 );
 // How we save the user
 passport.serializeUser(function (user, done) {
+  console.log("serialize")
   done(null, user.id);
 });
 // How we look for the user
 passport.deserializeUser(function (id, done) {
+  console.log("DEserialize")
   User.findByPk(id).then((user) => done(null, user));
 });
 
-
 //*Routing
 const routes = require("./routes");
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-
-app.get("/api/ping", function (req, res) {
-  console.log("ruta PONG");
-  return res.send("pong");
-});
 
 app.use("/api", routes)
 
