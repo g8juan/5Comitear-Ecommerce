@@ -5,6 +5,8 @@ import { getProducts } from "../products/productsActionCreators";
 import { logOut } from "../users/usersActionCreators";
 import { withRouter } from "react-router-dom";
 
+
+
 function mapStateToProps(state) {
   return { user: state.users.user };
 }
@@ -33,7 +35,6 @@ class NavigationBarContainer extends React.Component {
   }
  */
   render() {
-    console.log("PROPS NAVBAR", this.props.user);
     return (
       <div>
         <NavigationBar

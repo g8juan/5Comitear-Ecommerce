@@ -14,11 +14,14 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Divider from '@material-ui/core/Divider';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: 50,
+    marginLeft: '1rem',
+    marginRight: '1rem'
   },
   paper: {
     padding: theme.spacing(2),
@@ -35,9 +38,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 250,
     margin: "0 auto",
   },
+  title: {
+    fontSize: '1.5rem',
+    margin: '1.5rem'
+  },
   buttons: {
     margin: "0 auto",
-  },
+  }
 }));
 
 export default function Products({ products }) {
@@ -45,7 +52,8 @@ export default function Products({ products }) {
 
   return (
     <div className={classes.root}>
-      <p className={classes.buttons}> PRODUCTS </p>
+      <p className={classes.title}> PRODUCTS </p>
+      <Divider/>
       <Grid container spacing={3}>
         {products.map((product) => {
           return (

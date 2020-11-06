@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Category} = require("../models/index")
+const {Category, Product, CategoryProduct} = require("../models/index")
 
 router.get("/", (req, res) => {
   Category.findAll()
@@ -14,6 +14,19 @@ router.post("/", (req, res) => {
 router.get("/singleCategory", (req, res) => {
   Category.findByPk(req.query.id)
     .then(category => res.send(category))
+})
+
+router.get("/:category", (req, res) => {
+  Category.findOne({
+     where:{name:req.params.category},
+     include: [{model: Product}]})
+     .then(order => res.send(order))
+ });
+
+ router.post("/add", (req, res) => {
+  CategoryProduct.create({productId:req.body.productId, categoryId:req.body.categoryId})
+  .then(() => res.status(200).send("item added to category"))
+  .catch((err) => console.log(err))
 })
 
 module.exports = router;

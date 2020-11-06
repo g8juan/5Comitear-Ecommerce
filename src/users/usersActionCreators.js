@@ -30,12 +30,10 @@ export const errorLogin = (error) => ({
 // };
 
 export const getOrderId = (id) => (dispatch, getState) => {
-  console.log("AXIOS GETORDER")
-  return axios
-    .get(`/api/orders/${id}`)
-    .then((res) => res.data)
-    .then((order) => dispatch(setOrder(order)))
-    .catch((err) => console.log(err));
+  return axios.get(`/api/orders/${id}`)
+  .then((res) => res.data)
+  .then((order) => dispatch(setOrder(order)))
+  .catch((err) => console.log(err));
 };
 
 // export function getOrderId() {

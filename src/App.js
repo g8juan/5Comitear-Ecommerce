@@ -34,13 +34,10 @@ function mapDispatchToProps(dispatch) {
 
 class App extends React.Component {
   componentDidMount() {
-    axios
-      .get("/api/me", {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    axios.get("/api/me", { 
+      withCredentials: true, 
+      headers: {"Content-Type": "application/json"}
+    })
       .then((res) => {
         return res.data;
       })
@@ -58,25 +55,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <NavigationBarContainer />
-
         <Switch>
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/search" component={ProductsContainer} />
-          <Route
-            exact
-            path="/products/:id"
-            component={SingleProductContainer}
-          />
+          <Route exact path="/products/:id" component={SingleProductContainer} />
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/register" component={RegisterContainer} />
-          <Route exact path="/users" />
           <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
-
-          <Route exact path="/home" component={Home} />
-
+          <Route exact path="/" component={Home} />
+          <Route exact path="/users" />
         </Switch>
       </div>
     );

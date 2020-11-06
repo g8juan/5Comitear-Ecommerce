@@ -25,8 +25,7 @@ router.get("/:id", (req, res) => {
 });
 
 
-//+Chequear que existan esos productId y orderId en la db o tira error
-router.post("/add", (req, res) => { //+DONE
+router.post("/add", (req, res) => {
   OrderProduct.create({quantity:1, productId:req.body.productId, orderId:req.body.orderId})
   .then(() => res.status(200).send("item added"))
   .catch((err) => console.log(err))

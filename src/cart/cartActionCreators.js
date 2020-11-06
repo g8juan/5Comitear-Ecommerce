@@ -45,7 +45,7 @@ export const getCart = () => (dispatch, getState) => {
 }
 
 export const showCart = () => async (dispatch, getState) => {
-    getOrderId(getState().users.order.id)
+    await getOrderId(getState().users.order.id)
     dispatch(getCart())
   }
 

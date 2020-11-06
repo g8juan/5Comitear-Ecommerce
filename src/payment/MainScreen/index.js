@@ -33,7 +33,9 @@ const PaymentContainer = () => {
         cardCvv: useRef()
     };
 
-    let focusFormFieldByKey = useCallback((key) => {
+    // (ESTO ES PARA QUE NO APAREZCA UN WARNING EN LA CONSOLA)
+    // eslint-disable-next-line
+    let focusFormFieldByKey = useCallback((key) => { 
         formFieldsRefObj[key].current.focus();
     });
 

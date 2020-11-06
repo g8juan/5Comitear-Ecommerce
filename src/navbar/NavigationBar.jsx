@@ -5,7 +5,7 @@ import {Navbar, Nav, FormControl, Button, Form} from "react-bootstrap";
 export default function NavigationBar({handleSubmit, user, logOut}) {
   return (
     <Navbar bg="info" variant="dark">
-      <Navbar.Brand as={Link} to="/home">
+      <Navbar.Brand as={Link} to="/">
         5mitear
       </Navbar.Brand>
       <Nav className="mr-auto">
