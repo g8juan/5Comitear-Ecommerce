@@ -49,50 +49,40 @@ export default function Products({ products }) {
       <Grid container spacing={3}>
         {products.map((product) => {
           return (
-            <Grid item xs={3}>
-              <Card className={classes.rootCard}>
-                <CardActionArea>
-                  <Link to={`/products/${product.id}`}>
-                    <CardMedia
-                      className={classes.media}
-                      image={product.thumbnail}
-                      title={product.name}
-                    />
-                  </Link>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {product.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      {product.description}
-                      <br />
-                      Precio: $ {product.price} ARS
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button
-                    size="small"
-                    color="primary"
-                    className={classes.buttons}
-                  >
-                    Añadir al carrito
-                  </Button>
-                  <Button
-                    size="small"
-                    color="primary"
-                    className={classes.buttons}
-                  >
-                    <Link to={`/products/${product.id}`}>Ver Producto</Link>
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          );
+
+        <Grid item xs={3} key={product.id}>
+          <Card className={classes.rootCard}>
+            <CardActionArea>
+            <Link to={`/products/${product.id}`}>
+              <CardMedia
+                className={classes.media}
+                image={product.thumbnail}
+                title={product.name}
+              />
+            </Link>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                {product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                {product.description}
+                <br/>
+                Precio: $ {product.price} ARS
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions >
+              <Button size="small" color="primary" className={classes.buttons}>
+                Añadir al carrito
+              </Button>
+                <Button size="small" color="primary" className={classes.buttons}>
+                <Link to={`/products/${product.id}`}>Ver Producto</Link>
+                </Button> 
+            </CardActions>
+          </Card>
+        </Grid>
+        )
+
         })}
       </Grid>
     </div>
