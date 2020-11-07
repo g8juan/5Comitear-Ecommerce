@@ -17,8 +17,6 @@ import PaymentContainer from "./payment/MainScreen";
 import Home from './home/home'
 import { setUser, getOrderId } from "./users/usersActionCreators";
 
-
-
 function mapStateToProps(state){
   return {
     user: state.users.user,

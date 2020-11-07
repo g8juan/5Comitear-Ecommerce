@@ -20,7 +20,6 @@ const mapDispatchToProps = (dispatch) => {
     // getOrderId: (id) => dispatch(getOrderId(id)),
     // getCart: (id) => dispatch(getCart(id)),
     showCart:()=> dispatch(showCart())
-
   };
 };
 

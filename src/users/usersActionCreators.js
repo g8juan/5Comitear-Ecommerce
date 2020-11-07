@@ -11,11 +11,6 @@ const getUsers = (users) => ({
   payload: users,
 });
 
-const setOrder = (order) => ({
-  type: "SET_ORDER",
-  payload: order,
-});
-
 export const errorLogin = (error) => ({
   type: "ERROR_LOGIN",
   error,
@@ -68,6 +63,7 @@ export const newOrder = () => (dispatch, getState) => {
   axios.post("/api/newCart", { userId, ammount: 0, address });
 }; */
 
+
 export const login = (user) => (dispatch) => {
   axios
     .post("/api/login", user, { withCredentials: true })
@@ -80,7 +76,8 @@ export const getUser = () => (dispatch) => {
   axios
     .get("http://localhost:8000/api/users")
     .then((res) => res.data)
-    .then((users) => dispatch(getUsers(users)));
+    .then((logInfo) => dispatch(setUser(logInfo)))
+    .catch((err) => dispatch(errorLogin(true)));
 };
 
 export const logOut = () => (dispatch) => {

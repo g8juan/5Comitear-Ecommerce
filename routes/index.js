@@ -27,7 +27,7 @@ router.get("/404", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.send(req.user);
+  res.send(req.user).catch((err) => res.redirect("/404").send(err));
 });
 
 router.get("/logout", (req, res) => {
