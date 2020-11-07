@@ -2,20 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import Cart from "./Cart";
 //import { getFavorites, deleteFavorites } from "../store/action-creators/users";
-import { increaseProductQuantity, decreaseProductQuantity, getProductsInCart } from "./cartActionCreators";
+import { increaseProductQuantity, decreaseProductQuantity, getCart, showCart } from "./cartActionCreators";
+import {getOrderId} from '../users/usersActionCreators'
 
 const mapStateToProps = (state) => {
   return {
     products: state.cart.productsInCart,
+    cart: state.cart,
     userId: state.users.user.id,
-    cart: state.cart
+   orderId: state.users.order.id
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     oneMore: (productId) => dispatch(increaseProductQuantity(productId)),
     oneLess: (productId) => dispatch(decreaseProductQuantity(productId)),
-    getProductsInCart: (userId) => dispatch(getProductsInCart(userId))
+    // getOrderId: (id) => dispatch(getOrderId(id)),
+    // getCart: (id) => dispatch(getCart(id)),
+    showCart:()=> dispatch(showCart())
   };
 };
 
@@ -48,13 +52,12 @@ class CartContainer extends React.Component {
     // this.handleDelete = this.handleDelete.bind(this);  // borrar productos del carrito
   }
   componentDidMount() {
-    console.log(this.props)
-    if(this.props.userId) this.props.getProductsInCart(this.props.userId)
+    this.props.showCart()
   }
 
-  componentWillUnmount() {
-
-  }
+  // componentDidUpdate(prevProps) {
+   
+  // }
 
 
  /*  increaseQty = (event) => {

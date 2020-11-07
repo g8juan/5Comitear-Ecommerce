@@ -16,29 +16,48 @@ export const errorLogin = (error) => ({
   error,
 });
 
-const setOrder = (order) => ({ type: "SET_ORDER", payload: order });
+// export const getOrderId = () => (dispatch, getState) => {
+//   axios
+//     .get(`/api/orders/${getState().users.user.id}`)
+//     .then((res) => res.data)
+//     .then((order) => dispatch(setOrder(order)))
+//     .catch((err) => console.log(err));
+// };
 
-export const getOrderId = (userId) => (dispatch) => {
-  axios
-    .get(`/api/orders/getClientOrder/2`)
-    .then((res) => res.data)
-    .then((products) => dispatch(setOrder(products)))
-    .catch((err) => console.log(err));
+export const getOrderId = (id) => (dispatch, getState) => {
+  return axios.get(`/api/orders/${id}`)
+  .then((res) => res.data)
+  .then((order) => dispatch(setOrder(order)))
+  .catch((err) => console.log(err));
 };
+
+// export function getOrderId() {
+//   return async (dispatch, getState) => {
+//     try {
+//       const res = await axios.get(`/api/orders/${getState().users.user.id}`)
+//       dispatch(setOrder(res.data))
+//     } catch (err) {console.log(err)}
+//   }
+// }
 
 export const register = (user) => (dispatch) => {
-  axios
-    .post("api/register", user)
-    .then((res) => res.data)
-    .then((user) => {
-      console.log("soy user", user);
-      return axios.post("/api/orders/newCart", {
-        userId: user.id,
-        ammount: 0,
-        address: user.address,
-      });
+  axios.post("api/register", user)
+    .then((res) => res.data).then((user) => {
+      console.log("Registrado usuario", user);
+      return newOrder()
+      // return axios.post("/api/orders/new", {userId: user.id}).then((order)=>{
+      //   dispatch(setOrder(order))
+      //   console.log(`Orden generada para usuario ${user.name}`)
+      // }).catch((err) => console.log(err));
     });
 };
+
+export const newOrder = () => (dispatch, getState) => {
+  const user = getState().users.user
+  axios.post("/api/orders/new", {userId: user.id}).then((order)=>{
+    dispatch(setOrder(order))
+    console.log(`Orden generada para usuario ${user.name}`)
+}).catch((err) => console.log(err))}
 
 /* export const addCart = (userId, ammount, address) => (dispatch) => {
   axios.post("/api/newCart", { userId, ammount: 0, address });
@@ -49,8 +68,8 @@ export const login = (user) => (dispatch) => {
   axios
     .post("/api/login", user, { withCredentials: true })
     .then((res) => res.data)
-    .then((logInfo) => dispatch(setUser(logInfo)))
-    .catch((err) => dispatch(errorLogin(true)));
+    .then((user) => dispatch(setUser(user)))
+    .catch((err) => dispatch(errorLogin(true)))
 };
 
 export const getUser = () => (dispatch) => {

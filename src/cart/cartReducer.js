@@ -1,4 +1,4 @@
-import { SET_PRODUCTS_IN_CART, /* INCREMENT_PRODUCT_QUANTITY, DECREMENT_PRODUCT_QUANTITY */ } from "../redux/constants";
+import { SET_CART, INCREMENT_PRODUCT_QUANTITY, DECREMENT_PRODUCT_QUANTITY } from "../redux/constants";
 
 // const initialState = {
 //  productsInCart:[]
@@ -22,8 +22,10 @@ const initialState = []
 
 export default function cart (state = initialState, action) {
     switch(action.type){
-        case SET_PRODUCTS_IN_CART:
+        case SET_CART:
             return action.payload
+        // case SET_CART_ITEM:
+        //     return [...state, action.payload] //+TODO
         default:
             return state
     }

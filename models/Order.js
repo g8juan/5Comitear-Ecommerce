@@ -14,7 +14,6 @@ Order.init({
   },
   address: {
     type: DataTypes.STRING,
-    allowNull: false
   },
   orderStatus: {
     type: DataTypes.ENUM("pending","completed"),
