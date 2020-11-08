@@ -13,14 +13,13 @@ const cookieParser = require("cookie-parser");
 app.use(volleyball);
 app.use(cookieParser()); // popula req.cookie
 app.use(session({secret: ["superfluous cat", "ultra dog"], resave: false, saveUninitialized: false})) // popula req.session
-app.use((req, res, next) => { next() });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//*Passport----------------------------------------------------------------------------
+//Passport
 passport.use(
   new LocalStrategy(
     {
@@ -54,11 +53,11 @@ passport.deserializeUser(function (id, done) {
   User.findByPk(id).then((user) => done(null, user));
 });
 
-//*Routing
+//Routing
 const routes = require("./routes");
-
 app.use("/api", routes);
 
+//Database
 database.sync({ force: false }).then(() => {
   app.listen(process.env.PORT || 8000, () => {
     console.log("SERVER LISTENING AT PORT 8000");

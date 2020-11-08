@@ -1,42 +1,49 @@
 const router = require("express").Router();
-const { OrderProduct, Product, Order } = require("../models/index");
-const database = require("../database/database")
-const { QueryTypes } = require("sequelize");
-
-
-
-// router.get("/:id", (req, res) => {
-//   database.query(
-//       `SELECT * FROM products as p
-//    JOIN order_product as op ON p.id = op."productId"
-//    JOIN orders as o ON op."orderId" = o.id
-//    WHERE o."userId" = ${req.params.id}`, //AND o."orderStatus" = 'pending'
-//       { type: QueryTypes.SELECT }
-//     )
-//     .then((query) => res.status(200).send(query))
-//     .catch((err) => console.log(err));
-// });
+const {OrderProduct, Product, Order} = require("../models/index");
 
 router.get("/:id", (req, res) => {
- Order.findOne({
-    where:{id:req.params.id},
-    include: [{model: Product, through:OrderProduct}]})
+  Order.findOne({
+    where: {id: req.params.id},
+    include: [{model: Product}]
+  })
     .then(order => res.send(order))
 });
 
-
-router.post("/add", (req, res) => {
-  OrderProduct.create({quantity:1, productId:req.body.productId, orderId:req.body.orderId})
-  .then(() => res.status(200).send("item added"))
-  .catch((err) => console.log(err))
+router.post("/modify", async (req, res) => {
+  const {orderId, productId} = req.body;
+  let quantity = req.body.quantity || 1
+  const foundItem = await OrderProduct.findOne({where:{orderId, productId}});
+  if (!foundItem) {
+       const product = await OrderProduct.create({quantity, productId: req.body.productId, orderId: req.body.orderId})
+       return  res.status(200).send(product)
+   }
+  if (foundItem.quantity + quantity === 0) {
+    await foundItem.destroy()
+    return  res.status(200).send(null)
+  }
+   const product = await foundItem.update({quantity:foundItem.quantity+quantity})
+   return res.status(201).send(product);
 })
 
-router.put("/itemQuantity/:quantity", (req, res) => {
-  const { quantity, orderId, productId } = req.body;
-  OrderProduct.findOne({where: {orderId, productId}})
-  .then(item => item.update({quantity}))
-  .then(res.status(200).send("quantity updated"))
-  .catch(err=> console.log(err))
-});
 
 module.exports = router;
+
+// const categories = await models.Category.findAll({
+//   attributes: ['id', 'title', 'description'],
+//   order: [['title', 'ASC'], [models.Product, models.Price, 'createdAt', 'DESC']],
+//   include: [
+//     {
+//       model: models.Product,
+//       attributes: ['id', 'title'],
+//       through: { attributes: [] },
+//       include: [
+//         {
+//           model: models.Price,
+//           attributes: ['id', 'amount', 'createdAt'],
+//           separate: true,
+//           limit: 1,
+//         },
+//       ],
+//     },
+//   ],
+// });

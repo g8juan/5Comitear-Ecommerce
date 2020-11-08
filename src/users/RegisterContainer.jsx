@@ -1,9 +1,10 @@
 import React from "react";
 import Register from "./Register";
-import { connect } from "react-redux";
-import { register } from "./usersActionCreators";
-import { newOrder } from '../cart/cartActionCreators'
-import { withRouter } from "react-router-dom";
+import {connect} from "react-redux";
+import {postOrder} from '../orders/ordersActionCreators'
+import {withRouter} from "react-router-dom";
+import axios from 'axios'
+import {success} from '../utils/logs'
 
 const mapStateToProps = (state) => {
   return {
@@ -13,8 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (user) => dispatch(register(user)),
-    newOrder: (userId) => dispatch(newOrder(userId))
+    postOrder: (userId) => dispatch(postOrder(userId))
   };
 };
 
@@ -37,44 +37,25 @@ class RegisterContainer extends React.Component {
   onChangeHandler(e) {
     let value = e.target.value;
     if (e.target.value === "") {
-      this.setState({ [e.target.id]: true });
+      this.setState({[e.target.id]: true});
     }
-    this.setState({ [e.target.id]: value });
+    this.setState({[e.target.id]: value});
   }
 
   onSubmitHandler(e) {
-    console.log("HISTORY", this.props.history);
+    const {email, firstName, lastName, password, address, phone} = this.state
     e.preventDefault();
-    if (
-      this.state.email === "" ||
-      this.state.firstName === "" ||
-      this.state.lastName === "" ||
-      this.state.password === "" ||
-      this.state.address === "" ||
-      this.state.phone === ""
-    ) {
-      this.setState({ error: true });
+    if (email === "" || firstName === "" || lastName === "" || password === "" || address === "" || phone === "") {
+      this.setState({error: true});
     } else {
-      this.props.register({
-        email: this.state.email,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        password: this.state.password,
-        address: this.state.address,
-        phone: this.state.phone,
-        userType: "1",
-      });
-
-      this.setState({
-        email: "",
-        firstName: "",
-        lastName: "",
-        password: "",
-        address: "",
-        phone: "",
-      });
-      this.props.history.push("/login");
-    }
+      axios.post("api/users/register", {email, firstName, lastName, password, address, phone, userType: "1"})
+        .then(({data}) => {
+          success("USUARIO REGISTRADO CON EXITO. ID:", data.id)
+          this.props.postOrder(data.id)})
+        .then(()=>{
+          this.props.history.push("/login");
+          this.setState({email: "", firstName: "", lastName: "", password: "", address: "", phone: ""})})
+    };
   }
 
   render() {

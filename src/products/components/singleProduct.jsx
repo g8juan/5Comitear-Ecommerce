@@ -41,13 +41,13 @@ export default function SingleProduct ({singleProduct}) {
           <Typography variant="body2" color="textSecondary" component="p">
           {singleProduct.description}
           <br/>
-          Precio: $ {singleProduct.price} ARS
+          Price: $ {singleProduct.price} ARS
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions >
         <Button size="small" color="primary" className={classes.buttons}>
-          Añadir al carrito
+          Add to cart
         </Button>
         <Button size="small" color="primary" className={classes.buttons}>
           Reviews

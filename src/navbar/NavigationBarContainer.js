@@ -5,13 +5,11 @@ import { getProducts } from "../products/productsActionCreators";
 import { logOut } from "../users/usersActionCreators";
 import { withRouter } from "react-router-dom";
 
-
-
 function mapStateToProps(state) {
   return { user: state.users.user };
 }
 
-function mapDispatchToProps(dispatch, ownprops) {
+function mapDispatchToProps(dispatch) {
   return {
     getProducts: (searchTermStr) => dispatch(getProducts(searchTermStr)),
     logOut: () => dispatch(logOut()),
@@ -29,24 +27,13 @@ class NavigationBarContainer extends React.Component {
     event.target[0].value = "";
   };
 
-  /*  handleClick(evento) {
-    evento.preventDefault()
-    this.props.logOut()
-  }
- */
   render() {
     return (
       <div>
-        <NavigationBar
-          handleSubmit={this.handleSubmit}
-          user={this.props.user}
-          logOut={this.props.logOut}
-        />
+        <NavigationBar handleSubmit={this.handleSubmit} user={this.props.user} logOut={this.props.logOut}/>
       </div>
     );
   }
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(NavigationBarContainer)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationBarContainer));
