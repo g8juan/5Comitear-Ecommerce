@@ -4,6 +4,8 @@ const initialState = {
   error: false,
 };
 
+///////////////////////////// USERLIST NO SE USA /////////////////////////////////////////////
+
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case "SET_LOGIN":
