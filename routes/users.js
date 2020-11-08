@@ -21,7 +21,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/users/me", (req, res) => {
+router.get("/me", (req, res) => {
   console.log("AUTHENTICATED", req.isAuthenticated());
   if (!req.user) return res.sendStatus(401);
   res.send(req.user);
