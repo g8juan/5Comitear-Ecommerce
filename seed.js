@@ -1,6 +1,6 @@
 require("./database/database");
-const { User, Product, Order } = require("./models/index");
-
+//TODO: meter al seed categorias
+const {User, Product, Order} = require("./models/index");
 async function seed() {
   await User.create({
     firstName: "Juan",
@@ -108,16 +108,5 @@ async function seed() {
       console.log("ordenes generadas");
     })
     .catch((err) => console.log(err));
-
-  // Category.bulkCreate([
-  //   {userId: 1, ammount: 2000, address: "Pachanga 3032", orderStatus: "completed"}, //1 camisa
-  //   {userId: 2, ammount: 4800, address: "Pachanga 3032", orderStatus: "completed"}, //1 campera
-  //   {userId: 3, ammount: 6800, address: "Pachanga 3032", orderStatus: "completed"}, //camisa y campera
-  //   {userId: 2, ammount: 5200, address: "Pachanga 3032", orderStatus: "completed"}, //camisa, pnatalon y remera
-  //   {userId: 1, ammount: 2000, address: "Pachanga 3032", orderStatus: "completed"}, //2 remeras
-  // ]).then(() => {
-  //   console.log("ordenes generadas")
-  // }).catch(err => console.log(err))
 }
-
-seed();
+seed()

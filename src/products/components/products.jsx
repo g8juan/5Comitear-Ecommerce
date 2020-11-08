@@ -1,7 +1,7 @@
 //DEFAULT
 import React from "react";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
+import {makeStyles} from "@material-ui/core/styles";
 
 // GRID
 import Grid from "@material-ui/core/Grid";
@@ -47,49 +47,48 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Products({ products }) {
+export default function Products({products, addToCart, userId}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <p className={classes.title}> PRODUCTS </p>
-      <Divider/>
+      <Divider />
       <Grid container spacing={3}>
         {products.map((product) => {
           return (
-
-        <Grid item xs={3} key={product.id}>
-          <Card className={classes.rootCard}>
-            <CardActionArea>
-            <Link to={`/products/${product.id}`}>
-              <CardMedia
-                className={classes.media}
-                image={product.thumbnail}
-                title={product.name}
-              />
-            </Link>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                {product.name}
+            <Grid item xs={3} key={product.id}>
+              <Card className={classes.rootCard}>
+                <CardActionArea>
+                  <Link to={`/products/${product.id}`}>
+                    <CardMedia
+                      className={classes.media}
+                      image={product.thumbnail}
+                      title={product.name}
+                    />
+                  </Link>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {product.description}
+                      <br />
+                Price: $ {product.price} ARS
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                {product.description}
-                <br/>
-                Precio: $ {product.price} ARS
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions >
-              <Button size="small" color="primary" className={classes.buttons}>
-                Añadir al carrito
-              </Button>
-                <Button size="small" color="primary" className={classes.buttons}>
-                <Link to={`/products/${product.id}`}>Ver Producto</Link>
-                </Button> 
-            </CardActions>
-          </Card>
-        </Grid>
-        )
+                  </CardContent>
+                </CardActionArea>
+                <CardActions >
+                  {userId ? (<Button onClick={() => addToCart(product)} size="small" color="primary" className={classes.buttons}>
+                    Add to cart {/*//TODO:que haya algun tipo de confirmacion visual de que haya añadido un item al carrito*/}
+                  </Button>) : null}
+                  <Button size="small" color="primary" className={classes.buttons}>
+                    <Link to={`/products/${product.id}`}>See item</Link>
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          )
 
         })}
       </Grid>

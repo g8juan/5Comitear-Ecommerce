@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -15,9 +15,11 @@ import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
 import Home from './home/home'
-import { setUser, getOrderId } from "./users/usersActionCreators";
+import {setLogin} from "./users/usersActionCreators";
+import {getOrder} from "./orders/ordersActionCreators"
 
-function mapStateToProps(state){
+
+function mapStateToProps(state) {
   return {
     user: state.users.user,
   };
@@ -25,29 +27,23 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
   return {
-    setUser: (user) => dispatch(setUser(user)),
-    getOrderId: (id) => dispatch(getOrderId(id))
+    setLogin: (user) => dispatch(setLogin(user)),
+    getOrder: () => dispatch(getOrder())
   };
 }
 
 class App extends React.Component {
   componentDidMount() {
-    axios.get("/api/me", { 
-      withCredentials: true, 
-      headers: {"Content-Type": "application/json"}
-    })
+    console.log("APP.JS COMPONENT DID MOUNT")
+    axios.get("/api/me", {withCredentials: true, headers: {"Content-Type": "application/json"}})
       .then((res) => {
-        return res.data;
+        console.log("SET LOGIN DE APPjs")
+        this.props.setLogin(res.data)
+        this.props.getOrder()
       })
-      .then((user) => {
-        console.log(`found user ${user}`);
-        this.props.setUser(user);
-        return user
-      }).then((user)=>{
-        this.props.getOrderId(user.id)
-      })
-      .catch((err) => console.log(err));
   }
+
+
 
   render() {
     return (
@@ -60,8 +56,8 @@ class App extends React.Component {
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrderContainer} />
+          <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
           <Route exact path="/register" component={RegisterContainer} />
-          <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
           <Route exact path="/" component={Home} />
           <Route exact path="/users" />
@@ -70,5 +66,6 @@ class App extends React.Component {
     );
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

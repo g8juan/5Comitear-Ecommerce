@@ -1,53 +1,46 @@
 import axios from 'axios';
-import { INCREMENT_PRODUCT_QUANTITY, DECREMENT_PRODUCT_QUANTITY, SET_CART } from "../redux/constants";
-import {getOrderId} from '../users/usersActionCreators'
-
-const incrementProductQty = product => ({
-    type: INCREMENT_PRODUCT_QUANTITY,
-    payload: product
-})
-
-const decrementProductQty = product => ({
-    type: DECREMENT_PRODUCT_QUANTITY,
-    payload: product
-})
 
 const setCart = products => ({
-    type: SET_CART,
-    payload: products
+  type: "SET_CART",
+  payload: products
 })
 
+export const resetCart = () => ({
+  type: "RESET_CART",
+})
 
-export const increaseProductQuantity = (product) => dispatch => {
-    dispatch(incrementProductQty(product))
-}
+export const setCartProduct = (product) => ({
+  type: "SET_CART_PRODUCT",
+  payload: product
+})
 
-export const decreaseProductQuantity = (product) => dispatch => {
-    dispatch(decrementProductQty(product))
-}
+export const getCart = (orderId) => (dispatch) => axios.get(`/api/cart/${orderId}`).then(({data}) => dispatch(setCart(data)))
 
-export const newOrder = () => (dispatch, getState) => 
-axios.get(`http://localhost:8000/api/orders/new?${getState().users.user.id}`)
-
-// chequear ruta del back
-// export const getCart = (id) => (dispatch, getState) => {
-//   console.log("entre al axios")
-//     axios.get(`/api/cart/${id}`)
-//     .then(res => res.data)
-//     .then(products => dispatch(setCart(products)))
-// }
-
-export const getCart = () => (dispatch, getState) => {
-  console.log("entre al axios")
-    axios.get(`/api/cart/${getState().users.user.id}`)
-    .then(res => res.data)
-    .then(products => dispatch(setCart(products)))
-}
-
-export const showCart = () => async (dispatch, getState) => {
-    await getOrderId(getState().users.order.id)
-    dispatch(getCart())
+export const modifyCart = (product, quantity=1) => async (dispatch, getState) => {
+  const res = await axios.post(`/api/cart/modify`, {orderId: getState().orders.order.id, productId: product.id, quantity})
+  const products = getState().cart.products
+  const index = products.findIndex(p => p.id === product.id)
+  if (index === -1) {
+    dispatch(setCartProduct(products.concat([{ ...product, order_product: res.data}])));
+  } else {
+    if (res.data) {
+      const data = [...products];
+      data[index].order_product = res.data; //esta res.data es order_product
+      dispatch(setCartProduct(data));
+    } else {
+      dispatch(setCartProduct(products.slice(index, 1)));
+    }
   }
+}
+
+
+
+
+
+
+
+
+
 
 
 // export const getCart = () => (dispatch, getState) => {

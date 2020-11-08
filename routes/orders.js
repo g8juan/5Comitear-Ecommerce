@@ -5,7 +5,7 @@ const database = require("../database/database");
 
 router.get("/", (req, res) => Order.findAll().then((order) => res.send(order)));
 
-router.post("/new", (req, res) => { //+DONE
+router.post("/new", (req, res) => {
   Order.create({userId: req.body.userId, orderStatus: "pending" })
   .then(order => res.send(order))
   .catch((err) => console.log(err))
@@ -14,7 +14,7 @@ router.post("/new", (req, res) => { //+DONE
 //+Get order (for current user)
 router.get("/:userId", (req, res) => { 
   Order.findOne({where: { userId: req.params.userId, orderStatus: "pending" }})
-    .then((order) => res.send(order))
+    .then((order) => res.status(200).send(order))
     .catch((err) => console.log(err));
 });
 
