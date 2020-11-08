@@ -2,7 +2,6 @@ const initialState = {
   user: {},
   userList: [],
   error: false,
-  order: {}
 };
 
 export default function usersReducer(state = initialState, action) {

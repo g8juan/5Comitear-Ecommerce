@@ -51,28 +51,3 @@ class CartContainer extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
-
-
-
-/*  increaseQty = (event) => {
-   console.log(event.target)
-   const name = event.target.name;
-   const selectedItem = this.state.items.filter((elem) => elem.name === name);
-   const notSelectedItems = this.state.items.filter((elem) => elem.name !== name);
-   selectedItem[0].quantity = selectedItem[0].quantity + 1;
-     this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-     , console.log(this.state)
-   ))
- } */
-
-/* increaseQty = (event) => {
-  console.log(event.target)
-  const name = event.target.name;
-  const selectedItem = this.state.items.filter((elem) => elem.name === name);
-  const notSelectedItems = this.state.items.filter((elem) => elem.name !== name);
-  selectedItem[0].quantity = selectedItem[0].quantity + 1;
-  //this.props.setProductQuantity('+', selectedItem.name)
-    this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-    , console.log(this.state)
-  ))
-} */
