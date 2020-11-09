@@ -1,34 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import OrderForm from "./OrderForm";
-import { setAdress } from "./ordersActionCreators";
 
 function mapStateToProps(state, ownProps) {
-  return {
-    address: state.orders.address,
-  };
+  return {};
 }
 function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    setAdress: (address) => dispatch(setAdress(address)),
-  };
+  return {};
 }
 
 class OrderContainer extends React.Component {
-  handleChange = () => {
+  handleChange = () => {};
 
-  }
-
-  handleSubmit = () => {
-
-  }
+  handleSubmit = () => {};
 
   render() {
-    return (
-      <div>
-        <OrderForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-      </div>
-    );
+    return <div>Ordenes del Usuario</div>;
   }
 }
 

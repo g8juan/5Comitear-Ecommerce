@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = ({increaseQuantity, decreaseQuantity, products, handleDelete, ammount}) => {
+const Cart = ({increaseQuantity, decreaseQuantity, products, handleDelete, handleClick}) => {
   const classes = useStyles();
   let subtotal = 0;
   let formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
@@ -91,8 +91,8 @@ const Cart = ({increaseQuantity, decreaseQuantity, products, handleDelete, ammou
                             Subtotal :{formatter.format(subtotal)}
                           </td>
                           <td colSpan="4" align="right">
-                            <Link to="/orders">
-                              <button className="btn btn-primary">
+                            <Link to="/cart/checkout">
+                              <button onClick={handleClick} className="btn btn-primary" value={subtotal}>
                                 Proceed to checkout
                             </button>
                             </Link>

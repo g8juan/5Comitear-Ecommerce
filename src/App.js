@@ -17,6 +17,8 @@ import PaymentContainer from "./payment/MainScreen";
 import Home from './home/home'
 import {setLogin} from "./users/usersActionCreators";
 import {getOrder} from "./orders/ordersActionCreators"
+import CheckoutContainer from "./cart/CheckoutContainer";
+import ReviewOrderContainer from './cart/ReviewOrderContainer'
 
 
 function mapStateToProps(state) {
@@ -34,10 +36,8 @@ function mapDispatchToProps(dispatch) {
 
 class App extends React.Component {
   componentDidMount() {
-    console.log("APP.JS COMPONENT DID MOUNT")
-    axios.get("/api/me", {withCredentials: true, headers: {"Content-Type": "application/json"}})
+    axios.get("/api/users/me", {withCredentials: true, headers: {"Content-Type": "application/json"}})
       .then((res) => {
-        console.log("SET LOGIN DE APPjs")
         this.props.setLogin(res.data)
         this.props.getOrder()
       })
@@ -56,9 +56,14 @@ class App extends React.Component {
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrderContainer} />
+
           <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
+          <Route exact path="/cart/checkout" component={CheckoutContainer} />
+          <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
+          <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
+
+
           <Route exact path="/register" component={RegisterContainer} />
-          <Route exact path="/payment" component={PaymentContainer} />
           <Route exact path="/" component={Home} />
           <Route exact path="/users" />
         </Switch>

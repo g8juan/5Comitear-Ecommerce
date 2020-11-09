@@ -5,14 +5,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Typography from "@material-ui/core/Typography";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {Link} from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,13 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderForm = ({
-  handleChange,
-  handleSubmit,
-  firstName,
-  lastName,
-  error,
-}) => {
+const Checkout = ({ handleChange, handleSubmit, error }) => {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">
@@ -51,7 +43,7 @@ const OrderForm = ({
           <ShoppingCartIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Shipping Adress
+          Shipping Address
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={1}>
@@ -60,26 +52,24 @@ const OrderForm = ({
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
-                required
+                //required
                 fullWidth
                 id="firstName"
                 label="Name"
                 autoFocus
                 onChange={handleChange}
-                value={firstName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required
+                //required
                 fullWidth
                 id="lastName"
                 label="Lastname"
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleChange}
-                value={lastName}
               />
             </Grid>
 
@@ -154,7 +144,7 @@ const OrderForm = ({
               />
             </Grid>
           </Grid>
-          <Link to="/payment">
+{/*           <Link to="checkout/payment"> */}
             <Button
               type="submit"
               fullWidth
@@ -163,20 +153,20 @@ const OrderForm = ({
               className={classes.submit}
             >
               Continue with Payment
-          </Button>
-          </Link>
+            </Button>
+      {/*     </Link> */}
           {error ? (
             <Alert variant="outlined" severity="error">
               Pst! Todos los campos deben estar completos.
             </Alert>
           ) : null}
 
-          <Grid container justify="flex-end">
-          </Grid>
+          <Grid container justify="flex-end"></Grid>
         </form>
       </div>
       <Box mt={5}></Box>
     </Container>
   );
 };
-export default OrderForm;
+
+export default Checkout;
