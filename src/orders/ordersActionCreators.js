@@ -17,7 +17,9 @@ export const getOrder = () => (dispatch, getState) => {
 }
 
 export const postOrder = (id) => (dispatch) => {
+  console.log('ENTRANDO A POSTORDER CON ID, ' + id)
   axios.post(`http://localhost:8000/api/orders/new`, {userId: id})
     .then(({data}) => dispatch(setOrder(data))).then(() => success('orden creada con exito.', ""))
     .catch((err) => console.log(err))
 }
+

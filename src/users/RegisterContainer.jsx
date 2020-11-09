@@ -51,6 +51,7 @@ class RegisterContainer extends React.Component {
       axios.post("api/users/register", {email, firstName, lastName, password, address, phone, userType: "1"})
         .then(({data}) => {
           success("USUARIO REGISTRADO CON EXITO. ID:", data.id)
+          
           this.props.postOrder(data.id)})
         .then(()=>this.setState({email: "", firstName: "", lastName: "", password: "", address: "", phone: ""}, ()=>{
             this.props.history.push("/login");
