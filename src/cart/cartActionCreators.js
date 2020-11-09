@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {info} from '../utils/logs'
 
 const setCart = products => ({
   type: "SET_CART",
@@ -17,18 +18,20 @@ export const setCartProduct = (product) => ({
 export const getCart = (orderId) => (dispatch) => axios.get(`/api/cart/${orderId}`).then(({data}) => dispatch(setCart(data)))
 
 export const modifyCart = (product, quantity=1) => async (dispatch, getState) => {
+
   const res = await axios.post(`/api/cart/modify`, {orderId: getState().orders.order.id, productId: product.id, quantity})
   const products = getState().cart.products
-  const index = products.findIndex(p => p.id === product.id)
+  const index = products.findIndex(p => p.id === product.id) //-1
   if (index === -1) {
     dispatch(setCartProduct(products.concat([{ ...product, order_product: res.data}])));
   } else {
+    const productsCopy = [...products];
     if (res.data) {
-      const data = [...products];
-      data[index].order_product = res.data; //esta res.data es order_product
-      dispatch(setCartProduct(data));
+      productsCopy[index].order_product = res.data; //esta res.data es order_product
+      dispatch(setCartProduct(productsCopy));
     } else {
-      dispatch(setCartProduct(products.slice(index, 1)));
+      productsCopy.splice(index,1)
+      dispatch(setCartProduct(productsCopy));
     }
   }
 }

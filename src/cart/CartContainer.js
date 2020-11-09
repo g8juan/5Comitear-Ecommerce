@@ -21,12 +21,6 @@ function mapDispatchToProps (dispatch) {
 class CartContainer extends React.Component {
 
   componentDidMount() {
-    console.log("componentDIdMount de Cart ORDERID", this.props.orderId)
-    this.props.getCart(this.props.orderId)
-  }
-
-  componentDidUpdate({orderId, products}) {
-    if ((orderId !== this.props.orderId) || (products.length !== this.props.products.length))
     this.props.getCart(this.props.orderId)
   }
 
