@@ -9,16 +9,14 @@ export const actionSingleProduct = (singleProduct) => {
 };
 
 export const getProducts = (productName) => (dispatch) => {
-  axios
-    .get(`/api/products`, {params: {name: productName}})
+  axios.get(`/api/products`, {params: {name: productName}})
     .then((res) => res.data)
     .then((products) => dispatch(actionProducts(products)))
     .catch((err) => console.log(err));
 };
 
 export const getSingleProduct = (id) => (dispatch) => {
-  axios
-    .get("/api/products/singleProduct", {params: id})
+  axios.get("/api/products/singleProduct", {params: id})
     .then((res) => res.data)
     .then((product) => dispatch(actionSingleProduct(product)))
     .catch((err) => console.log(err));

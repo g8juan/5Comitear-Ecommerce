@@ -21,6 +21,20 @@ export const success = (msg, value) => {
 };
 
 /**
+ * Logs a success notification on the browser dev tools.
+ * Success prefix on display
+ * @param {string} message
+ */
+export const info = (msg, value) => {
+  console.log(
+    `%c------------------------\n%c${msg}%c ${value}\n------------------------`,
+    "color:black; font-weight:bold",
+    "background-color:black; color: white; font-weight:bold",
+    "color:black; font-weight:bold"
+  );
+};
+
+/**
  * Logs a notification on the browser dev tools
  * Error prefix on display
  * @param {string} reason
