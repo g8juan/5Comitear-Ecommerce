@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 
 import { connect } from "react-redux";
-import { login, errorLogin } from "./usersActionCreators";
+import { login, setErrorLogin } from "./usersActionCreators";
 
 function mapStateToProps(state) {
   return {

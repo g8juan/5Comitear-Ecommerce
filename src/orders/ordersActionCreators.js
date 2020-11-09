@@ -1,5 +1,5 @@
 import axios from "axios";
-import {log, success} from '../utils/logs'
+import {success} from '../utils/logs'
 
 export const setOrder = (order) => ({
   type: "SET_ORDER",
@@ -17,7 +17,6 @@ export const getOrder = () => (dispatch, getState) => {
 }
 
 export const postOrder = (id) => (dispatch) => {
-  log("postOrder in cartActionCreators:18")
   axios.post(`http://localhost:8000/api/orders/new`, {userId: id})
     .then(({data}) => dispatch(setOrder(data))).then(() => success('orden creada con exito.', ""))
     .catch((err) => console.log(err))

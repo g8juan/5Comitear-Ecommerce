@@ -34,10 +34,8 @@ function mapDispatchToProps(dispatch) {
 
 class App extends React.Component {
   componentDidMount() {
-    console.log("APP.JS COMPONENT DID MOUNT")
-    axios.get("/api/me", {withCredentials: true, headers: {"Content-Type": "application/json"}})
+    axios.get("/api/users/me", {withCredentials: true, headers: {"Content-Type": "application/json"}})
       .then((res) => {
-        console.log("SET LOGIN DE APPjs")
         this.props.setLogin(res.data)
         this.props.getOrder()
       })
