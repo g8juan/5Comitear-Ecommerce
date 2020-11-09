@@ -32,42 +32,10 @@ async function seed() {
   console.log("usuarios generados");
 
   await Product.bulkCreate([
-    {
-      name: "camisa",
-      price: 2000,
-      description: "una bella camisa",
-      thumbnail: "https://i.imgur.com/BY9MiuQ.png",
-      image: "una bella image",
-      stock: 4,
-      reviews: [7, 6, 9],
-    },
-    {
-      name: "pantalon",
-      price: 2200,
-      description: "un pantalon gris",
-      thumbnail: "https://i.imgur.com/XTQuyir.png",
-      image: "una bella imagen de pantalon",
-      stock: 14,
-      reviews: [8, 8, 9],
-    },
-    {
-      name: "remera",
-      price: 1000,
-      description: "una remera dark",
-      thumbnail: "https://i.imgur.com/af9yLS4.png",
-      image: "una bella image",
-      stock: 6,
-      reviews: [7, 5, 6],
-    },
-    {
-      name: "campera",
-      price: 4800,
-      description: "una campera muy abrigada",
-      thumbnail: "https://i.imgur.com/JEDAPAg.png",
-      image: "una bella imagen de campera",
-      stock: 2,
-      reviews: [8, 10, 10],
-    },
+    { name: "camisa", price: 2000, description: "una bella camisa", thumbnail: "https://i.imgur.com/BY9MiuQ.png", image: "una bella image", stock: 4, reviews: [7, 6, 9], },
+    { name: "pantalon", price: 2200, description: "un pantalon gris", thumbnail: "https://i.imgur.com/XTQuyir.png", image: "una bella imagen de pantalon", stock: 14, reviews: [8, 8, 9], },
+    { name: "remera", price: 1000, description: "una remera dark", thumbnail: "https://i.imgur.com/af9yLS4.png", image: "una bella image", stock: 6, reviews: [7, 5, 6], },
+    { name: "campera", price: 4800, description: "una campera muy abrigada", thumbnail: "https://i.imgur.com/JEDAPAg.png", image: "una bella imagen de campera", stock: 2, reviews: [8, 10, 10], },
   ]).then(() => {
     console.log("productos generados");
   });
