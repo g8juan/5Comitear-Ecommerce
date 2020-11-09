@@ -1,27 +1,48 @@
 import React from "react";
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Products from './products'
-import { getProducts } from '../productsActionCreators'
+import {getProducts} from '../productsActionCreators'
+import {modifyCart} from '../../cart/cartActionCreators'
 
-const mapStateToProps = (state) => ({ products : state.products.products })
-const mapDispatchToProps = (dispatch) => ({ getProducts : (n) => dispatch(getProducts(n))})
+function mapStateToProps(state) {
+  return {
+    products: state.products.products,
+    userId: state.users.user.id,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getProducts: (n) => dispatch(getProducts(n)),
+    modifyCart: (product) => dispatch(modifyCart(product))
+  }
+}
 
 class ProductsContainer extends React.Component {
-
-  componentDidMount(){ 
-    const search = this.props.location.search, query = new URLSearchParams(search)
-    if (search) this.props.getProducts(query.get('s')) 
-    else this.props.getProducts() 
+  
+  search() {
+    const query = new URLSearchParams(this.props.location.search);
+    this.props.getProducts(query.get('s'))
   }
 
-  componentDidUpdate(previousProps){
-    if (previousProps.location.search !== this.props.location.search) {
-      const search = this.props.location.search, query = new URLSearchParams(search)
-      this.props.getProducts(query.get('s'))
+  componentDidMount() {
+    this.search()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.search()
     }
   }
 
-  render() { return <div> <Products products={this.props.products}/> </div> } 
+  handleClick = (product) => {
+    this.props.modifyCart(product)
+  }
+
+  render() {
+    return (<Products addToCart={this.handleClick} products={this.props.products} userId={this.props.userId} />)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
+

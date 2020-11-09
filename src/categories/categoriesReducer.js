@@ -3,7 +3,7 @@ const defaultState = {
     categorySelected: {}
 }
 
-export default function categoriesReducer (state = defaultState, action) {
+function categoriesReducer (state = defaultState, action) {
   switch (action.type) {
     case 'GET_CATEGORIES':
       return {...state, categories: action.categories}
@@ -13,3 +13,4 @@ export default function categoriesReducer (state = defaultState, action) {
       return state;
   }
 }
+export default categoriesReducer

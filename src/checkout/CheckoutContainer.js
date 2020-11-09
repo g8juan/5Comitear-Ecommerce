@@ -18,7 +18,7 @@ function mapDispatchToProps (dispatch) {
   };
 };
 
-class CartContainer extends React.Component {
+class CheckoutContainer extends React.Component {
 
   componentDidMount() {
     console.log("componentDIdMount de Cart ORDERID", this.props.orderId)
@@ -50,4 +50,4 @@ class CartContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);

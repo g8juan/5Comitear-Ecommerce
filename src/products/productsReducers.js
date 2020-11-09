@@ -3,7 +3,7 @@ const defaultState = {
     singleProduct: {},
 }
 
-const productsReducer = (state = defaultState, action) => {
+function productsReducer (state = defaultState, action) {
     switch (action.type) {
     case 'GET_PRODUCTS':
       return {...state, products: action.products}

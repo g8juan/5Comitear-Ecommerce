@@ -1,49 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
-import Order from "./Order";
+import OrderForm from "./OrderForm";
+import { setAdress } from "./ordersActionCreators";
 
-const mapStateToProps = (state) => {
-  return {};
-};
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+function mapStateToProps(state, ownProps) {
+  return {
+    address: state.orders.address,
+  };
+}
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    setAdress: (address) => dispatch(setAdress(address)),
+  };
+}
 
 class OrderContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      payload: {
-        subTotal: 4300,
-      },
-      items: [
-        {
-          id: 1,
-          name: "zapatillas",
-          quantity: 1,
-          price: 2500,
-          thumbnail: "https:/foto.jpg",
-          stock: 120,
-        },
-        {
-          id: 2,
-          name: "remera",
-          quantity: 1,
-          price: 1800,
-          thumbnail: "https:/foto2.jpg",
-          stock: 170,
-        },
-      ],
-    };
-  }
-  componentDidMount() {}
+  handleChange = () => {
 
-  componentWillUnmount() {}
+  }
+
+  handleSubmit = () => {
+
+  }
 
   render() {
     return (
       <div>
-        <Order />
+        <OrderForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     );
   }

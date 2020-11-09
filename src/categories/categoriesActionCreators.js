@@ -1,10 +1,10 @@
 import axios from "axios"
 
-export const actionCategories = (categories) => {
+export function actionCategories (categories) {
     return { type: 'GET_CATEGORIES', categories: categories }
 }
 
-export const actionSelectCategory = (categorySelected) => {
+export function actionSelectCategory (categorySelected) {
     return { type: 'SELECT_CATEGORY', categorySelected: categorySelected }
 }
 

@@ -10,9 +10,9 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,15 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Order = ({
-  onChange,
-  onSubmit,
-  email,
+const OrderForm = ({
+  handleChange,
+  handleSubmit,
   firstName,
   lastName,
-  password,
-  phone,
-  address,
   error,
 }) => {
   const classes = useStyles();
@@ -57,7 +53,7 @@ const Order = ({
         <Typography component="h1" variant="h5">
           Shipping Adress
         </Typography>
-        <form onSubmit={onSubmit} className={classes.form} noValidate>
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={1}>
             <Grid item xs={1} sm={6}>
               <TextField
@@ -69,7 +65,7 @@ const Order = ({
                 id="firstName"
                 label="Name"
                 autoFocus
-                onChange={onChange}
+                onChange={handleChange}
                 value={firstName}
               />
             </Grid>
@@ -82,7 +78,7 @@ const Order = ({
                 label="Lastname"
                 name="lastName"
                 autoComplete="lname"
-                onChange={onChange}
+                onChange={handleChange}
                 value={lastName}
               />
             </Grid>
@@ -96,7 +92,7 @@ const Order = ({
                 label="ZIP Code"
                 name="zip"
                 autoComplete="zip"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -109,7 +105,7 @@ const Order = ({
                 label="Province"
                 type="province"
                 id="province"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -122,7 +118,7 @@ const Order = ({
                 label="City"
                 type="city"
                 id="city"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -135,7 +131,7 @@ const Order = ({
                 label="Street and Number"
                 type="street and number"
                 id="street and number"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -147,7 +143,7 @@ const Order = ({
                 label="Floor and Apartment"
                 type="floor and apartment"
                 id="floor and apartment"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -159,14 +155,14 @@ const Order = ({
             </Grid>
           </Grid>
           <Link to="/payment">
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Continue with Payment
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Continue with Payment
           </Button>
           </Link>
           {error ? (
@@ -183,4 +179,4 @@ const Order = ({
     </Container>
   );
 };
-export default Order;
+export default OrderForm;
