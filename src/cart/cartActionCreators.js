@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {info} from '../utils/logs'
 
 const setCart = products => ({
   type: "SET_CART",
@@ -35,20 +34,3 @@ export const modifyCart = (product, quantity=1) => async (dispatch, getState) =>
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-// export const getCart = () => (dispatch, getState) => {
-//   console.log("entre al axios")
-//     axios.get(`/api/orders/${getState().users.order.data.id}`)
-//     .then(res => res.data)
-//     .then(products => dispatch(setCart(products)))
-// }
