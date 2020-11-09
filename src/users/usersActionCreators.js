@@ -13,10 +13,10 @@ export const setErrorLogin = (error) => ({
   payload: error
 });
 
+
 export const setLogout = () => ({
   type: "SET_LOGOUT",
 });
-
 
 export const login = (user) => async (dispatch) => {
   try {
@@ -28,15 +28,12 @@ export const login = (user) => async (dispatch) => {
   dispatch(getOrder())
 };
 
-
-
 export const logOut = () => (dispatch) => {
   axios.get("/api/users/logout").then(() => dispatch(setLogout()))
     .then(() => success("usuario desloggeado con exito", ""));
   dispatch(resetOrder())
   dispatch(resetCart())
 };
-
 
 export const getUsers = () => (dispatch) => {
   axios.get("http://localhost:8000/api/users")

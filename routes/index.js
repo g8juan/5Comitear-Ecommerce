@@ -11,7 +11,6 @@ router.use("/users", usersRouter);
 router.use("/products", productsRouter);
 router.use("/orders", ordersRouter);
 router.use("/cart", cartRouter);
-
 router.use("/", function (req, res) {
   res.send("No se ha alcanzado ninguna ruta");
 });
