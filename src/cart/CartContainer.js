@@ -1,122 +1,48 @@
 import React from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Cart from "./Cart";
-//import { getFavorites, deleteFavorites } from "../store/action-creators/users";
-import { increaseProductQuantity, decreaseProductQuantity, getProductsInCart } from "./cartActionCreators";
+import {getCart, modifyCart} from "./cartActionCreators";
 
-const mapStateToProps = (state) => {
+function mapStateToProps (state) {
   return {
-    products: state.cart.productsInCart,
+    products: state.cart.products, //Array
+    orderId: state.orders.order.id,
     userId: state.users.user.id,
-    cart: state.cart
   };
 };
-const mapDispatchToProps = (dispatch) => {
+
+function mapDispatchToProps (dispatch) {
   return {
-    oneMore: (productId) => dispatch(increaseProductQuantity(productId)),
-    oneLess: (productId) => dispatch(decreaseProductQuantity(productId)),
-    productsInCart: (userId) => dispatch(getProductsInCart(userId))
+    getCart: (orderId) => dispatch(getCart(orderId)),
+    modifyCart: (product, quantity) => dispatch(modifyCart(product, quantity))
   };
 };
 
 class CartContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      payload: {
-        subTotal: 4300
-      },
-      items: [
-        {
-          id: 1,
-          name: "zapatillas",
-          quantity: 1,
-          price: 2500,
-          thumbnail: "https:/foto.jpg",
-          stock: 120
-        },
-        {
-          id: 2,
-          name: "remera",
-          quantity: 1,
-          price: 1800,
-          thumbnail: "https:/foto2.jpg",
-          stock: 170
-        } 
-      ]
-    }
-    // this.handleDelete = this.handleDelete.bind(this);  // borrar productos del carrito
-  }
+
   componentDidMount() {
-    console.log(this.props)
-    if(this.props.userId) this.props.getProductsInCart(this.props.userId)
+    console.log("componentDIdMount de Cart ORDERID", this.props.orderId)
+    this.props.getCart(this.props.orderId)
   }
 
-  componentWillUnmount() {
-
+  componentDidUpdate({orderId, products}) {
+    if ((orderId !== this.props.orderId) || (products.length !== this.props.products.length))
+    this.props.getCart(this.props.orderId)
   }
 
+  increaseQuantity = (product) => this.props.modifyCart(product, 1)
+  decreaseQuantity = (product) => this.props.modifyCart(product, -1)
 
- /*  increaseQty = (event) => {
-    console.log(event.target)
-    const name = event.target.name;
-    const selectedItem = this.state.items.filter((elem) => elem.name === name);
-    const notSelectedItems = this.state.items.filter((elem) => elem.name !== name);
-    selectedItem[0].quantity = selectedItem[0].quantity + 1;
-      this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-      , console.log(this.state)
-    ))
-  } */
-
-  /* increaseQty = (event) => {
-    console.log(event.target)
-    const name = event.target.name;
-    const selectedItem = this.state.items.filter((elem) => elem.name === name);
-    const notSelectedItems = this.state.items.filter((elem) => elem.name !== name);
-    selectedItem[0].quantity = selectedItem[0].quantity + 1;
-    //this.props.setProductQuantity('+', selectedItem.name)
-      this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-      , console.log(this.state)
-    ))
-  } */
-
-  decreaseQty = (event) => {
-    console.log(event.target)
-    const name = event.target.name;
-    const selectedItem = this.state.items.filter((elem) => elem.name === name);
-    const notSelectedItems = this.state.items.filter((elem) => elem.name !== name);
-    selectedItem[0].quantity = selectedItem[0].quantity - 1;
-    //this.props.setProductQuantity('+', selectedItem.name)
-      this.setState((prevState) => ({ ...prevState, items: [...notSelectedItems, selectedItem] }
-    ))
-  } 
-
-
-  increaseQty = (item) => {
-    //const item = event.target.selectedItem;
-    //console.log("event", event.target)
-    console.log("item", item)
-    //this.props.oneMore(id)
-  }
-
-  handleDelete(item) {
-    console.log(item)
-    /* this.props
-      .deleteFavorites(id)
-      .then(() => this.props.getFavorites(this.props.userId));
-    this.props.history.push("/"); */
-  }
+  handleDelete(){/*TODO*/}
 
   render() {
     return (
       <div>
-        <Cart 
-          cart = {this.props.cart}
-          increaseQty ={this.increaseQty} 
-          decreaseQty={this.decreaseQty} 
-          // products={this.props.products}  cuando podamos traer la data que Juan envia al back
-          products={this.state.items}
-          payload={this.state.payload} 
+        <Cart
+          products={this.props.products}
+          ammount={this.props.ammount}
+          increaseQuantity={this.increaseQuantity}
+          decreaseQuantity={this.decreaseQuantity}
           handleDelete={this.handleDelete}
         />
       </div>

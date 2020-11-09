@@ -44,16 +44,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({
-  onSubmit,
-  onChange,
-  email,
-  password,
-  error,
-  handleClose,
-}) {
+export default function SignIn({ onSubmit, onChange, email, password, error, handleClose }) {
   const classes = useStyles();
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -63,16 +55,8 @@ export default function SignIn({
           Iniciar sesión
         </Typography>
         <form onSubmit={onSubmit} className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Correo electrónico"
-            name="email"
-            autoComplete="email"
-            autoFocus
+          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Correo electrónico" name="email"
+            autoComplete="email" autoFocus
             onChange={onChange}
             value={email}
           />

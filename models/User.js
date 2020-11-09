@@ -8,7 +8,6 @@ class User extends Model {
   }
 }
 
-
 User.init(
   {
     firstName: {
@@ -56,16 +55,6 @@ User.init(
   {
     sequelize: database,
     modelName: "user",
-    // hooks: {
-    //   beforeCreate: ((user) => {
-    //     return bcrypt.genSalt(16).then((salt) => {
-    //       user.salt = salt;
-    //       return user.hash(user.password, salt)
-    //     }).then((hash) => {
-    //       user.password = hash;
-    //     })
-    //   })
-    // }
   }
 );
 
