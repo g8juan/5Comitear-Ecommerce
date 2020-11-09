@@ -52,9 +52,9 @@ class RegisterContainer extends React.Component {
         .then(({data}) => {
           success("USUARIO REGISTRADO CON EXITO. ID:", data.id)
           this.props.postOrder(data.id)})
-        .then(()=>{
-          this.props.history.push("/login");
-          this.setState({email: "", firstName: "", lastName: "", password: "", address: "", phone: ""})})
+        .then(()=>this.setState({email: "", firstName: "", lastName: "", password: "", address: "", phone: ""}, ()=>{
+            this.props.history.push("/login");
+          }))  
     };
   }
 
