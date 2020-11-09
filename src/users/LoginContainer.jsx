@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 
 import { connect } from "react-redux";
-import { login, errorLogin } from "./usersActionCreators";
+import { login, setErrorLogin } from "./usersActionCreators";
 
 function mapStateToProps(state) {
   return {
@@ -33,26 +33,30 @@ class LoginContainer extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    this.props.login(this.state)
-  }
+    this.props.login(this.state);
+  };
 
   onChangeHandler = (e) => {
     let value = e.target.value;
-    this.setState({[e.target.id]: value});
-  }
+    this.setState({ [e.target.id]: value });
+  };
 
   handleClose = () => {
     this.props.setErrorLogin(false);
-  }
+  };
 
   render() {
     return (
-      <Login onChange={this.onChangeHandler} onSubmit={this.onSubmitHandler} email={this.state.email}
-        password={this.state.password} error={this.props.error} handleClose={this.handleClose}
+      <Login
+        onChange={this.onChangeHandler}
+        onSubmit={this.onSubmitHandler}
+        email={this.state.email}
+        password={this.state.password}
+        error={this.props.error}
+        handleClose={this.handleClose}
       />
     );
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
