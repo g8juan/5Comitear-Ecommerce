@@ -23,7 +23,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/me", (req, res) => {
   console.log("AUTHENTICATED", req.isAuthenticated());
-  if (!req.user) return res.sendStatus(401);
+  if (!req.user) res.sendStatus(401);
   res.send(req.user);
 });
 

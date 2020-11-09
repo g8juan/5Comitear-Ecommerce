@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -59,8 +59,8 @@ class App extends React.Component {
           <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/users" />
+          <Route exact path="/home" component={Home} />
+          <Redirect from="/" to="/home" />
         </Switch>
       </div>
     );

@@ -11,7 +11,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/modify", async (req, res) => {
   const {orderId, productId} = req.body;
-  let quantity = req.body.quantity || 1
+  let quantity = req.body.quantity || 1 // esta linea esta de mas se puede poner arriba ya especifica en front.
   const foundItem = await OrderProduct.findOne({where:{orderId, productId}});
   if (!foundItem) {
        const product = await OrderProduct.create({quantity, productId: req.body.productId, orderId: req.body.orderId})
