@@ -18,16 +18,22 @@ router.put("/update", (req, res) => {
       .then((order) => {
         order.address = req.body.address;
         order.save();
-        console.log("order", order);
+        res.send(order);
+      })
+      .catch((err) => console.log(err));
+  } else if (req.body.subtotal) {
+    Order.findByPk(req.body.orderId)
+      .then((order) => {
+        order.ammount = req.body.subtotal;
+        order.save();
         res.send(order);
       })
       .catch((err) => console.log(err));
   } else {
     Order.findByPk(req.body.orderId)
       .then((order) => {
-        order.ammount = req.body.subtotal;
+        order.recipient = req.body.fullName;
         order.save();
-        console.log("order", order);
         res.send(order);
       })
       .catch((err) => console.log(err));
@@ -65,12 +71,12 @@ WHERE "orderStatus" = "cancelled"
 */
 //Se deberia mover también los elemntos de order_product, moviendola a cancelled_order_product por ej y cambiar el nombre de las claves foraneas.
 /*
-ALTER TABLE `cancelled_order_product` 
-DROP FOREIGN KEY `orderId`;  
+ALTER TABLE `cancelled_order_product`
+DROP FOREIGN KEY `orderId`;
 
-ALTER TABLE `cancelled_order_product`  
-ADD CONSTRAINT `cancelled_orderId` 
-    FOREIGN KEY (`cancelled_order_productId`) REFERENCES `cancelled_order` (`id`) ON DELETE CASCADE; 
+ALTER TABLE `cancelled_order_product`
+ADD CONSTRAINT `cancelled_orderId`
+    FOREIGN KEY (`cancelled_order_productId`) REFERENCES `cancelled_order` (`id`) ON DELETE CASCADE;
 repetir para productId
 */
 

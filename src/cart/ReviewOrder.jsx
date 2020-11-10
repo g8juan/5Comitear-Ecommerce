@@ -32,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
 const ReviewOrder = ({ handleSubmit, order, products, email }) => {
   const classes = useStyles();
   console.log("order", order);
