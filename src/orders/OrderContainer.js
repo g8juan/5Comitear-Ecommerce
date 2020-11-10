@@ -1,22 +1,20 @@
 import React from "react";
-import {connect} from "react-redux";
-import OrderForm from "./OrderForm"
+import { connect } from "react-redux";
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps(state, ownProps) {
   return {};
-};
-function mapDispatchToProps (dispatch, ownProps) {
+}
+function mapDispatchToProps(dispatch, ownProps) {
   return {};
-};
+}
 
 class OrderContainer extends React.Component {
-  
-  render(){
-    return (
-      <div>
-        <OrderForm />
-      </div>
-    )
+  handleChange = () => {};
+
+  handleSubmit = () => {};
+
+  render() {
+    return <div>Ordenes del Usuario</div>;
   }
 }
 

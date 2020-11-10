@@ -24,6 +24,7 @@ class LoginContainer extends React.Component {
     this.state = {
       email: "",
       password: "",
+      loader: false
     };
   }
 
@@ -33,6 +34,7 @@ class LoginContainer extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
+    this.setState({ loader: true })
     this.props.login(this.state);
   };
 
@@ -42,6 +44,7 @@ class LoginContainer extends React.Component {
   };
 
   handleClose = () => {
+    this.setState({ loader: false })
     this.props.setErrorLogin(false);
   };
 
@@ -54,6 +57,7 @@ class LoginContainer extends React.Component {
         password={this.state.password}
         error={this.props.error}
         handleClose={this.handleClose}
+        loader={this.state.loader}
       />
     );
   }

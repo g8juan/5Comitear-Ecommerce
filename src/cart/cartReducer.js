@@ -1,17 +1,18 @@
 const initialState = {
-  products: []
-}
+  products: [],
+  order: {},
+};
 
-function cartReducer (state = initialState, action) {
+function cartReducer(state = initialState, action) {
   switch (action.type) {
     case "SET_CART":
-      return action.payload
+      return action.payload;
     case "RESET_CART":
-      return initialState
+      return initialState;
     case "SET_CART_PRODUCT":
-      return {...state, products: action.payload}
+      return { ...state, products: action.payload };
     default:
-      return state
+      return state;
   }
 }
-export default cartReducer
+export default cartReducer;
