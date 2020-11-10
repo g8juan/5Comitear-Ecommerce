@@ -1,6 +1,8 @@
 const initialState = {
   order: {},
   orderList: [],
+  ordersList:[],
+  adminOrdersList:[]
 };
 
 export default function usersReducer(state = initialState, action) {
@@ -9,8 +11,8 @@ export default function usersReducer(state = initialState, action) {
       return { ...state, order: action.payload };
     case "RESET_ORDER":
       return initialState
-    // case "SET_ORDER_LIST": // TODO:(PARA ADMIN)
-    //   return { ...state, orderList: action.payload };
+    case "SET_ORDERS_LIST":
+      return { ...state, ordersList: action.payload };
     default:
       return state;
   }

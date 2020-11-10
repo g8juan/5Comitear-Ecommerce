@@ -21,7 +21,13 @@ function mapDispatchToProps(dispatch) {
 
 class CartContainer extends React.Component {
   componentDidMount() {
-    this.props.getCart(this.props.orderId);
+    if(this.props.location.state)this.props.getCart(this.props.location.state.orderId)
+    else this.props.getCart(this.props.orderId)
+  }
+
+  componentDidUpdate({orderId}) {
+    if(this.props.orderId !== orderId)
+    this.props.getCart(this.props.orderId)
   }
 
   increaseQuantity = (product) => this.props.modifyCart(product, 1);
@@ -40,6 +46,7 @@ class CartContainer extends React.Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Cart

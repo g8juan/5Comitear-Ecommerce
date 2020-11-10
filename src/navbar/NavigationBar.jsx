@@ -65,9 +65,8 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
                   />
                 </svg>
               </Button>
-              <Button onClick={logOut} as={Link} to="/" className="m-1">
-                Log Out
-            </Button>
+              <Button as={Link} to="/orders" className="m-1">My purchases {"  "}</Button>
+              <Button onClick={logOut} as={Link} to="/" className="m-1">Log Out</Button>
               <p style={{ margin: '0.5rem', alignSelf: 'center', color: 'white' }}>Bienvenido {user.firstName}!</p>
             </Nav>
           )}

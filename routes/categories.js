@@ -3,7 +3,9 @@ const {Category, Product, CategoryProduct} = require("../models/index")
 
 router.get("/", (req, res) => {
   Category.findAll()
-    .then(categories => res.send(categories))
+    .then(categories => {
+      console.log(categories)
+      res.send(categories)})
 })
 
 router.post("/", (req, res) => {
