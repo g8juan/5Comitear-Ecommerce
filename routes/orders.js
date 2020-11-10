@@ -11,7 +11,36 @@ router.post("/new", (req, res) => {
     .catch((err) => console.log(err))
 })
 
-//+Get pending order for current user
+router.put("/update", (req, res) => {
+  console.log("REQ.BODY", req.body);
+  if (req.body.address) {
+    Order.findByPk(req.body.orderId)
+      .then((order) => {
+        order.address = req.body.address;
+        order.save();
+        res.send(order);
+      })
+      .catch((err) => console.log(err));
+  } else if (req.body.subtotal) {
+    Order.findByPk(req.body.orderId)
+      .then((order) => {
+        order.ammount = req.body.subtotal;
+        order.save();
+        res.send(order);
+      })
+      .catch((err) => console.log(err));
+  } else {
+    Order.findByPk(req.body.orderId)
+      .then((order) => {
+        order.recipient = req.body.fullName;
+        order.save();
+        res.send(order);
+      })
+      .catch((err) => console.log(err));
+  }
+});
+
+//+Get order (for current user)
 router.get("/:userId", (req, res) => {
   Order.findOne({where: {userId: req.params.userId, orderStatus: "pending"}})
     .then((order) => res.status(200).send(order))
@@ -41,7 +70,7 @@ router.put("/changeCartStatus", (req, res) => {
 
 //+Ruta solo para el seed
 router.post("/newCompletedOrder", (req, res) => {
-  Order.create({userId: req.body.userId, orderStatus: req.body.orderStatus, ammount:req.body.ammount, address: req.body.address})
+  Order.create({userId: req.body.userId, orderStatus: req.body.orderStatus, ammount: req.body.ammount, address: req.body.address})
     .then(order => res.send(order))
     .catch((err) => console.log(err))
 })
@@ -104,7 +133,6 @@ repetir para productId
 //     .catch((err) => console.log(err));
 // });
 
-
 // router.put("/updateItemQuantity", (req, res) => {
 //   const { quantity, orderId, productId } = req.body;
 //   database
@@ -119,7 +147,7 @@ repetir para productId
 
 //    /api/orders/getCart
 // router.get("/getCart", (req, res)=>{
-//   Order.findOrCreate({where:{userId:req.body.userId, orderStatus:"pending"}, 
+//   Order.findOrCreate({where:{userId:req.body.userId, orderStatus:"pending"},
 //   defaults: {ammount:0, address:req.body.address}})
 //   .then((user)=>{
 //     console.log(user)

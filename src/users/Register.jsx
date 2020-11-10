@@ -1,11 +1,9 @@
 import React from "react";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.warning.dark,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -56,6 +54,7 @@ export default function SignUp({
   phone,
   address,
   error,
+  loader
 }) {
   const classes = useStyles();
 
@@ -155,24 +154,17 @@ export default function SignUp({
                 value={phone}
               />
             </Grid>
-
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Acepto los Términos y Condiciones y autorizo el uso de mis datos de acuerdo a la Declaración de Privacidad."
-              />
-            </Grid>
-          </Grid>
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Registrar
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Registrar
           </Button>
+          </Grid>
+          <div>{loader ? <CircularProgress style={{ margin: '1rem' }} /> : null}</div>
           {error ? (
             <Alert
               style={{ margin: "15px" }}
@@ -182,11 +174,10 @@ export default function SignUp({
               Pst! Todos los campos deben estar completos.
             </Alert>
           ) : null}
-
-          <Grid container justify="flex-end">
+          <Grid container justify="center">
             <Grid item>
-              <Link to="/login" variant="body2">
-                Ya tienes una cuenta? iniciá sesión.
+              <Link to="/login" variant="body2" >
+                ¿Ya tienes una cuenta? Iniciá sesión.
               </Link>
             </Grid>
           </Grid>

@@ -24,6 +24,7 @@ class LoginContainer extends React.Component {
     this.state = {
       email: "",
       password: "",
+      loader: false
     };
   }
 
@@ -33,26 +34,33 @@ class LoginContainer extends React.Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    this.props.login(this.state)
-  }
+    this.setState({ loader: true })
+    this.props.login(this.state);
+  };
 
   onChangeHandler = (e) => {
     let value = e.target.value;
-    this.setState({[e.target.id]: value});
-  }
+    this.setState({ [e.target.id]: value });
+  };
 
   handleClose = () => {
+    this.setState({ loader: false })
     this.props.setErrorLogin(false);
-  }
+  };
 
   render() {
     return (
-      <Login onChange={this.onChangeHandler} onSubmit={this.onSubmitHandler} email={this.state.email}
-        password={this.state.password} error={this.props.error} handleClose={this.handleClose}
+      <Login
+        onChange={this.onChangeHandler}
+        onSubmit={this.onSubmitHandler}
+        email={this.state.email}
+        password={this.state.password}
+        error={this.props.error}
+        handleClose={this.handleClose}
+        loader={this.state.loader}
       />
     );
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

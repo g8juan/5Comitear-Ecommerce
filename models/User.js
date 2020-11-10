@@ -30,7 +30,7 @@ User.init(
       unique: true,
       validate: {
         isEmail: {
-          msj: "must be a valid email adress",
+          msj: "must be a valid email address",
         },
       },
     },

@@ -1,10 +1,10 @@
 import React from "react";
 import Register from "./Register";
-import {connect} from "react-redux";
-import {postOrder} from '../orders/ordersActionCreators'
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { postOrder } from '../orders/ordersActionCreators'
+import { withRouter } from "react-router-dom";
 import axios from 'axios'
-import {success} from '../utils/logs'
+import { success } from '../utils/logs'
 
 const mapStateToProps = (state) => {
   return {
@@ -29,6 +29,7 @@ class RegisterContainer extends React.Component {
       address: "",
       phone: "",
       error: false,
+      loader: false,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -37,25 +38,28 @@ class RegisterContainer extends React.Component {
   onChangeHandler(e) {
     let value = e.target.value;
     if (e.target.value === "") {
-      this.setState({[e.target.id]: true});
+      this.setState({ [e.target.id]: true });
     }
-    this.setState({[e.target.id]: value});
+    this.setState({ [e.target.id]: value });
   }
 
   onSubmitHandler(e) {
-    const {email, firstName, lastName, password, address, phone} = this.state
+    const { email, firstName, lastName, password, address, phone } = this.state
     e.preventDefault();
+    this.setState({ loader: true })
+    console.log(this.state.loader, 'LOADERRRRRRRRRRRRR')
     if (email === "" || firstName === "" || lastName === "" || password === "" || address === "" || phone === "") {
-      this.setState({error: true});
+      this.setState({ error: true });
+      this.setState({ loader: false })
     } else {
-      axios.post("api/users/register", {email, firstName, lastName, password, address, phone, userType: "1"})
-        .then(({data}) => {
+      return axios.post("api/users/register", { email, firstName, lastName, password, address, phone, userType: "1" })
+        .then(({ data }) => {
           success("USUARIO REGISTRADO CON EXITO. ID:", data.id)
-          this.props.postOrder(data.id)})
-        .then(()=>this.setState({email: "", firstName: "", lastName: "", password: "", address: "", phone: ""}, ()=>{
-            this.props.history.push("/login");
-          }))  
-    };
+          this.props.postOrder(data.id)
+          this.props.history.push("/login")
+        })
+        .then(() => this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" }))
+    }
   }
 
   render() {
@@ -70,11 +74,10 @@ class RegisterContainer extends React.Component {
         onChange={this.onChangeHandler}
         onSubmit={this.onSubmitHandler}
         error={this.state.error}
+        loader={this.state.loader}
       />
     );
   }
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(RegisterContainer)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterContainer));

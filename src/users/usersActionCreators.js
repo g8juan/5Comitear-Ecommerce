@@ -1,7 +1,7 @@
 import axios from "axios";
-import {success, } from '../utils/logs'
-import {getOrder, resetOrder} from '../orders/ordersActionCreators'
-import {resetCart} from '../cart/cartActionCreators'
+import { success } from "../utils/logs";
+import { getOrder, resetOrder } from "../orders/ordersActionCreators";
+import { resetCart } from "../cart/cartActionCreators";
 
 export const setLogin = (user) => ({
   type: "SET_LOGIN",
@@ -10,9 +10,8 @@ export const setLogin = (user) => ({
 
 export const setErrorLogin = (error) => ({
   type: "SET_ERROR_LOGIN",
-  payload: error
+  payload: error,
 });
-
 
 export const setLogout = () => ({
   type: "SET_LOGOUT",
@@ -20,23 +19,21 @@ export const setLogout = () => ({
 
 export const login = (user) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/users/login", user, {withCredentials: true})
-    dispatch(setLogin(res.data))
+    const res = await axios.post("/api/users/login", user, {
+      withCredentials: true,
+    });
+    dispatch(setLogin(res.data));
   } catch (err) {
-    dispatch(setErrorLogin(true))
+    dispatch(setErrorLogin(true));
   }
-  dispatch(getOrder())
+  dispatch(getOrder());
 };
 
 export const logOut = () => (dispatch) => {
-  axios.get("/api/users/logout").then(() => dispatch(setLogout()))
+  axios
+    .get("/api/users/logout")
+    .then(() => dispatch(setLogout()))
     .then(() => success("usuario desloggeado con exito", ""));
-  dispatch(resetOrder())
-  dispatch(resetCart())
-};
-
-export const getUsers = () => (dispatch) => {
-  axios.get("http://localhost:8000/api/users")
-    .then((res) => res.data)
-    .then((users) => dispatch(getUsers(users)));
+  dispatch(resetOrder());
+  dispatch(resetCart());
 };
