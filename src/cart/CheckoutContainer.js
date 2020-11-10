@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { setAddress, setRecipient } from "./cartActionCreators";
 import Checkout from "./Checkout";
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     order: state.orders.order,
   };
 }
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     setAddress: (id, address) => dispatch(setAddress(id, address)),
-    setRecipient: (fullname) => dispatch(setRecipient(fullname)),
+    setRecipient: (id, fullname) => dispatch(setRecipient(id, fullname)),
   };
 }
 
@@ -43,18 +43,13 @@ class CheckoutContainer extends React.Component {
   };
 
   handleSubmit = (event) => {
-    console.log("ENTRANDO AL HANDLESUBMIT");
     event.preventDefault();
     const { firstName, lastName, zip, province, city, street, floor } = this.state;
-
-    const fullName = firstName + " " + lastName;
-    const fullAddress =
-      street + ", " + floor + ". " + city + " (" + zip + ") " + province + ", Argentina.";
-    console.log("fullName", fullName);
-    console.log("fullAddress", fullAddress);
-    console.log(this.props);
+    let fullName = firstName + " " + lastName;
+    let fullAddress = street + ", " + floor + ". " + city + " (" + zip + ") " + province + ", Argentina.";
+    this.props.setRecipient(this.props.order.id, fullName)
     this.props.setAddress(this.props.order.id, fullAddress);
-    if (this.props.order.address) this.props.history.push('./checkout/payment')
+    if (this.props.order.address && this.props.order.recipient) this.props.history.push('./checkout/payment')
   };
 
   render() {

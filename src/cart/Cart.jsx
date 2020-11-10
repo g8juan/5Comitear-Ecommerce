@@ -1,112 +1,96 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
+// STYLES
 import DeleteIcon from "@material-ui/icons/Delete";
-import {makeStyles} from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   buttonDelete: {
-    marginLeft: "25px",
+    // marginLeft: "25px",
+    margin: '0.5rem',
     "&:hover": {
       cursor: "pointer",
       color: "red",
     },
   },
   quantity: {
-    margin: "11px",
+    margin: "1rem",
   },
+  table: {
+    minWidth: 650,
+  },
+  divTable: {
+    margin: '3rem'
+  },
+  title: {
+    margin: '1rem'
+  },
+  subtitle: {
+    margin: '1rem'
+  }
 });
 
-const Cart = ({increaseQuantity, decreaseQuantity, products, handleDelete, handleClick}) => {
+const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, handleClick }) => {
   const classes = useStyles();
   let subtotal = 0;
-  let formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
+  let formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   return (
-    <div >
-      <main>
-        <section>
-          <div className="banner-innerpage">
-            <div className="container">
-              <div className="row justify-content-center">
-                <div className="col-md-6 align-self-center text-center">
-                  <h1 className="title">Cart Listing</h1>
-                  <h6 className="subtitle op-8">
-                    We are small team (5mitear) of creative people working together
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div className="spacer">
-            <div className="container">
-              <div className="row mt-5">
-                <div className="col-lg-9">
-                  <div className="row shop-listing">
-                    <table className="table shop-table">
-                      <tbody>
-                        <tr>
-                          <th className="b-0">Photo</th>
-                          <th className="b-0">Name</th>
-                          <th className="b-0">Price</th>
-                          <th className="b-0">Quantity</th>
-                          <th className="b-0 text-center">Total Price</th>
-                          <th className="b-0"></th>
-                        </tr>
-                        {products.map((item, i) => {
-                          subtotal += (item.price*item.order_product.quantity)
-                          return(
-                          <tr key={i}>
-                            <td>{item.thumbnail}</td>
-                            <td>{item.name}</td>
-                            <td>{formatter.format(item.price)}</td>
-                            <td>
-                              <button
-                                onClick={() => decreaseQuantity(item)}
-                                className="btn btn-primary btn-sm"
-                              >
-                                -
-                            </button>
-                              <span className={classes.quantity}>{item.order_product.quantity}</span>
-                              <button
-                                onClick={() => increaseQuantity(item)}
-                                className="btn btn-primary btn-sm"
-                              >
-                                +
-                            </button>
-                            </td>
-                            <td className="text-center">
-                              <h5 className="font-medium m-b-30">{`${(formatter.format(item.price * item.order_product.quantity))}`}</h5>
-                            </td>
-                            <td> {/*TODO:hacer que se elimine un producto al hacer click en el tachito. Ya se elimina al llegar a 0 la cantidad de un producto*/}
-                              <DeleteIcon 
-                                className={classes.buttonDelete}
-                                onClick={() => handleDelete(item)}
-                              />
-                            </td>
-                          </tr>
-                        )})}
-                        <tr>
-                          <td colSpan="3" align="right">
-                            Subtotal :{formatter.format(subtotal)}
-                          </td>
-                          <td colSpan="4" align="right">
-                            <Link to="/cart/checkout">
-                              <button onClick={handleClick} className="btn btn-primary" value={subtotal}>
-                                Proceed to checkout
-                            </button>
-                            </Link>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+    <div>
+      <h3 className={classes.title}>Cart Listing</h3>
+      <h6 className={classes.subtitle}> We are small team (5mitear) of creative people working together </h6>
+      <div className={classes.divTable}>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                {/* <TableCell> THUMBNAIL </TableCell> */}
+                <TableCell align="right">Nombre</TableCell>
+                <TableCell align="right">Precio</TableCell>
+                <TableCell align="right">Cantidad</TableCell>
+                <TableCell align="right">Subtotal</TableCell>
+                <TableCell align="right"></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product) => {
+                subtotal += (product.price * product.order_product.quantity)
+                return (
+                  <TableRow key={product.id}>
+                    {/* <TableCell component="th" scope="row"> {product.thumbnail} </TableCell> */}
+                    <TableCell align="right">{product.name}</TableCell>
+                    <TableCell align="right">{formatter.format(product.price)}</TableCell>
+                    <TableCell align="right">
+                      <button onClick={() => decreaseQuantity(product)} className="btn btn-primary btn-sm"> - </button>
+                      <span className={classes.quantity}>{product.order_product.quantity}</span>
+                      <button onClick={() => increaseQuantity(product)} className="btn btn-primary btn-sm"> + </button>
+                    </TableCell>
+                    <TableCell align="right">{`${(formatter.format(product.price * product.order_product.quantity))}`}</TableCell>
+                    <TableCell align="right">
+                      <DeleteIcon className={classes.buttonDelete} onClick={() => handleDelete(product)} />
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <p> Subtotal: {formatter.format(subtotal)} </p>
+      <Link to="/cart/checkout" style={{ color: 'white' }}>
+        <button onClick={handleClick} className="btn btn-primary" value={subtotal}> Proceed to delivery details </button>
+      </Link>
+      <hr />
+      <Link to="/products">
+        <button className="btn btn-secondary" value={subtotal}> Back to products </button>
+      </Link>
     </div>
   );
 };
