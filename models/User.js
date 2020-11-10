@@ -59,7 +59,6 @@ User.init(
 );
 
 User.beforeCreate((user) => {
-  console.log("ENTRA EN EL BEFORE CREATE");
   return bcrypt
     .genSalt(16)
     .then((salt) => {

@@ -21,6 +21,12 @@ function mapDispatchToProps (dispatch) {
 class CartContainer extends React.Component {
 
   componentDidMount() {
+    if(this.props.location.state)this.props.getCart(this.props.location.state.orderId)
+    else this.props.getCart(this.props.orderId)
+  }
+
+  componentDidUpdate({orderId}) {
+    if(this.props.orderId !== orderId)
     this.props.getCart(this.props.orderId)
   }
 
@@ -30,6 +36,7 @@ class CartContainer extends React.Component {
   handleDelete(){/*TODO*/}
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Cart
