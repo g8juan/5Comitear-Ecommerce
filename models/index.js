@@ -1,4 +1,3 @@
-// const {DataTypes} = require("sequelize")
 const database = require("../database/database")
 const Category = require("./Category")
 const Order = require("./Order")
