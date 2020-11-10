@@ -14,12 +14,15 @@ import CategoriesContainer from "./categories/components/categoriesContainer";
 import CartContainer from "./cart/CartContainer";
 import OrderContainer from "./orders/OrderContainer";
 import PaymentContainer from "./payment/MainScreen";
+import Home from './home/home'
+import { setLogin } from "./users/usersActionCreators";
+import { getOrder } from "./orders/ordersActionCreators"
+import CheckoutContainer from "./cart/CheckoutContainer";
+import ReviewOrderContainer from './cart/ReviewOrderContainer'
+// import AdminContainer from "./admin/AdminContainer";
 import AdminUsersContainer from "./admin/container/AdminUsersContainer";
 //import AdminProductsContainer from "./admin/container/AdminProductsContainer";
-//import AdminOrdersContainer from "./admin/container/AdminUsersContainer";
-import Home from "./home/home";
-import { setLogin } from "./users/usersActionCreators";
-import { getOrder } from "./orders/ordersActionCreators";
+
 
 function mapStateToProps(state) {
   return {
@@ -35,19 +38,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 class App extends React.Component {
+
   componentDidMount() {
-    console.log("APP.JS COMPONENT DID MOUNT")
-    axios.get("/api/users/me", { withCredentials: true, headers: { "Content-Type": "application/json" } })
+    return axios.get("/api/users/me", { withCredentials: true, headers: { "Content-Type": "application/json" } })
       .then((res) => {
         this.props.setLogin(res.data)
         this.props.getOrder()
-
       })
-      .then((res) => {
-        console.log("SET LOGIN DE APPjs");
-        this.props.setLogin(res.data);
-        this.props.getOrder();
-      });
   }
 
   render() {
@@ -57,20 +54,20 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/search" component={ProductsContainer} />
-          <Route
-            exact
-            path="/products/:id"
-            component={SingleProductContainer}
-          />
+          <Route exact path="/products/:id" component={SingleProductContainer} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/categories" component={CategoriesContainer} />
+          <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrderContainer} />
           <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
-          <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/payment" component={PaymentContainer} />
+          <Route exact path="/cart/checkout" component={CheckoutContainer} />
+          <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
+          <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
+          <Route exact path="/users" />
           <Route path="/admin/users" component={AdminUsersContainer} />
           {/* <Route path="/admin/products" component={AdminProductsContainer} /> */}
-          <Route exact path="/home" component={Home} />
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
