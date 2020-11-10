@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import DehazeIcon from '@material-ui/icons/Dehaze';
+import {Route} from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,8 @@ export default function Categories({categories}) {
               <ListItemText primary={(category.name).toUpperCase()} />
             </ListItem>
             <Divider />
+
+            <Route exact path="/" />
           </div>
         )
       })}

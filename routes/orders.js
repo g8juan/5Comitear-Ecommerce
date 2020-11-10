@@ -1,15 +1,15 @@
 const router = require("express").Router();
 
-const { Order } = require("../models/index");
+const {Order} = require("../models/index");
 const database = require("../database/database");
 
 router.get("/", (req, res) => Order.findAll().then((order) => res.send(order)));
 
 router.post("/new", (req, res) => {
-  Order.create({ userId: req.body.userId, orderStatus: "pending" })
-    .then((order) => res.send(order))
-    .catch((err) => console.log(err));
-});
+  Order.create({userId: req.body.userId, orderStatus: "pending"})
+    .then(order => res.send(order))
+    .catch((err) => console.log(err))
+})
 
 router.put("/update", (req, res) => {
   console.log("REQ.BODY", req.body);
@@ -42,10 +42,17 @@ router.put("/update", (req, res) => {
 
 //+Get order (for current user)
 router.get("/:userId", (req, res) => {
-  Order.findOne({ where: { userId: req.params.userId, orderStatus: "pending" } })
+  Order.findOne({where: {userId: req.params.userId, orderStatus: "pending"}})
     .then((order) => res.status(200).send(order))
     .catch((err) => console.log(err));
 });
+
+//+Get all orders for current user
+router.get("/list/:userId", (req, res) => {
+  Order.findAll({where: {userId: req.params.userId}, order: [['updatedAt', 'DESC']]})
+    .then((orders) => res.status(200).send(orders))
+    .catch((err) => console.log(err))
+})
 
 //change order/cart status //JSON modelo a enviar  {"id":13 ,"orderStatus":"completed"}
 //carritos/ordenes no se eliminan, simplemente se cancelan/completan/pending. Esto permite tener data de la preferncia de compra del cliente. (Recomendarle el televisor que nunca compró) (Se pueden hacer operaciones luego para mover las ordenes cancelled asi como los productos comprados a otras tablas para alivianar la query de la operatoria normal, ver cleanup mas abajo)
@@ -57,6 +64,16 @@ router.put("/changeCartStatus", (req, res) => {
     .then(() => res.sendStatus(200))
     .catch((err) => console.log(err));
 });
+
+
+
+
+//+Ruta solo para el seed
+router.post("/newCompletedOrder", (req, res) => {
+  Order.create({userId: req.body.userId, orderStatus: req.body.orderStatus, ammount: req.body.ammount, address: req.body.address})
+    .then(order => res.send(order))
+    .catch((err) => console.log(err))
+})
 
 module.exports = router;
 

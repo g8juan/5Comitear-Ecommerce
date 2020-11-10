@@ -10,16 +10,29 @@ export const resetOrder = () => ({
   type: "RESET_ORDER"
 })
 
+export const setOrdersList = (ordersList) => ({
+  type: "SET_ORDERS_LIST",
+  payload: ordersList
+})
+
+
+export const postOrder = (id) => (dispatch) => {
+  axios.post(`http://localhost:8000/api/orders/new`, {userId: id})
+    .then(({data}) => dispatch(setOrder(data))).then(() => success('orden creada con exito.', ""))
+    .catch((err) => console.log(err))
+}
+
 export const getOrder = () => (dispatch, getState) => {
   axios.get(`/api/orders/${getState().users.user.id}`)
     .then((res) => dispatch(setOrder(res.data)))
     .catch((err) => console.log(err))
 }
 
-export const postOrder = (id) => (dispatch) => {
-  console.log('ENTRANDO A POSTORDER CON ID, ' + id)
-  axios.post(`http://localhost:8000/api/orders/new`, {userId: id})
-    .then(({data}) => dispatch(setOrder(data))).then(() => success('orden creada con exito.', ""))
+export const getOrdersList = () => (dispatch, getState) => {
+  axios.get(`/api/orders/list/${getState().users.user.id}`)
+    .then(({data}) => {
+      dispatch(setOrdersList(data))})
+    .then(() => success('listado de ordenes traida con exito'))
     .catch((err) => console.log(err))
 }
 
