@@ -7,7 +7,6 @@ import {modifyCart} from '../../cart/cartActionCreators'
 function mapStateToProps(state) {
   return {
     products: state.products.products,
-    userId: state.users.user.id,
     userType: state.users.user.userType,
   }
 }
@@ -50,7 +49,7 @@ class ProductsContainer extends React.Component {
   }
 
   render() {
-    return (<Products addToCart={this.handleClick} products={this.props.products} userId={this.props.userId} userType={this.props.userType} />)
+    return (<Products addToCart={this.handleClick} products={this.props.products} userType={this.props.userType} />)
   }
 }
 
