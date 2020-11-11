@@ -25,26 +25,20 @@ class CategoriesContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    // this.props.categories && console.log(`${this.props.match.url}/${this.props.categories[0].name}`)
     return (
       <div>
-        Hola
         {this.props.categories.map((category) => {
           return (
             <div key={category.id}>
               {category.name}
-              <Link to={`${this.props.match.url}/${category.name}`}>
+              <Link to={`${this.props.match.url}/${category.id}`}>
                 <ListItem button>
                   <ListItemText primary={(category.name).toUpperCase()} />
                 </ListItem>
               </Link>
               <Divider />
 
-
-              <Route path={`${this.props.match.url}/${category.name}`} render={() => {
-                console.log("ENTRE ACA")
-                  return (<ProductsContainer categoryId={category.id} />)
-              }} />
             </div>
           )
         })}

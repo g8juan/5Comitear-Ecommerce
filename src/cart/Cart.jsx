@@ -31,10 +31,10 @@ const useStyles = makeStyles({
     margin: '3rem'
   },
   title: {
-    margin: '1rem'
+    margin: '1.5rem'
   },
   subtitle: {
-    margin: '1rem'
+    margin: '1.5rem'
   }
 });
 
@@ -60,7 +60,7 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product) => {
+              {products && products.map((product) => {
                 subtotal += (product.price * product.order_product.quantity)
                 return (
                   <TableRow key={product.id}>

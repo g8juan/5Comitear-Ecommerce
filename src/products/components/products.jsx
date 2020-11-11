@@ -79,9 +79,9 @@ export default function Products({products, addToCart, userId}) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions >
-                  {userId ? (<Button onClick={() => addToCart(product)} size="small" color="primary" className={classes.buttons}>
+                  <Button onClick={() => addToCart(product)} size="small" color="primary" className={classes.buttons}>
                     Add to cart {/*//TODO:que haya algun tipo de confirmacion visual de que haya añadido un item al carrito*/}
-                  </Button>) : null}
+                  </Button>
                   <Button size="small" color="primary" className={classes.buttons}>
                     <Link to={`/products/${product.id}`}>See item</Link>
                   </Button>
