@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Products({products, addToCart, userId}) {
+export default function Products({products, addToCart, userType}) {
   const classes = useStyles();
 
   return (
@@ -79,7 +79,7 @@ export default function Products({products, addToCart, userId}) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions >
-                  {userId ? (<Button onClick={() => addToCart(product)} size="small" color="primary" className={classes.buttons}>
+                  {userType === "1" ? (<Button onClick={() => addToCart(product)} size="small" color="primary" className={classes.buttons}>
                     Add to cart {/*//TODO:que haya algun tipo de confirmacion visual de que haya añadido un item al carrito*/}
                   </Button>) : null}
                   <Button size="small" color="primary" className={classes.buttons}>

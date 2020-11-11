@@ -14,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   buttonDelete: {
-    // marginLeft: "25px",
     margin: '0.5rem',
     "&:hover": {
       cursor: "pointer",

@@ -19,9 +19,9 @@ import { setLogin } from "./users/usersActionCreators";
 import { getOrder } from "./orders/ordersActionCreators"
 import CheckoutContainer from "./cart/CheckoutContainer";
 import ReviewOrderContainer from './cart/ReviewOrderContainer'
-// import AdminContainer from "./admin/AdminContainer";
 import AdminUsersContainer from "./admin/container/AdminUsersContainer";
-//import AdminProductsContainer from "./admin/container/AdminProductsContainer";
+import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
+import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
 
 
 function mapStateToProps(state) {
@@ -67,7 +67,8 @@ class App extends React.Component {
           <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
           <Route exact path="/users" />
           <Route path="/admin/users" component={AdminUsersContainer} />
-          {/* <Route path="/admin/products" component={AdminProductsContainer} /> */}
+          <Route path="/admin/products/create" component={AdminCreateProductsContainer} />
+          <Route path="/admin/products/update" component={AdminUpdateProductsContainer} />
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
