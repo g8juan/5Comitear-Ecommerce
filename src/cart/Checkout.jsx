@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Checkout = ({ handleChange, handleSubmit, error }) => {
+const Checkout = ({ handleChange, handleSubmit, error, user }) => {
+  console.log(user);
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">
@@ -52,7 +53,8 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
                 variant="outlined"
                 fullWidth
                 id="firstName"
-                label="Name"
+                label="Recipient Name"
+                placeholder={user.firstName + "?"}
                 autoFocus
                 onChange={handleChange}
               />
@@ -62,7 +64,8 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
                 variant="outlined"
                 fullWidth
                 id="lastName"
-                label="Lastname"
+                label="Recipient Lastname"
+                placeholder={user.lastName + "?"}
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleChange}
@@ -141,7 +144,7 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
             className={classes.submit}
           >
             Continue with Payment
-            </Button>
+          </Button>
           {error ? (
             <Alert variant="outlined" severity="error">
               Pst! Todos los campos deben estar completos.

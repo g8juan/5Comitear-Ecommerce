@@ -1,32 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
 import ReviewOrder from "./ReviewOrder";
-import { sendEmail } from './cartActionCreators'
-
+import { sendEmail, setStatus } from "./cartActionCreators";
+import { postOrder } from "../orders/ordersActionCreators";
 
 function mapStateToProps(state, ownProps) {
   return {
     order: state.orders.order,
-    products: state.cart.products,
+    products: state.cart,
     email: state.users.user.email,
-    cardNumber: state.orders.orderCardNumber
+    cardNumber: state.orders.orderCardNumber,
+    user: state.users.user,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    sendEmail: (email, products, order) => { dispatch(sendEmail(email, products, order)) }
+    sendEmail: (email, products, order) => {
+      dispatch(sendEmail(email, products, order));
+    },
+    setStatus: (id, status) => dispatch(setStatus(id, status)),
+    postOrder: (userId) => dispatch(postOrder(userId)),
   };
 }
 
 class ReviewOrderContainer extends React.Component {
   handleClick = (event) => {
-    const { order, products, email, sendEmail } = this.props
-    event.preventDefault()
-    const enviaEmail = async () => {
-      await sendEmail(email, products, order)
-    }
-    enviaEmail()
-    this.props.history.push('/home')
+    const { order, products, email, user, sendEmail, setStatus, postOrder } = this.props;
+    event.preventDefault();
+    const enviaEmailyCambiaOrden = async () => {
+      await sendEmail(email, products, order);
+      await setStatus(order.id, "completed");
+      await postOrder(user.id);
+    };
+    enviaEmailyCambiaOrden();
+    this.props.history.push("/home");
   };
 
   render() {

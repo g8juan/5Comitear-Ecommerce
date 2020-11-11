@@ -1,9 +1,9 @@
-import React from 'react';
-import {Table, Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import React from "react";
+import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const Orders = ({ordersList, handleClick}) => {
-; // dd/mm/yyyy
+const Orders = ({ ordersList }) => {
+  console.log(ordersList, "ordersList");
   return (
     <div>
       <Table striped bordered hover variant="dark">
@@ -21,13 +21,21 @@ const Orders = ({ordersList, handleClick}) => {
           return (
             <tbody key={i}>
               <tr>
-                <td>{i+1}</td>
+                <td>{order.id}</td>
                 <td>{order.ammount}</td>
                 <td>{order.address}</td>
                 <td>{order.orderStatus}</td>
-                <td>{new Date(order.updatedAt).toLocaleDateString('en-GB')}</td>
+                <td>{new Date(order.updatedAt).toLocaleDateString("en-GB")}</td>
                 <td>
-                  <Button as={Link} to ={{pathname: '/cart', state:{orderId: order.id}}}>See purchase</Button>
+                  <Button
+                    as={Link}
+                    to={{
+                      pathname: `/orders/${order.id}`,
+                      state: { orderId: order.id },
+                    }}
+                  >
+                    See purchase
+                  </Button>
                 </td>
               </tr>
             </tbody>
