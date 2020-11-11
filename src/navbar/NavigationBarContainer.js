@@ -28,7 +28,7 @@ class NavigationBarContainer extends React.Component {
   render() {
     return (
       <div>
-        <NavigationBar handleSubmit={this.handleSubmit} user={this.props.user} logOut={this.props.logOut}/>
+        <NavigationBar handleSubmit={this.handleSubmit} user={this.props.user} logOut={this.props.logOut} />
       </div>
     );
   }

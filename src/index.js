@@ -12,7 +12,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-        <App style={{backgroundColor: "red"}} />
+        <App />
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,
