@@ -25,11 +25,11 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
         {user.userType === "2" || user.userType === "3" ? (
           <NavDropdown title="Panel de control" id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/admin/products/create">
-              Añadir productos
+              Add Product
             </NavDropdown.Item>
             {user.userType === "3" ? (
               <NavDropdown.Item as={Link} to="/admin/users">
-                Panel de usuarios
+                Users Panel
               </NavDropdown.Item>
             ) : null }
           </NavDropdown>
@@ -66,7 +66,7 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
               <>{user.userType === "1" ? 
                 <Button as={Link} to="/orders" className="m-1">My purchases {"  "}</Button>
               : null}
-                <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>Bienvenido {user.firstName}!</p>
+                <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>Welcome {user.firstName}!</p>
                 <Button onClick={logOut} as={Link} to="/" className="m-1">Log Out</Button>
               </>
             )}
