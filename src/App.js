@@ -22,6 +22,7 @@ import ReviewOrderContainer from './cart/ReviewOrderContainer'
 import AdminUsersContainer from "./admin/container/AdminUsersContainer";
 import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
 import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
+//import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
 
 
 function mapStateToProps(state) {
@@ -70,6 +71,7 @@ class App extends React.Component {
           <Route path="/admin/users" component={AdminUsersContainer} />
           <Route path="/admin/products/create" component={AdminCreateProductsContainer} />
           <Route path="/admin/products/update" component={AdminUpdateProductsContainer} />
+          {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
           <Redirect from="/" to="/home" />
         </Switch>
       </div>

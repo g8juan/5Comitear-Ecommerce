@@ -27,10 +27,18 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
             <NavDropdown.Item as={Link} to="/admin/products/create">
               Add Product
             </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/admin/category/create">
+              Add Category
+            </NavDropdown.Item>
             {user.userType === "3" ? (
-              <NavDropdown.Item as={Link} to="/admin/users">
-                Users Panel
-              </NavDropdown.Item>
+              <div>
+                  <NavDropdown.Item as={Link} to="/admin/users">
+                    Users Panel
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/orders">
+                    Orders Panel
+                  </NavDropdown.Item>
+              </div>
             ) : null }
           </NavDropdown>
         ) : null}
