@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AdminProducts({
+export default function AdminUpdateProducts({
     onChange,
     onSubmit,
     name,
@@ -64,7 +64,7 @@ export default function AdminProducts({
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-         New Product
+         Update Product
         </Typography>
         <form onSubmit={onSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -159,7 +159,7 @@ export default function AdminProducts({
               color="primary"
               className={classes.submit}
             >
-              Add!
+              Update!
           </Button>
           </Grid>
           {error ? (
