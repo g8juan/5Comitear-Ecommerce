@@ -24,14 +24,22 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
         </Nav.Link>
         {user.userType === "2" || user.userType === "3" ? (
           <NavDropdown title="Panel de control" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/admin/products">
-              Añadir productos
+            <NavDropdown.Item as={Link} to="/admin/products/create">
+              Add Product
+            </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/admin/category/create">
+              Add Category
             </NavDropdown.Item>
             {user.userType === "3" ? (
-              <NavDropdown.Item as={Link} to="/admin/users">
-                Panel de usuarios
-              </NavDropdown.Item>
-            ) : null}
+              <div>
+                  <NavDropdown.Item as={Link} to="/admin/users">
+                    Users Panel
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/orders">
+                    Orders Panel
+                  </NavDropdown.Item>
+              </div>
+            ) : null }
           </NavDropdown>
         ) : null}
       </Nav>
@@ -39,6 +47,7 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
       <Form inline="true" onSubmit={handleSubmit}>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Nav className="mr-auto">
+          {user.userType === "1" ? 
           <Button as={Link} to="/cart" className="m-1">
             My Cart {"  "}
             <svg
@@ -54,17 +63,19 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
                 d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
               />
             </svg>
-          </Button>
+          </Button> 
+          : null}
           {!user.id ? (
             <>
               <Button inline="true" as={Link} to="/register" className="m-1">Sign up{"  "}</Button>
               <Button as={Link} to="/login" className="m-1"> Log in </Button>
             </>
           ) : (
-              <>
+              <>{user.userType === "1" ? 
                 <Button as={Link} to="/orders" className="m-1">My purchases {"  "}</Button>
+              : null}
+                <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>Welcome {user.firstName}!</p>
                 <Button onClick={logOut} as={Link} to="/" className="m-1">Log Out</Button>
-                <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>Bienvenido {user.firstName}!</p>
               </>
             )}
         </Nav>

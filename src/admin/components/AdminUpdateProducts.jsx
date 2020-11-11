@@ -11,9 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
 
 function Copyright() {
   return (
@@ -44,26 +41,18 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
 }));
 
-export default function AdminProducts({
-  onChange,
-  onSubmit,
-  name,
-  price,
-  description,
-  thumbnail,
-  image,
-  stock,
-  categories,
-  error,
+export default function AdminUpdateProducts({
+    onChange,
+    onSubmit,
+    name,
+    price, 
+    description, 
+    thumbnail, 
+    image, 
+    stock,
+    error
 }) {
   const classes = useStyles();
 
@@ -75,7 +64,7 @@ export default function AdminProducts({
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          New Product
+         Update Product
         </Typography>
         <form onSubmit={onSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -163,25 +152,6 @@ export default function AdminProducts({
                 value={stock}
               />
             </Grid>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel htmlFor="outlined-age-native-simple">
-                Categories
-              </InputLabel>
-              <Select
-                native
-                onChange={onChange}
-                label="Categories"
-                inputProps={{
-                  name: "CategoryId",
-                  id: "categoryId",
-                }}
-              >
-                <option aria-label="Elegir categorias" value="" />
-                {categories.map((category) => (
-                  <option value={category.id}>{category.name}</option>
-                ))}
-              </Select>
-            </FormControl>
             <Button
               type="submit"
               fullWidth
@@ -189,8 +159,8 @@ export default function AdminProducts({
               color="primary"
               className={classes.submit}
             >
-              Add!
-            </Button>
+              Update!
+          </Button>
           </Grid>
           {error ? (
             <Alert
@@ -201,7 +171,8 @@ export default function AdminProducts({
               Please fill in all required fields!
             </Alert>
           ) : null}
-          <Grid container justify="center"></Grid>
+          <Grid container justify="center">
+          </Grid>
         </form>
       </div>
       <Box mt={5}>
