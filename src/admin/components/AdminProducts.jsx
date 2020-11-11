@@ -176,7 +176,7 @@ export default function AdminProducts({
                   id: "categoryId",
                 }}
               >
-                {/* <option aria-label="Elegir categorias" value="" /> */}
+                <option aria-label="Elegir categorias" value="" />
                 {categories.map((category) => (
                   <option value={category.id}>{category.name}</option>
                 ))}
