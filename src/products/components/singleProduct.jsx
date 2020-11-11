@@ -71,7 +71,7 @@ export default function SingleProduct ({ singleProduct, userType, handleDelete }
         {userType === "2" || userType === "3" ? (
           <div>
           <DeleteIcon className={classes.buttonDelete} 
-          onClick={() => handleDelete(singleProduct)}
+          onClick={() => handleDelete(singleProduct.id)}
           />
           {/* {!singleProduct.id ?
             (<div>

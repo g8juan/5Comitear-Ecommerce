@@ -33,13 +33,18 @@ export const updateProduct = (product) => (dispatch) => {
     .then((product) => dispatch(actionSingleProduct(product)))
 };
 
-export const deleteSingleProduct = (singleProduct) => (dispatch) => {
+/* export const deleteSingleProduct = (singleProduct) => (dispatch) => {
   console.log("product en el AXIOS", singleProduct)
   axios.delete("/api/products/singleProduct", { params: { id: singleProduct.id } })
     .then(res => res.data)
     .then(deletedProduct => dispatch(actionDeletedProduct(deletedProduct)))
-}
+} */
 
+export const deleteSingleProduct = (singleProductId) => (dispatch) => {
+  axios.post("/api/products/singleProduct", { id: singleProductId })
+    .then(res => res.data)
+    .then(deletedProduct => dispatch(actionDeletedProduct(deletedProduct)))
+}
 
 // export const getProductsByCategory = (categoryId) => (dispatch) => {
 //   axios.get(`/api/products/productsByCategory`, {params: {categoryId}})
