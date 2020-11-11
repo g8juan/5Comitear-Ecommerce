@@ -9,6 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
+const creds = require('./routes/configNodeMailer');
 
 app.use(volleyball);
 app.use(cookieParser()); // popula req.cookie

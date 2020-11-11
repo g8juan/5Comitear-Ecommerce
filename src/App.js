@@ -59,8 +59,7 @@ class App extends React.Component {
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrdersContainer} /> {/*Este va a ser para mostrar todas las órdenes del usuario*/}
-          <Route exact path="/cart/checkout" component={CartContainer} /> {/*Esta va a ser la vista para el formulario de checkout de compra + tarjeta de credito*/}
-          <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
+          <Route exact path="/cart" component={CartContainer} />
           <Route exact path="/cart/checkout" component={CheckoutContainer} />
           <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
           <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
@@ -71,7 +70,7 @@ class App extends React.Component {
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
-    );
+    )
   }
 }
 

@@ -8,6 +8,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+
+import PinDropIcon from '@material-ui/icons/PinDrop';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -30,47 +37,56 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  infoDivs: {
+    margin: '1.5rem'
+  },
+  title: {
+    margin: '1.5rem',
+    fontSize: '1.5rem'
+  }
 }));
 
-const ReviewOrder = ({ handleSubmit, order, products, email }) => {
+const ReviewOrder = ({ handleClick, order, products, email, cardNumber }) => {
   const classes = useStyles();
-  console.log("order", order);
-  console.log("products", products);
-  console.log("email", email);
-
+  const lastNumbers = 'XXXX XXXX XXXX ' + cardNumber.slice(15, 19)
   return (
     <div>
+      <div className={classes.title}> REVISA TU COMPRA <DoneAllIcon /></div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Productos</TableCell>
-              <TableCell align="right">Precio Unitario</TableCell>
-              <TableCell align="right">Cantidad</TableCell>
-              <TableCell align="right">SubTotal</TableCell>
+              <TableCell align="center">Productos</TableCell>
+              <TableCell align="center">Precio Unitario</TableCell>
+              <TableCell align="center">Cantidad</TableCell>
+              <TableCell align="center">SubTotal</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.name}>
-                <TableCell component="th" scope="row">
+                <TableCell align="center" component="th" scope="row">
                   {product.name}
                 </TableCell>
-                <TableCell align="right">{product.price}</TableCell>
-                <TableCell align="right">{product.order_product.quantity}</TableCell>
-                <TableCell align="right">
+                <TableCell align="center">{product.price}</TableCell>
+                <TableCell align="center">{product.order_product.quantity}</TableCell>
+                <TableCell align="center">
                   {product.price * product.order_product.quantity}
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow>
-              <TableCell align="right">Total de tu Orden: {order.ammount}</TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <div>Vamos a enviar tu compra a: {order.address}</div>
-      <div></div>
+      <div className={classes.infoDivs}>Total de tu Orden: {order.ammount} <AttachMoneyIcon /> </div>
+      <div className={classes.infoDivs}>Vamos a enviar tu compra a: {order.address} <PinDropIcon /> </div>
+      <div className={classes.infoDivs}>Metodo de pago: {lastNumbers} <CreditCardIcon /> </div>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        onClick={handleClick}
+      > Confirmar compra </Button>
     </div>
   );
 };
