@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback } from "react";
+import { connect } from 'react-redux'
 import CForm from "./components/form";
 import Card from "./components/card";
 import Button from "@material-ui/core/Button";
-
-import { Link } from "react-router-dom";
+import { setCard } from '../../orders/ordersActionCreators'
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +21,19 @@ const initialState = {
   isCardFlipped: false,
 };
 
-const PaymentContainer = () => {
+const mapStateToProps = (state) => {
+  return {
+    cardNumber: state.orders.orderCardNumber
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCard: (number) => dispatch(setCard(number))
+  }
+}
+
+
+const PaymentContainer = (props) => {
   const classes = useStyles();
 
   const [state, setState] = useState(initialState);
@@ -67,6 +79,14 @@ const PaymentContainer = () => {
     setCurrentFocusedElm(null);
   }, []);
 
+  let handleClick = () => {
+    const seteaTarjeta = async () => {
+      await props.setCard(state.cardNumber)
+    }
+    seteaTarjeta()
+    props.history.push('/cart/checkout/review')
+  }
+
   return (
     <div className="wrapper">
       <CForm
@@ -92,20 +112,19 @@ const PaymentContainer = () => {
           cardHolderRef={cardElementsRef.cardHolder}
           cardDateRef={cardElementsRef.cardDate}
         ></Card>
-        <Link to="/cart/checkout/review">
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Proceed To Order Review
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={handleClick}
+        > Proceed To Order Review
           </Button>
-        </Link>
       </CForm>
     </div>
   );
 };
 
-export default PaymentContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentContainer);
+

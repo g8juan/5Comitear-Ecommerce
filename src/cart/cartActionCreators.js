@@ -70,3 +70,8 @@ export const setRecipient = (id, fullName) => (dispatch) => {
 
 
 
+export const sendEmail = (email, products, order) => (dispatch) => {
+  console.log("ENTRANDO A sendEmail CON email, products, order", email, products, order);
+  return axios.post('/api/send/email', { order: order, products: products, email: email })
+    .then(({ data }) => console.log(data))
+}

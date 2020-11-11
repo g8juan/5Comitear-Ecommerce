@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Cart from "./Cart";
 import { getCart, modifyCart, setAmount } from "./cartActionCreators";
+// import Steper from '../utils/steper/steper'
 
 function mapStateToProps(state) {
   return {
@@ -21,13 +22,13 @@ function mapDispatchToProps(dispatch) {
 
 class CartContainer extends React.Component {
   componentDidMount() {
-    if(this.props.location.state)this.props.getCart(this.props.location.state.orderId)
+    if (this.props.location.state) this.props.getCart(this.props.location.state.orderId)
     else this.props.getCart(this.props.orderId)
   }
 
-  componentDidUpdate({orderId}) {
-    if(this.props.orderId !== orderId)
-    this.props.getCart(this.props.orderId)
+  componentDidUpdate({ orderId }) {
+    if (this.props.orderId !== orderId)
+      this.props.getCart(this.props.orderId)
   }
 
   increaseQuantity = (product) => this.props.modifyCart(product, 1);
@@ -47,8 +48,10 @@ class CartContainer extends React.Component {
 
   render() {
     console.log(this.props)
+
     return (
       <div>
+        {/* <Steper /> */}
         <Cart
           products={this.props.products}
           increaseQuantity={this.increaseQuantity}

@@ -31,10 +31,10 @@ const useStyles = makeStyles({
     margin: '3rem'
   },
   title: {
-    margin: '1rem'
+    margin: '1.5rem'
   },
   subtitle: {
-    margin: '1rem'
+    margin: '1.5rem'
   }
 });
 
