@@ -26,6 +26,9 @@ Product.belongsToMany(Category, {through: CategoryProduct})
 Product.belongsToMany(Order, {through: OrderProduct})
 Order.belongsToMany(Product, {through: OrderProduct})
 
+Product.hasMany(OrderProduct)
+Order.hasMany(OrderProduct)
+
 User.hasMany(Order)
 Order.belongsTo(User)
 

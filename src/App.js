@@ -52,20 +52,22 @@ class App extends React.Component {
       <div className="App">
         <NavigationBarContainer />
         <Switch>
+          {/* <Route path="/categories" component={CategoriesContainer} /> */}
+          <Route exact path="/categories/:id" component={ProductsContainer} />
+          <Route path="/categories" component={CategoriesContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
-          <Route exact path="/products" component={ProductsContainer} />
+          <Route exact path="/products/" component={ProductsContainer} />
           <Route exact path="/home" component={Home} />
-          <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrdersContainer} /> {/*Este va a ser para mostrar todas las órdenes del usuario*/}
-          <Route exact path="/cart" component={CartContainer} />
-          <Route exact path="/cart/checkout" component={CheckoutContainer} />
-          <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
           <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
+          <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
+          <Route exact path="/cart/checkout" component={CheckoutContainer} />
+          <Route path="/cart" component={CartContainer} /> {/*revisar*/}
+          <Route path="/admin/users" component={AdminUsersContainer} />
           <Route exact path="/users" />
           {/* <Route exact path="/admin" component={AdminContainer} /> */}
-          <Route path="/admin/users" component={AdminUsersContainer} />
           {/* <Route path="/admin/products" component={AdminProductsContainer} /> */}
           <Redirect from="/" to="/home" />
         </Switch>

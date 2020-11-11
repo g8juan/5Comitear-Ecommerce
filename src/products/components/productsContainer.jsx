@@ -13,25 +13,34 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getProducts: (n) => dispatch(getProducts(n)),
-    modifyCart: (product) => dispatch(modifyCart(product))
+    getProducts: (searchTerm, categoryId) => dispatch(getProducts(searchTerm, categoryId)),
+    modifyCart: (product) => dispatch(modifyCart(product)),
   }
 }
 
 class ProductsContainer extends React.Component {
-  
-  search() {
+
+  search(categoryId) {
+    console.log("CATEGORY ID EN SEARCH", categoryId)
     const query = new URLSearchParams(this.props.location.search);
-    this.props.getProducts(query.get('s'))
+    this.props.getProducts(query.get('s'), categoryId)
   }
 
   componentDidMount() {
-    this.search()
+    if (this.props.match.params.id) {
+      this.search(parseInt(this.props.match.params.id))
+    } else {
+      this.search()
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
-      this.search()
+      if (this.props.match.params.id) {
+        this.search(parseInt(this.props.match.params.id))
+      } else {
+        this.search()
+      }
     }
   }
 
@@ -40,6 +49,7 @@ class ProductsContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (<Products addToCart={this.handleClick} products={this.props.products} userId={this.props.userId} />)
   }
 }

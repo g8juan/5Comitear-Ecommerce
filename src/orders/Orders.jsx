@@ -28,7 +28,7 @@ const Orders = ({ordersList, handleClick}) => {
                 <td>{new Date(order.updatedAt).toLocaleDateString('en-GB')}</td>
                 <td>
                   <Button as={Link} to ={{pathname: '/cart', state:{orderId: order.id}}}>See purchase</Button>
-                  </td>
+                </td>
               </tr>
             </tbody>
           );

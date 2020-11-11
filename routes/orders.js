@@ -1,7 +1,5 @@
 const router = require("express").Router();
-
 const {Order} = require("../models/index");
-const database = require("../database/database");
 
 router.get("/", (req, res) => Order.findAll().then((order) => res.send(order)));
 
@@ -12,7 +10,6 @@ router.post("/new", (req, res) => {
 })
 
 router.put("/update", (req, res) => {
-  console.log("REQ.BODY", req.body);
   if (req.body.address) {
     Order.findByPk(req.body.orderId)
       .then((order) => {
@@ -54,16 +51,6 @@ router.get("/list/:userId", (req, res) => {
     .catch((err) => console.log(err))
 })
 
-//change order/cart status //JSON modelo a enviar  {"id":13 ,"orderStatus":"completed"}
-//carritos/ordenes no se eliminan, simplemente se cancelan/completan/pending. Esto permite tener data de la preferncia de compra del cliente. (Recomendarle el televisor que nunca compró) (Se pueden hacer operaciones luego para mover las ordenes cancelled asi como los productos comprados a otras tablas para alivianar la query de la operatoria normal, ver cleanup mas abajo)
-router.put("/changeCartStatus", (req, res) => {
-  database
-    .query(
-      `UPDATE orders SET "orderStatus" = '${req.body.orderStatus}', "updatedAt" = NOW() WHERE id=${req.body.id}`
-    )
-    .then(() => res.sendStatus(200))
-    .catch((err) => console.log(err));
-});
 
 
 
@@ -132,25 +119,3 @@ repetir para productId
 //     })
 //     .catch((err) => console.log(err));
 // });
-
-// router.put("/updateItemQuantity", (req, res) => {
-//   const { quantity, orderId, productId } = req.body;
-//   database
-//     .query(
-//       `UPDATE order_product SET quantity = ${quantity}, "updatedAt" = NOW() WHERE "orderId" = ${orderId} AND "productId" = ${productId}`
-//     )
-//     .then(() => {
-//       res.sendStatus(200);
-//     })
-//     .catch((err) => console.log(err));
-// });
-
-//    /api/orders/getCart
-// router.get("/getCart", (req, res)=>{
-//   Order.findOrCreate({where:{userId:req.body.userId, orderStatus:"pending"},
-//   defaults: {ammount:0, address:req.body.address}})
-//   .then((user)=>{
-//     console.log(user)
-//     res.send(user)
-//   })
-// })

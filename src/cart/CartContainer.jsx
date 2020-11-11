@@ -6,7 +6,7 @@ import { getCart, modifyCart, setAmount } from "./cartActionCreators";
 
 function mapStateToProps(state) {
   return {
-    products: state.cart.products, //Array
+    cart: state.cart, //Array
     orderId: state.orders.order.id,
     userId: state.users.user.id,
   };
@@ -22,14 +22,18 @@ function mapDispatchToProps(dispatch) {
 
 class CartContainer extends React.Component {
   componentDidMount() {
-    if (this.props.location.state) this.props.getCart(this.props.location.state.orderId)
-    else this.props.getCart(this.props.orderId)
+    if (this.props.userId) this.props.getCart(this.props.orderId)
+    else this.props.getCart()
   }
 
   componentDidUpdate({ orderId }) {
     if (this.props.orderId !== orderId)
       this.props.getCart(this.props.orderId)
   }
+
+  //TODO:
+  //if(this.props.location.state) this.props.getCart(this.props.location.state.orderId)
+  //Esta linea iba en los componentDidUpdate y componentDidUpdate para renderizar la vista mis compras. Pasarle la vista de resumen de compra que hicieron Juan y Yenien
 
   increaseQuantity = (product) => this.props.modifyCart(product, 1);
   decreaseQuantity = (product) => this.props.modifyCart(product, -1);
@@ -53,7 +57,7 @@ class CartContainer extends React.Component {
       <div>
         {/* <Steper /> */}
         <Cart
-          products={this.props.products}
+          products={this.props.cart}
           increaseQuantity={this.increaseQuantity}
           decreaseQuantity={this.decreaseQuantity}
           handleDelete={this.handleDelete}
