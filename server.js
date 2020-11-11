@@ -9,11 +9,17 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
-const creds = require('./routes/configNodeMailer');
+const creds = require("./routes/configNodeMailer");
 
 app.use(volleyball);
 app.use(cookieParser()); // popula req.cookie
-app.use(session({ secret: ["superfluous cat", "ultra dog"], resave: false, saveUninitialized: false })) // popula req.session
+app.use(
+  session({
+    secret: ["superfluous cat", "ultra dog"],
+    resave: false,
+    saveUninitialized: false,
+  })
+); // popula req.session
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
