@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Product, Category, CategoryProduct} = require("../models/index")
+const {Product, Category} = require("../models/index")
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 

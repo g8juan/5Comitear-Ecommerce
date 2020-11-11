@@ -50,7 +50,6 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
-                //required
                 fullWidth
                 id="firstName"
                 label="Name"
@@ -61,7 +60,6 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                //required
                 fullWidth
                 id="lastName"
                 label="Lastname"
@@ -135,7 +133,6 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
               />
             </Grid>
           </Grid>
-          {/*           <Link to="checkout/payment"> */}
           <Button
             type="submit"
             fullWidth
@@ -145,7 +142,6 @@ const Checkout = ({ handleChange, handleSubmit, error }) => {
           >
             Continue with Payment
             </Button>
-          {/*     </Link> */}
           {error ? (
             <Alert variant="outlined" severity="error">
               Pst! Todos los campos deben estar completos.

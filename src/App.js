@@ -72,7 +72,7 @@ class App extends React.Component {
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
