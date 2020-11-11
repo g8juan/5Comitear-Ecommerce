@@ -44,18 +44,22 @@ class CheckoutContainer extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { order, setRecipient, setAddress } = this.props
     const { firstName, lastName, zip, province, city, street, floor } = this.state;
     let fullName = firstName + " " + lastName;
     let fullAddress = street + ", " + floor + ". " + city + " (" + zip + ") " + province + ", Argentina.";
-    this.props.setRecipient(this.props.order.id, fullName)
-    this.props.setAddress(this.props.order.id, fullAddress);
-    if (this.props.order.address && this.props.order.recipient) this.props.history.push('./checkout/payment')
+    const actualizarData = async () => {
+      await setRecipient(order.id, fullName)
+      await setAddress(order.id, fullAddress);
+    }
+    actualizarData()
+    this.props.history.push('./checkout/payment')
   };
 
   render() {
     return (
       <div>
-        <Checkout handleChange={this.handleChange} handleSubmit={this.handleSubmit} />;
+        <Checkout handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     );
   }

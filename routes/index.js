@@ -5,12 +5,14 @@ const usersRouter = require("./users");
 const productsRouter = require("./products");
 const ordersRouter = require("./orders");
 const cartRouter = require("./cart");
+const mailRouter = require('./configNodeMailer')
 
 router.use("/categories", categoriesRouter);
 router.use("/users", usersRouter);
 router.use("/products", productsRouter);
 router.use("/orders", ordersRouter);
 router.use("/cart", cartRouter);
+router.use('/send', mailRouter)
 router.use("/", function (req, res) {
   res.send("No se ha alcanzado ninguna ruta");
 });
