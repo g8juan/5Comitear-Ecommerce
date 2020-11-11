@@ -46,7 +46,7 @@ async function seed() {
   /*Categoria Informal*/{categoryId: 2, productId: 3}, {categoryId: 2, productId: 5},
   /*Categoria Formal*/  {categoryId: 3, productId: 1}, {categoryId: 3, productId: 2}, {categoryId: 3, productId: 4}, {categoryId: 3, productId: 6},
   /*Categoria Verano*/  {categoryId: 4, productId: 2}, {categoryId: 4, productId: 3}, {categoryId: 4, productId: 5},
-  /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 3}, {categoryId: 5, productId: 5}
+  /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 4}, {categoryId: 5, productId: 6}
   ]).then(() => console.log("products in cart generated!")).catch((err) => console.log(err));
 
 }

@@ -9,6 +9,20 @@ router.get("/:id", (req, res) => {
     .then(order => res.send(order))
 });
 
+/*
+router.get("/:orderId", (req, res) => {
+  Product.findAll({
+    include: [{
+      model: OrderProduct,
+      attributes: ["quantity"],
+      where: {orderId: req.params.orderId},
+      required: true
+    }],
+    attributes: {exclude: ['createdAt', 'updatedAt']}
+  }).then(order => res.send(order))
+});
+*/
+
 router.post("/modify", async (req, res) => {
   const {orderId, productId} = req.body;
   let quantity = req.body.quantity || 1 // esta linea esta de mas se puede poner arriba ya especifica en front.
@@ -24,6 +38,19 @@ router.post("/modify", async (req, res) => {
    const product = await foundItem.update({quantity:foundItem.quantity+quantity})
    return res.status(201).send(product);
 })
+
+
+router.get("/test/:orderId", (req, res) => {
+  Product.findAll({
+    include: [{
+      model: Order, 
+      attributes: [],
+      through: {attributes: []}, where: {id: req.params.orderId}, required: true
+    }],
+    attributes: {exclude: ['createdAt', 'updatedAt']}
+  })
+    .then(order => res.send(order))
+});
 
 
 module.exports = router;
