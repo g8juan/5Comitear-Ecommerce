@@ -18,11 +18,16 @@ import CartContainer from "./cart/CartContainer";
 import OrdersContainer from "./orders/OrdersContainer";
 import PaymentContainer from "./payment/MainScreen";
 import CheckoutContainer from "./cart/CheckoutContainer";
-import ReviewOrderContainer from "./cart/ReviewOrderContainer";
-// import AdminContainer from "./admin/AdminContainer";
-import AdminUsersContainer from "./admin/container/AdminUsersContainer";
-//import AdminProductsContainer from "./admin/container/AdminProductsContainer";
+
 import SingleOrderContainer from "./orders/SingleOrderContainer";
+
+import ReviewOrderContainer from './cart/ReviewOrderContainer'
+import AdminUsersContainer from "./admin/container/AdminUsersContainer";
+import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
+import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
+//import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
+
+import CustomizedRatings from './rating/CustomizedRatings'
 
 function mapStateToProps(state) {
   return {
@@ -76,9 +81,12 @@ class App extends React.Component {
           <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
           
           <Route exact path="/admin/users" component={AdminUsersContainer} />
+          <Route exact path="/admin/products/create" component={AdminCreateProductsContainer} />
+          <Route exact path="/admin/products/update" component={AdminUpdateProductsContainer} />
+          {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
 
-          {/* <Route exact path="/admin" component={AdminContainer} /> */}
-          {/* <Route path="/admin/products" component={AdminProductsContainer} /> */}
+          <Route exact path="/ratings" component={CustomizedRatings} />
+
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
