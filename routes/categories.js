@@ -25,4 +25,21 @@ router.post("/add", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.put("/update", (req, res) => {
+  CategoryProduct.update(
+    {
+      categoryId: req.body.categoryId,
+    },
+    { where: { productId: req.body.productId }, returning: true, plain: true }
+  )
+    .then((productCategory) => res.status(200).send(productCategory[1]))
+    .catch((err) => console.log(err));
+});
+
+router.get("/productCategory", (req, res) => {
+  CategoryProduct.findOne({
+    where: { productId: req.query.productId },
+  }).then((product) => res.send(product));
+});
+
 module.exports = router;
