@@ -40,6 +40,10 @@ function mapDispatchToProps(dispatch) {
 class App extends React.Component {
 
   componentDidMount() {
+    const productsJSON = localStorage.getItem("cartProducts")
+    const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
+  
+    console.log("APP.JS LOCAL STORAGE CART PRODUCTS", localStorageProducts)
     return axios.get("/api/users/me", { withCredentials: true, headers: { "Content-Type": "application/json" } })
       .then((res) => {
         this.props.setLogin(res.data)

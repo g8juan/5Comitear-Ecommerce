@@ -1,6 +1,6 @@
 require("./database/database");
 //TODO: meter al seed categorias
-const {User, Product, Order, OrderProduct, Category, CategoryProduct} = require("./models/index");
+const {User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser} = require("./models/index");
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
   /*SUDO!*/await User.create({firstName: "Juan", lastName: "Loza", email: "juana@gmail.com", password: "1", address: "Pachanga 3032", phone: "2332432", userType: "3", }).then(() => console.log("Por favor espere, estbleciendo conexión cuántica")).catch((err) => console.log(err));
@@ -48,6 +48,15 @@ async function seed() {
   /*Categoria Verano*/  {categoryId: 4, productId: 2}, {categoryId: 4, productId: 3}, {categoryId: 4, productId: 5},
   /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 4}, {categoryId: 5, productId: 6}
   ]).then(() => console.log("products in cart generated!")).catch((err) => console.log(err));
+
+  ProductUser.bulkCreate([
+    /*Reviews de producto 1*/ {productId: 1, userId: 1, review: 8}, {productId: 1, userId: 2, review: 8}, {productId: 1, userId: 3, review: 10},
+    /*Reviews de producto 2*/ {productId: 2, userId: 1, review: 8}, {productId: 2, userId: 2, review: 5},
+    /*Reviews de producto 3*/ {productId: 3, userId: 1, review: 7}, {productId: 2, userId: 3, review: 10},
+    /*Reviews de producto 4*/ {productId: 4, userId: 1, review: 4}, {productId: 4, userId: 3, review: 4}, 
+    /*Reviews de producto 5*/ {productId: 5, userId: 1, review: 7}, {productId: 5, userId: 2, review: 10}, {productId: 5, userId: 3, review: 7},
+    /*Reviews de producto 6*/ {productId: 6, userId: 2, review: 3}, 
+  ]).then(() => console.log("product reviews generated!")).catch((err) => console.log(err));
 
 }
 seed()
