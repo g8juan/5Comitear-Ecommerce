@@ -1,10 +1,13 @@
 import React from "react";
-import { connect } from 'react-redux'
-import SingleProduct from './singleProduct'
-import { getSingleProduct } from '../productsActionCreators'
+import { connect } from 'react-redux';
+import SingleProduct from './singleProduct';
+import { getSingleProduct, deleteSingleProduct } from '../productsActionCreators';
 
-const mapStateToProps = (state) => ({ singleProduct : state.products.singleProduct })
-const mapDispatchToProps = (dispatch) => ({ getSingleProduct : (id) => dispatch(getSingleProduct(id))})
+const mapStateToProps = (state) => ({ singleProduct : state.products.singleProduct, userType: state.users.user.userType })
+const mapDispatchToProps = (dispatch) => ({ 
+  getSingleProduct : (id) => dispatch(getSingleProduct(id)),
+  deleteSingleProduct: (singleProduct) => dispatch(deleteSingleProduct(singleProduct))
+})
 
 class SingleProductContainer extends React.Component {
   
@@ -12,11 +15,16 @@ class SingleProductContainer extends React.Component {
     this.props.getSingleProduct(this.props.match.params)
   }
 
+  handleDelete = async (singleProduct) => {
+    await this.props.deleteSingleProduct(singleProduct)
+    this.props.history.push("/products")
+  }
+
   render() {
-    const {singleProduct} = this.props
+    const {singleProduct, userType} = this.props
     return (
       <div>
-        <SingleProduct singleProduct={singleProduct}/> 
+        <SingleProduct singleProduct={singleProduct} userType={userType} handleDelete={this.handleDelete} /> 
       </div>
     );
   }
