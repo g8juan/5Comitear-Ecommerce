@@ -27,6 +27,12 @@ Product.init({
   },
   reviews: {
     type: DataTypes.ARRAY(DataTypes.INTEGER),
+  },
+  review:{
+    type: DataTypes.VIRTUAL,
+    get(){
+      
+    }
   }
 },
   {
