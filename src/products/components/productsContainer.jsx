@@ -14,7 +14,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getProducts: (searchTerm, categoryId) => dispatch(getProducts(searchTerm, categoryId)),
-    modifyCart: (product) => dispatch(modifyCart(product)),
+    modifyCart: (product, quantity) => dispatch(modifyCart(product, quantity)),
   }
 }
 
@@ -27,6 +27,11 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidMount() {
+
+    const productsJSON = localStorage.getItem("cartProducts")
+    const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
+    console.log("LOCAL STORAGE CART PRODUCTS EN PRODUCTS:41", localStorageProducts)
+
     if (this.props.match.params.id) {
       this.search(parseInt(this.props.match.params.id))
     } else {
@@ -35,6 +40,11 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const productsJSON = localStorage.getItem("cartProducts")
+    const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
+    console.log("LOCAL STORAGE CART PRODUCTS EN PRODUCTS:41", localStorageProducts)
+
+
     if (prevProps.location.search !== this.props.location.search) {
       if (this.props.match.params.id) {
         this.search(parseInt(this.props.match.params.id))
@@ -45,7 +55,8 @@ class ProductsContainer extends React.Component {
   }
 
   handleClick = (product) => {
-    this.props.modifyCart(product)
+    console.log("HANDLECLICK PRODUCT", product)
+    this.props.modifyCart(product, 1)
   }
 
   render() {
@@ -54,4 +65,3 @@ class ProductsContainer extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
-

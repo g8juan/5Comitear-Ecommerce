@@ -1,27 +1,24 @@
 import React from "react";
-import {connect} from 'react-redux'
-import ProductsContainer from '../products/components/productsContainer'
-import {Route, Link} from 'react-router-dom'
-import {getCategories} from './categoriesActionCreators'
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getCategories } from "./categoriesActionCreators";
 
-
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-
-
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories.categories
-  }
+    categories: state.categories.categories,
+  };
 }
-function mapDispatchToProps(dispatch) {return ({getCategories: () => dispatch(getCategories())})}
+function mapDispatchToProps(dispatch) {
+  return { getCategories: () => dispatch(getCategories()) };
+}
 
 class CategoriesContainer extends React.Component {
-
   componentDidMount() {
-    this.props.getCategories()
+    this.props.getCategories();
   }
 
   render() {
@@ -34,20 +31,22 @@ class CategoriesContainer extends React.Component {
               {category.name}
               <Link to={`${this.props.match.url}/${category.id}`}>
                 <ListItem button>
-                  <ListItemText primary={(category.name).toUpperCase()} />
+                  <ListItemText primary={category.name.toUpperCase()} />
                 </ListItem>
               </Link>
               <Divider />
-
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoriesContainer);
 
 // const App = () => (
 //   <div>

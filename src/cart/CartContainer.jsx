@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch) {
 
 class CartContainer extends React.Component {
   componentDidMount() {
+    console.log(localStorage.getItem("cartProducts"))
     if (this.props.userId) this.props.getCart(this.props.orderId)
     else this.props.getCart()
   }
@@ -31,16 +32,18 @@ class CartContainer extends React.Component {
       this.props.getCart(this.props.orderId)
   }
 
+  componentWillUnmount(){
+    this.props.cart.forEach(e=>{
+      this.props.modifyCart(e);
+    })
+  }
+
   //TODO:
   //if(this.props.location.state) this.props.getCart(this.props.location.state.orderId)
   //Esta linea iba en los componentDidUpdate y componentDidUpdate para renderizar la vista mis compras. Pasarle la vista de resumen de compra que hicieron Juan y Yenien
 
   increaseQuantity = (product) => this.props.modifyCart(product, 1);
   decreaseQuantity = (product) => this.props.modifyCart(product, -1);
-
-  handleDelete() {
-    /*TODO*/
-  }
 
   handleClick = (event) => {
     console.log("ENTRANDO AL HANDLECLICK");

@@ -1,10 +1,13 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import { setLogin } from "./users/usersActionCreators";
+import { getOrder } from "./orders/ordersActionCreators";
 import axios from "axios";
+
+import Home from "./home/home";
 import ProductsContainer from "./products/components/productsContainer";
 import SingleProductContainer from "./products/components/singleProductContainer";
 import RegisterContainer from "./users/RegisterContainer";
@@ -14,16 +17,14 @@ import CategoriesContainer from "./categories/CategoriesContainer";
 import CartContainer from "./cart/CartContainer";
 import OrdersContainer from "./orders/OrdersContainer";
 import PaymentContainer from "./payment/MainScreen";
-import Home from './home/home'
-import { setLogin } from "./users/usersActionCreators";
-import { getOrder } from "./orders/ordersActionCreators"
 import CheckoutContainer from "./cart/CheckoutContainer";
-import ReviewOrderContainer from './cart/ReviewOrderContainer'
+
+import ReviewOrderContainer from "./cart/ReviewOrderContainer";
 import AdminUsersContainer from "./admin/container/AdminUsersContainer";
+import SingleOrderContainer from "./orders/SingleOrderContainer";
 import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
 import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
 //import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
-
 
 function mapStateToProps(state) {
   return {
@@ -39,13 +40,16 @@ function mapDispatchToProps(dispatch) {
 }
 
 class App extends React.Component {
-
   componentDidMount() {
-    return axios.get("/api/users/me", { withCredentials: true, headers: { "Content-Type": "application/json" } })
-      .then((res) => {
-        this.props.setLogin(res.data)
-        this.props.getOrder()
+    return axios
+      .get("/api/users/me", {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
       })
+      .then((res) => {
+        this.props.setLogin(res.data);
+        this.props.getOrder();
+      });
   }
 
   render() {
@@ -54,28 +58,34 @@ class App extends React.Component {
         <NavigationBarContainer />
         <Switch>
           {/* <Route path="/categories" component={CategoriesContainer} /> */}
-          <Route exact path="/categories/:id" component={ProductsContainer} />
-          <Route path="/categories" component={CategoriesContainer} />
-          <Route exact path="/products/:id" component={SingleProductContainer} />
-          <Route exact path="/products/" component={ProductsContainer} />
           <Route exact path="/home" component={Home} />
+
+          <Route exact path="/categories" component={CategoriesContainer} />
+          <Route exact path="/categories/:id" component={ProductsContainer} />
+
+          <Route exact path="/products/" component={ProductsContainer} />
+          <Route exact path="/products/:id" component={SingleProductContainer} />
+
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/orders" component={OrdersContainer} /> {/*Este va a ser para mostrar todas las órdenes del usuario*/}
+
+          <Route exact path="/orders" component={OrdersContainer} />
+          <Route exact path="/orders/:id" component={SingleOrderContainer} />
+
+          <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
+          <Route exact path="/cart/checkout" component={CheckoutContainer} />
           <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
           <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
-          <Route exact path="/cart/checkout" component={CheckoutContainer} />
-          <Route path="/cart" component={CartContainer} /> {/*revisar*/}
-          <Route path="/admin/users" component={AdminUsersContainer} />
-          <Route exact path="/users" />
-          <Route path="/admin/users" component={AdminUsersContainer} />
-          <Route path="/admin/products/create" component={AdminCreateProductsContainer} />
-          <Route path="/admin/products/update" component={AdminUpdateProductsContainer} />
+
+          <Route exact path="/admin/users" component={AdminUsersContainer} />
+          <Route exact path="/admin/products/create" component={AdminCreateProductsContainer} />
+          <Route exact path="/admin/products/update" component={AdminUpdateProductsContainer} />
           {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
+
           <Redirect from="/" to="/home" />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
