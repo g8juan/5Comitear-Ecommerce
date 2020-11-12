@@ -42,6 +42,12 @@ export const updateProduct = (product) => (dispatch) => {
     .then((product) => dispatch(actionSingleProduct(product)));
 };
 
+export const deleteSingleProduct = (singleProductId) => (dispatch) => {
+  axios.post("/api/products/singleProduct", { id: singleProductId })
+    .then(res => res.data)
+    .then(deletedProduct => dispatch(actionDeletedProduct(deletedProduct)))
+}
+
 export const updateCategory = (productAndCategory) => (dispatch) => {
   console.log("soy product and category", productAndCategory);
   axios
@@ -58,13 +64,6 @@ export const getProductCategory = (productId) => (dispatch) => {
     .then((productCategory) =>
       dispatch(actionProductCategory(productCategory))
     );
-};
-
-export const deleteSingleProduct = (singleProduct) => (dispatch) => {
-  axios
-    .delete("/api/products/singleProduct", { params: { id: singleProduct.id } })
-    .then((res) => res.data)
-    .then((deletedProduct) => dispatch(actionDeletedProduct(deletedProduct)));
 };
 
 // export const getProductsByCategory = (categoryId) => (dispatch) => {

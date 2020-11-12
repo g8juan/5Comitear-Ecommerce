@@ -53,13 +53,30 @@ router.put("/singleProduct", (req, res) => {
     .then(product => res.send(product[1]))
 })
 
-router.delete("/singleProduct", (req, res) => {
-  Product.findByPk(req.query.id)
+router.post("/singleProduct", (req, res) => {
+  Product.findByPk(req.body.id)
     .then((product) => {
-      return Product.destroy({ where: { id: req.query.id } })
+      return Product.destroy({ where: { id: req.body.id } })
         .then((u) => res.send(product));
-    });
+    })
 })
+
+router.get("/productsByCategory", (req, res) => {
+  console.log(req.query)
+  Category.findAll({
+    where: { id: req.query.categoryId },
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    include: [{
+      model: Product,
+      through: { attributes: [] },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    }]
+  }).then(order => res.send(order))
+    .catch((err) => console.log(err))
+});
+
 
 
 
