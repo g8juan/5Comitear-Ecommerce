@@ -80,7 +80,7 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClic
           </TableContainer>
           ) : (
             <div>
-              Agrega productos al carrito!
+              <Link to={`/products`}>Add products to cart!</Link>
             </div>
           )
         }
@@ -93,9 +93,9 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClic
           </Link>
         ) : (
             <div>
-              <p> You need to be loged in to proceed to continue</p>
+              <p> You need to be loged in to proceed.</p>
               <Link to='/login'>
-                <button variant="contained" className="btn btn-secondary">Go to login</button>
+                <button variant="contained" className="btn btn-secondary">Log in</button>
               </Link>
             </div>
           )

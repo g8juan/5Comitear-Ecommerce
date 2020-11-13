@@ -1,10 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import {
-  deleteCategory,
-  getCategories,
-  getSingleCategory,
-} from "./categoriesActionCreators";
+import {connect} from "react-redux";
+import {deleteCategory,getCategories,getSingleCategory} from "./categoriesActionCreators";
 import Categories from "./Categories";
 
 function mapStateToProps(state) {
@@ -39,18 +35,10 @@ class CategoriesContainer extends React.Component {
   render() {
     return (
       <div>
-        <Categories
-          categories={this.props.categories}
-          userType={this.props.userType}
-          handleDelete={this.handleDelete}
-          handleEdit={this.handleEdit}
-        />
+        <Categories categories={this.props.categories} userType={this.props.userType} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
       </div>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CategoriesContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(CategoriesContainer);

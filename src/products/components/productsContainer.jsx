@@ -23,7 +23,6 @@ function mapDispatchToProps(dispatch) {
 class ProductsContainer extends React.Component {
 
   search(categoryId) {
-    console.log("CATEGORY ID EN SEARCH", categoryId)
     const query = new URLSearchParams(this.props.location.search);
     this.props.getProducts(query.get('s'), categoryId)
   }
