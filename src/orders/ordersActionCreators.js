@@ -39,9 +39,7 @@ export const getOrder = () => (dispatch, getState) => {
     .get(`/api/orders/${getState().users.user.id}`)
     .then((res) => dispatch(setOrder(res.data)))
     .then(()=>dispatch(getCart()))
-    .catch((err) => console.log(err));
-
-    
+    .catch((err) => console.log(err));  
 };
 
 export const getOrdersList = () => (dispatch, getState) => {

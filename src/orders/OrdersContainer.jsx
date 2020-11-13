@@ -24,11 +24,7 @@ class OrdersContainer extends React.Component {
   }
 
   handleClick = (event) => {
-    const { selectSingleOrder, singleOrder } = this.props
-    console.log('E TARGET VALUE', event.target.value)
-    selectSingleOrder(event.target.value)
-    console.log(singleOrder, 'ESTA ES LA SINGLE ORDER DEL HANDLE CLICK')
-    // this.props.history.push(`/orders/${event.target.value}`)
+    this.props.selectSingleOrder(event.target.value)
   }
 
   render() {

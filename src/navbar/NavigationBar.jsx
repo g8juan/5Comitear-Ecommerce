@@ -43,7 +43,7 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
           </NavDropdown>
         ) : null}
       </Nav>
-
+{user.id ? <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>{`Welcome ${user.firstName}!  `}</p>: null}
       <Form inline="true" onSubmit={handleSubmit}>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Nav className="mr-auto">
@@ -73,7 +73,6 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
               <>{user.userType === "1" ? 
                 <Button as={Link} to="/orders" className="m-1">My purchases {"  "}</Button>
               : null}
-                <p style={{margin: '0.5rem', alignSelf: 'center', color: 'white'}}>Welcome {user.firstName}!</p>
                 <Button onClick={logOut} as={Link} to="/" className="m-1">Log Out</Button>
               </>
             )}

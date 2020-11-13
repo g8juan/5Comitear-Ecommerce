@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { selectSingleOrder } from "./ordersActionCreators";
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     singleOrder: state.orders.singleOrder
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     selectSingleOrder: (id) => dispatch(selectSingleOrder(id))
   };
@@ -20,13 +20,10 @@ function mapDispatchToProps(dispatch, ownProps) {
 class SingleOrderContainer extends React.Component {
 
   componentDidMount() {
-    console.log('COMPONENTE DID MOUNT')
     this.props.selectSingleOrder(this.props.match.params.id)
   }
 
   render() {
-    console.log(this.props.singleOrder, 'THIS PROPS SINGLE ORDER')
-
     return (
       <div>
         <SingleOrder singleOrder={this.props.singleOrder} />

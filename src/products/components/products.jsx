@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Products({products, addToCart, userType}) {
   const classes = useStyles();
-
+  console.log("products",products)
   return (
     <div className={classes.root}>
       <p className={classes.title}> PRODUCTS </p>
@@ -69,7 +69,7 @@ export default function Products({products, addToCart, userType}) {
                   </Link>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {product.name}
+                      {product.stock ? product.name : product.name+" *sin stock"}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {product.description}

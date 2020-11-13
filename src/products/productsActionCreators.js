@@ -65,10 +65,3 @@ export const getProductCategory = (productId) => (dispatch) => {
       dispatch(actionProductCategory(productCategory))
     );
 };
-
-// export const getProductsByCategory = (categoryId) => (dispatch) => {
-//   axios.get(`/api/products/productsByCategory`, {params: {categoryId}})
-//     .then((res) => res.data[0].products)
-//     .then((products) => dispatch(actionProducts(products)))
-//     .catch((err) => console.log(err));
-// };
