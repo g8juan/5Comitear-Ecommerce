@@ -12,10 +12,11 @@ import {
 export default function NavigationBar({ handleSubmit, user, logOut }) {
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" style={{display: 'flex', justifyContent: 'space-between'}} >
       <Navbar.Brand as={Link} to="/home">
-        <img style={{ width: '7rem' }} src="logos/5mitear-Logo7.png" alt="5comitear" />
+        <img style={{ width: '10rem' }} src="logos/5mitear-Logo7.png" alt="5comitear" />
       </Navbar.Brand>
+      <div>
       <Nav className="mr-auto">
         <Nav.Link as={Link} to="/products">
           Products
@@ -44,7 +45,13 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
           </NavDropdown>
         ) : null}
       </Nav>
-
+      </div>
+      <div>
+      <p style={{ font: '1.5rem Roboto, sans-serif', margin: '0.5rem', alignSelf: 'center', color: 'white' }}>
+          Welcome {user.firstName}!
+      </p>
+      </div>
+      <div>
       <Form inline="true" onSubmit={handleSubmit}>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Nav className="mr-auto">
@@ -79,9 +86,6 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
                 </Button>
                 </div>
                 : null}
-                <p style={{ margin: '0.5rem', alignSelf: 'center', color: 'white' }}>
-                  Welcome {user.firstName}!
-                </p>
                 <Button onClick={logOut} as={Link} to="/" className="m-1" variant="secondary">
                   Log Out
                 </Button>
@@ -89,6 +93,7 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
             )}
         </Nav>
       </Form>
+      </div>
     </Navbar>
   );
 }
