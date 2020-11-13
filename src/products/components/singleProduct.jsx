@@ -13,6 +13,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Button } from 'react-bootstrap';
 
+// SNACKBAR
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 const useStyles = makeStyles({
   rootCard: {
@@ -36,8 +41,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SingleProduct({ singleProduct, userType, handleDelete }) {
+export default function SingleProduct({ singleProduct, userType, handleDelete, addToCart }) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') { return }
+    setOpen(false);
+  }
+
   return (
     <Card className={classes.rootCard}>
       <CardActionArea>
@@ -65,9 +81,28 @@ export default function SingleProduct({ singleProduct, userType, handleDelete })
             Edit Product
           </Button>
         ) : (
-            <Button size="small" variant="secondary" className={classes.buttons}>
-              Add to cart
+            <div>
+              <Button size="small" variant="secondary" className={classes.buttons} onClick={() => {
+                handleClick()
+                addToCart(singleProduct)
+              }}>
+                Add to cart
             </Button>
+              <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                message="Producto agregado al carrito"
+                action={
+                  <React.Fragment>
+                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </React.Fragment>
+                }
+              />
+            </div>
           )}
         <CustomizedRatings reviews={singleProduct.reviews} />
         <Button size="small" variant="secondary" className={classes.buttons}>

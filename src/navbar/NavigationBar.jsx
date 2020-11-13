@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 
 export default function NavigationBar({ handleSubmit, user, logOut }) {
+
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/home">
@@ -71,10 +72,16 @@ export default function NavigationBar({ handleSubmit, user, logOut }) {
             </>
           ) : (
               <>{user.userType === "1" ?
-                <Button as={Link} to="/orders" className="m-1" variant="secondary">My purchases {"  "}</Button>
+                <Button as={Link} to="/orders" className="m-1" variant="secondary">
+                  My purchases {"  "}
+                </Button>
                 : null}
-                <p style={{ margin: '0.5rem', alignSelf: 'center', color: 'white' }}>Welcome {user.firstName}!</p>
-                <Button onClick={logOut} as={Link} to="/" className="m-1" variant="secondary">Log Out</Button>
+                <p style={{ margin: '0.5rem', alignSelf: 'center', color: 'white' }}>
+                  Welcome {user.firstName}!
+                </p>
+                <Button onClick={logOut} as={Link} to="/" className="m-1" variant="secondary">
+                  Log Out
+                </Button>
               </>
             )}
         </Nav>

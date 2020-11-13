@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Alert from "@material-ui/lab/Alert";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,133 +30,129 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  buttons: {
+    margin: '1rem'
+  }
 }));
 
 const Checkout = ({ handleChange, handleSubmit, error, user }) => {
-  console.log(user);
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <ShoppingCartIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Shipping Address
+    <div>
+      <form onSubmit={handleSubmit} noValidate>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <ShoppingCartIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Shipping Details
         </Typography>
-        <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <Grid container spacing={1}>
-            <Grid item xs={1} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                fullWidth
-                id="firstName"
-                label="Recipient Name"
-                placeholder={user.firstName + "?"}
-                autoFocus
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="lastName"
-                label="Recipient Lastname"
-                placeholder={user.lastName + "?"}
-                name="lastName"
-                autoComplete="lname"
-                onChange={handleChange}
-              />
-            </Grid>
+            <Grid className={classes.form} container spacing={1}>
+              <Grid item xs={1} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  fullWidth
+                  id="firstName"
+                  label="Recipient Name"
+                  placeholder={user.firstName}
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="lastName"
+                  label="Recipient Lastname"
+                  placeholder={user.lastName}
+                  name="lastName"
+                  autoComplete="lname"
+                  onChange={handleChange}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="zip"
-                label="ZIP Code"
-                name="zip"
-                autoComplete="zip"
-                onChange={handleChange}
-              />
-            </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="zip"
+                  label="ZIP Code"
+                  name="zip"
+                  autoComplete="zip"
+                  onChange={handleChange}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="province"
-                label="Province"
-                type="province"
-                id="province"
-                onChange={handleChange}
-              />
-            </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="province"
+                  label="Province"
+                  type="province"
+                  id="province"
+                  onChange={handleChange}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="city"
-                label="City"
-                type="city"
-                id="city"
-                onChange={handleChange}
-              />
-            </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="city"
+                  label="City"
+                  type="city"
+                  id="city"
+                  onChange={handleChange}
+                />
+              </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="street and number"
-                label="Street and Number"
-                type="street and number"
-                id="street and number"
-                onChange={handleChange}
-              />
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="street and number"
+                  label="Street and Number"
+                  type="street and number"
+                  id="street and number"
+                  placeholder={user.address}
+                  onChange={handleChange}
+                />
+              </Grid>
+              {error ? (
+                <Alert variant="outlined" severity="error" className={classes.buttons}>
+                  Pst! Todos los campos deben estar completos.
+                </Alert>
+              ) : null}
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                name="floor and apartment"
-                label="Floor and Apartment"
-                type="floor and apartment"
-                id="floor and apartment"
-                onChange={handleChange}
-              />
+            <Grid container justify="space-around" >
             </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Continue with Payment
+          </div>
+          <Box mt={5}></Box>
+        </Container>
+        <Button
+          type="submit"
+          variant="contained"
+          color='secondary'
+          className={classes.buttons}
+        >
+          <Link to='/cart' style={{ color: 'white' }}>Back to cart</Link>
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.buttons}
+        >
+          Continue with Payment
           </Button>
-          {error ? (
-            <Alert variant="outlined" severity="error">
-              Pst! Todos los campos deben estar completos.
-            </Alert>
-          ) : null}
-
-          <Grid container justify="flex-end"></Grid>
-        </form>
-      </div>
-      <Box mt={5}></Box>
-    </Container>
+      </form>
+    </div>
   );
 };
 
