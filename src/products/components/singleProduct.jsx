@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CustomizedRatings from "./CustomizedRatings";
 
 //STYLE
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,11 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SingleProduct({
-  singleProduct,
-  userType,
-  handleDelete,
-}) {
+export default function SingleProduct({ singleProduct, userType, handleDelete }) {
   const classes = useStyles();
   return (
     <Card className={classes.rootCard}>
@@ -71,55 +68,17 @@ export default function SingleProduct({
             Add to cart
           </Button>
         )}
+        <CustomizedRatings reviews={singleProduct.reviews} />
         <Button size="small" color="primary" className={classes.buttons}>
           Reviews
         </Button>
+
         {userType === "2" || userType === "3" ? (
           <div>
-          <DeleteIcon className={classes.buttonDelete} 
-          onClick={() => handleDelete(singleProduct.id)}
-          />
-          {/* {!singleProduct.id ?
             <DeleteIcon
               className={classes.buttonDelete}
-              onClick={() => handleDelete(singleProduct)}
+              onClick={() => handleDelete(singleProduct.id)}
             />
-            
-            {/* {!singleProduct.id ?
-            (<div>
-              <Modal
-                open={true}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    width: 200,
-                    height: 100,
-                    justifyContent: "center",
-                    alignContent: "center",
-                    flexDirection: "column",
-                    margin: "0 auto",
-                    marginTop: 200,
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "white",
-                      width: "100%",
-                      height: "100%",
-                      textAlign: "center",
-                    }}
-                  >
-                    <h2 id="simple-modal-title">Warning!</h2>
-                    <p id="simple-modal-description">Are you sure you want to delete this product?</p>
-                  </div>
-                  <button>Cancel</button>
-                  <button >Confirm</button>
-                </div>
-              </Modal>
-            </div>) : null } */}
           </div>
         ) : null}
       </CardActions>

@@ -1,8 +1,5 @@
 require("./database/database");
 //TODO: meter al seed categorias
-<<<<<<< HEAD
-const {User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser} = require("./models/index");
-=======
 const {
   User,
   Product,
@@ -11,7 +8,6 @@ const {
   Category,
   CategoryProduct,
 } = require("./models/index");
->>>>>>> af80a4b1c45b7bfb2edcf856e5263e83eba0481f
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
     /*SUDO!*/ await User.create({
@@ -187,24 +183,6 @@ async function seed() {
     .catch((err) => console.log(err));
 
   CategoryProduct.bulkCreate([
-<<<<<<< HEAD
-  /*Categoria Calzado*/ {categoryId: 1, productId: 5}, {categoryId: 1, productId: 6},
-  /*Categoria Informal*/{categoryId: 2, productId: 3}, {categoryId: 2, productId: 5},
-  /*Categoria Formal*/  {categoryId: 3, productId: 1}, {categoryId: 3, productId: 2}, {categoryId: 3, productId: 4}, {categoryId: 3, productId: 6},
-  /*Categoria Verano*/  {categoryId: 4, productId: 2}, {categoryId: 4, productId: 3}, {categoryId: 4, productId: 5},
-  /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 4}, {categoryId: 5, productId: 6}
-  ]).then(() => console.log("products in cart generated!")).catch((err) => console.log(err));
-
-  ProductUser.bulkCreate([
-    /*Reviews de producto 1*/ {productId: 1, userId: 1, review: 8}, {productId: 1, userId: 2, review: 8}, {productId: 1, userId: 3, review: 10},
-    /*Reviews de producto 2*/ {productId: 2, userId: 1, review: 8}, {productId: 2, userId: 2, review: 5},
-    /*Reviews de producto 3*/ {productId: 3, userId: 1, review: 7}, {productId: 2, userId: 3, review: 10},
-    /*Reviews de producto 4*/ {productId: 4, userId: 1, review: 4}, {productId: 4, userId: 3, review: 4}, 
-    /*Reviews de producto 5*/ {productId: 5, userId: 1, review: 7}, {productId: 5, userId: 2, review: 10}, {productId: 5, userId: 3, review: 7},
-    /*Reviews de producto 6*/ {productId: 6, userId: 2, review: 3}, 
-  ]).then(() => console.log("product reviews generated!")).catch((err) => console.log(err));
-
-=======
     /*Categoria Calzado*/ { categoryId: 1, productId: 5 },
     { categoryId: 1, productId: 6 },
     /*Categoria Informal*/ { categoryId: 2, productId: 3 },
@@ -222,6 +200,5 @@ async function seed() {
   ])
     .then(() => console.log("products in cart generated!"))
     .catch((err) => console.log(err));
->>>>>>> af80a4b1c45b7bfb2edcf856e5263e83eba0481f
 }
 seed();
