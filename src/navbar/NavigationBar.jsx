@@ -47,9 +47,8 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
       <Form inline="true" onSubmit={handleSubmit}>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Nav className="mr-auto">
-          {user.userType === "1" ? 
           <Button as={Link} to="/cart" className="m-1">
-            My Cart {"  "}
+          {user.userType ? `My Cart   ` : `LocalStorage Cart   `}
             <svg
               width="1em"
               height="1em"
@@ -64,7 +63,7 @@ export default function NavigationBar({handleSubmit, user, logOut}) {
               />
             </svg>
           </Button> 
-          : null}
+
           {!user.id ? (
             <>
               <Button inline="true" as={Link} to="/register" className="m-1">Sign up{"  "}</Button>

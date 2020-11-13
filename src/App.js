@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setLogin } from "./users/usersActionCreators";
 import { getOrder } from "./orders/ordersActionCreators";
+import {getCart} from './cart/cartActionCreators'
 import axios from "axios";
 
 import Home from "./home/home";
@@ -35,6 +36,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setLogin: (user) => dispatch(setLogin(user)),
+    getCart: () => dispatch(getCart()),
     getOrder: () => dispatch(getOrder()),
   };
 }
@@ -48,7 +50,7 @@ class App extends React.Component {
       })
       .then((res) => {
         this.props.setLogin(res.data);
-        this.props.getOrder();
+        this.props.getOrder()
       });
   }
 
@@ -57,7 +59,6 @@ class App extends React.Component {
       <div className="App">
         <NavigationBarContainer />
         <Switch>
-          {/* <Route path="/categories" component={CategoriesContainer} /> */}
           <Route exact path="/home" component={Home} />
 
           <Route exact path="/categories" component={CategoriesContainer} />
