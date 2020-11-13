@@ -47,7 +47,6 @@ class RegisterContainer extends React.Component {
     const { email, firstName, lastName, password, address, phone } = this.state;
     e.preventDefault();
     this.setState({ loader: true });
-    console.log(this.state.loader, "LOADERRRRRRRRRRRRR");
     if (
       email === "" ||
       firstName === "" ||

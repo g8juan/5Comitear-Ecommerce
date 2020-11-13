@@ -1,4 +1,5 @@
 import React from "react";
+import { selectSingleOrder } from './ordersActionCreators'
 import { makeStyles } from "@material-ui/core/styles";
 
 import Table from "@material-ui/core/Table";
@@ -43,9 +44,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SingleOrder = ({ singleOrder }) => {
-  console.log(singleOrder, "singleOrder");
+
   const classes = useStyles();
-  
+
   return (
     <div>
       <div className={classes.title}>
@@ -62,7 +63,7 @@ const SingleOrder = ({ singleOrder }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {singleOrder && singleOrder.products.map((product) => (
+            {singleOrder.products && singleOrder.products.map((product) => (
               <TableRow key={product.name}>
                 <TableCell align="center" component="th" scope="row">
                   {product.name}
@@ -84,7 +85,7 @@ const SingleOrder = ({ singleOrder }) => {
         Tu compra fue enviada a: {singleOrder.address} <PinDropIcon />
       </div>
     </div>
-  );
+  )
 };
 
 export default SingleOrder;

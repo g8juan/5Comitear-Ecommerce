@@ -11,38 +11,38 @@ const {
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
     /*SUDO!*/ await User.create({
-      firstName: "Admin",
-      lastName: "3",
-      email: "admin3@admin.com",
-      password: "admin",
-      address: "Pachanga 3032",
-      phone: "2332432",
-      userType: "3",
-    })
+    firstName: "Admin",
+    lastName: "3",
+    email: "admin3@admin.com",
+    password: "admin",
+    address: "Pachanga 3032",
+    phone: "2332432",
+    userType: "3",
+  })
       .then(() =>
         console.log("Por favor espere, estbleciendo conexión cuántica")
       )
       .catch((err) => console.log(err));
     /*Admin*/ await User.create({
-      firstName: "Cristian",
-      lastName: "Mendoza",
-      email: "cristian@gmail.com",
-      password: "1",
-      address: "Aston 1311",
-      phone: "43432432",
-      userType: "2",
-    })
+        firstName: "Cristian",
+        lastName: "Mendoza",
+        email: "cristian@gmail.com",
+        password: "1",
+        address: "Aston 1311",
+        phone: "43432432",
+        userType: "2",
+      })
       .then(() => console.log("Generando super usuario con telemetría cósmica"))
       .catch((err) => console.log(err));
     /*User*/ await User.create({
-      firstName: "Jose",
-      lastName: "Perez",
-      email: "jose@gmail.com",
-      password: "1",
-      address: "Machacay 8042",
-      phone: "7522432",
-      userType: "1",
-    })
+        firstName: "Jose",
+        lastName: "Perez",
+        email: "jose@gmail.com",
+        password: "1",
+        address: "Machacay 8042",
+        phone: "7522432",
+        userType: "1",
+      })
       .then(() =>
         console.log("Fusión molecular completada, por favor espere...")
       )
@@ -50,13 +50,13 @@ async function seed() {
     console.log("users generated!");
 
     Category.bulkCreate([
-      { name: "calzado" },
-      { name: "informal" },
-      { name: "formal" },
-      { name: "verano" },
-      { name: "invierno" },
+      { name: "Calzado" },
+      { name: "Informal" },
+      { name: "Formal" },
+      { name: "Verano" },
+      { name: "Invierno" },
     ])
-      .then(() => console.log("categories generated!"))
+      .then(() => console.log("Categories generated!"))
       .catch((err) => console.log(err));
 
     Product.bulkCreate([

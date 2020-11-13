@@ -1,42 +1,39 @@
 import React from "react";
-import axios from "axios";
 import SingleOrder from "./SingleOrder";
+import { connect } from "react-redux";
+import { selectSingleOrder } from "./ordersActionCreators";
 
-//  VAMOS A PASAR ESTO A REDUX
-//  VAMOS A PASAR ESTO A REDUX
-//  VAMOS A PASAR ESTO A REDUX
+
+function mapStateToProps(state, ownProps) {
+  return {
+    singleOrder: state.orders.singleOrder
+  };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    selectSingleOrder: (id) => dispatch(selectSingleOrder(id))
+  };
+}
+
 
 class SingleOrderContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      singleOrder: {},
-    };
-  }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    return axios
-      .get(`/api/cart/${id}`)
-      .then((res) => this.setState({ singleOrder: res.data }))
-      .catch((err) => console.log(err));
+    console.log('COMPONENTE DID MOUNT')
+    this.props.selectSingleOrder(this.props.match.params.id)
   }
 
   render() {
-    console.log(
-      this.state.singleOrder,
-      "this.state.singleOrder a pasarle a SINGLE ORDER"
-    );
+    console.log(this.props.singleOrder, 'THIS PROPS SINGLE ORDER')
+
     return (
       <div>
-        {this.state.singleOrder.length > 1 ? (
-          <SingleOrder singleOrder={this.state.singleOrder} />
-        ) : (
-          <div> NO TENES ORDENES COMPLETAS </div>
-        )}
+        <SingleOrder singleOrder={this.props.singleOrder} />
       </div>
-    );
+    )
+
   }
 }
 
-export default SingleOrderContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(SingleOrderContainer);
