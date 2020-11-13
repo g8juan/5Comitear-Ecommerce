@@ -82,11 +82,11 @@ export default function Products({ products, addToCart, userType }) {
                     />
                   </Link>
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h6" component="h2">
                       {product.name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                      {product.description}
+                      {/* {product.description} */}
                       <br />
                 Price: $ {product.price} ARS
                 </Typography>

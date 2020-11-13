@@ -57,7 +57,7 @@ export default function SingleProduct({ singleProduct, userType, handleDelete, a
   return (
     <Card className={classes.rootCard}>
       <CardActionArea>
-        <CardMedia className={classes.media} image={singleProduct.thumbnail} />
+        <CardMedia className={classes.media} image={singleProduct.image} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {singleProduct.name}
