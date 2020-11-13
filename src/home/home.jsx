@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     position: "absolute",
-    top: "20%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     color: "#545454",
@@ -52,11 +52,13 @@ export default function Home() {
   return (
     <div className={classes.div}>
       <img
-        style={{ width: "100%" }}
-        src="home-images/home-back.jpg"
+        style={{ height: '50rem', width: "100%" }}
+        src="home-images/fondo.jpeg"
         alt="home"
       />
-      <div className={classes.title}> 5MITTEAR CLOTHING </div>
+      <div className={classes.title}>
+        <img style={{ width: '85%' }} src={`logos/5mitear-Logo${Math.floor(Math.random() * 7) + 1}.png`} alt="5comitear" />
+      </div>
       <div className={classes.root}>
         <Grid
           container

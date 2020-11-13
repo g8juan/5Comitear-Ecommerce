@@ -42,6 +42,7 @@ IconContainer.propTypes = {
 };
 
 class CustomizedRatings extends React.Component {
+  // eslint-disable-next-line
   constructor(props) {
     super(props);
   }

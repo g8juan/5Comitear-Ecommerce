@@ -1,5 +1,4 @@
 import React from "react";
-import { selectSingleOrder } from './ordersActionCreators'
 import { makeStyles } from "@material-ui/core/styles";
 
 import Table from "@material-ui/core/Table";
@@ -68,11 +67,9 @@ const SingleOrder = ({ singleOrder }) => {
                 <TableCell align="center" component="th" scope="row">
                   {product.name}
                 </TableCell>
-                <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.quantity}</TableCell>
-                <TableCell align="center">
-                  {product.price * product.quantity}
-                </TableCell>
+                <TableCell align="center">{product.price} $ </TableCell>
+                <TableCell align="center">{product.order_product.quantity}</TableCell>
+                <TableCell align="center">{product.price * product.order_product.quantity} $ ARS </TableCell>
               </TableRow>
             ))}
           </TableBody>
