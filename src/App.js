@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setLogin } from "./users/usersActionCreators";
 import { getOrder } from "./orders/ordersActionCreators";
-import {getCart} from './cart/cartActionCreators'
+import { getCart } from "./cart/cartActionCreators";
 import axios from "axios";
 
 import Home from "./home/home";
@@ -25,7 +25,9 @@ import AdminUsersContainer from "./admin/container/AdminUsersContainer";
 import SingleOrderContainer from "./orders/SingleOrderContainer";
 import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
 import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
-//import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
+import AdminOrdersContainer from "./admin/container/AdminOrdersContainer";
+import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
+import AdminUpdateCategoryContainer from "./admin/container/AdminUpdateCategoryContainer";
 
 function mapStateToProps(state) {
   return {
@@ -50,7 +52,7 @@ class App extends React.Component {
       })
       .then((res) => {
         this.props.setLogin(res.data);
-        this.props.getOrder()
+        this.props.getOrder();
       });
   }
 
@@ -63,15 +65,27 @@ class App extends React.Component {
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/categories/:id" component={ProductsContainer} />
           <Route exact path="/products/" component={ProductsContainer} />
-          <Route exact path="/products/:id" component={SingleProductContainer} />
+          <Route
+            exact
+            path="/products/:id"
+            component={SingleProductContainer}
+          />
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/orders" component={OrdersContainer} />
           <Route exact path="/orders/:id" component={SingleOrderContainer} />
           <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
           <Route exact path="/cart/checkout" component={CheckoutContainer} />
-          <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
-          <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
+          <Route
+            exact
+            path="/cart/checkout/review"
+            component={ReviewOrderContainer}
+          />
+          <Route
+            exact
+            path="/cart/checkout/payment"
+            component={PaymentContainer}
+          />
           <Route exact path="/admin/users" component={AdminUsersContainer} />
           <Route
             exact
@@ -83,7 +97,15 @@ class App extends React.Component {
             path="/admin/products/update"
             component={AdminUpdateProductsContainer}
           />
-          {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
+          <Route exact path="/admin/orders" component={AdminOrdersContainer} />
+          <Route
+            path="/admin/category/create"
+            component={AdminCreateCategoryContainer}
+          />
+          <Route
+            path="/admin/category/update"
+            component={AdminUpdateCategoryContainer}
+          />
           <Redirect from="/" to="/home" />
         </Switch>
       </div>

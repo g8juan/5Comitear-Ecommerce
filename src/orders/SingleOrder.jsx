@@ -67,11 +67,9 @@ const SingleOrder = ({ singleOrder }) => {
                 <TableCell align="center" component="th" scope="row">
                   {product.name}
                 </TableCell>
-                <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.quantity}</TableCell>
-                <TableCell align="center">
-                  {product.price * product.quantity}
-                </TableCell>
+                <TableCell align="center">{product.price} $ </TableCell>
+                <TableCell align="center">{product.order_product.quantity}</TableCell>
+                <TableCell align="center">{product.price * product.order_product.quantity} $ ARS </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
 import CForm from "./components/form";
 import Card from "./components/card";
@@ -10,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  form: {
+    margin: '2rem'
+  }
 }));
 
 const initialState = {
@@ -41,12 +45,8 @@ const PaymentContainer = (props) => {
 
   const updateStateValues = useCallback(
     (keyName, value) => {
-      setState({
-        ...state,
-        [keyName]: value || initialState[keyName],
-      });
-    },
-    [state]
+      setState({ ...state, [keyName]: value || initialState[keyName] });
+    }, [state]
   );
 
   // References for the Form Inputs used to focus corresponding inputs.
@@ -88,40 +88,39 @@ const PaymentContainer = (props) => {
   }
 
   return (
-    <div className="wrapper">
-      <CForm
-        cardMonth={state.cardMonth}
-        cardYear={state.cardYear}
-        onUpdateState={updateStateValues}
-        cardNumberRef={formFieldsRefObj.cardNumber}
-        cardHolderRef={formFieldsRefObj.cardHolder}
-        cardDateRef={formFieldsRefObj.cardDate}
-        onCardInputFocus={onCardFormInputFocus}
-        onCardInputBlur={onCardInputBlur}
-      >
-        <Card
-          cardNumber={state.cardNumber}
-          cardHolder={state.cardHolder}
+    <div>
+      <div className={classes.form}>
+        <CForm
           cardMonth={state.cardMonth}
           cardYear={state.cardYear}
-          cardCvv={state.cardCvv}
-          isCardFlipped={state.isCardFlipped}
-          currentFocusedElm={currentFocusedElm}
-          onCardElementClick={focusFormFieldByKey}
-          cardNumberRef={cardElementsRef.cardNumber}
-          cardHolderRef={cardElementsRef.cardHolder}
-          cardDateRef={cardElementsRef.cardDate}
-        ></Card>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={handleClick}
-        > Proceed To Order Review
-          </Button>
-      </CForm>
+          onUpdateState={updateStateValues}
+          cardNumberRef={formFieldsRefObj.cardNumber}
+          cardHolderRef={formFieldsRefObj.cardHolder}
+          cardDateRef={formFieldsRefObj.cardDate}
+          onCardInputFocus={onCardFormInputFocus}
+          onCardInputBlur={onCardInputBlur}
+        >
+          <Card
+            cardNumber={state.cardNumber}
+            cardHolder={state.cardHolder}
+            cardMonth={state.cardMonth}
+            cardYear={state.cardYear}
+            cardCvv={state.cardCvv}
+            isCardFlipped={state.isCardFlipped}
+            currentFocusedElm={currentFocusedElm}
+            onCardElementClick={focusFormFieldByKey}
+            cardNumberRef={cardElementsRef.cardNumber}
+            cardHolderRef={cardElementsRef.cardHolder}
+            cardDateRef={cardElementsRef.cardDate}
+          ></Card>
+        </CForm>
+      </div>
+      <Button variant="contained" className={classes.form} color='secondary'>
+        <Link to='/cart/checkout' style={{ color: 'white' }}>Back to delivery details</Link>
+      </Button>
+      <Button type="submit" variant="contained" color='primary' onClick={handleClick} className={classes.form}>
+        Proceed To Order Review
+      </Button>
     </div>
   );
 };

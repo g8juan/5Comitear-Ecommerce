@@ -18,10 +18,9 @@ class AdminUsersContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.userType === "3") this.getUserArr();
-    else {
-      this.props.history.push("/");
-    }
+    this.props.userType === "3"
+      ? this.getUserArr()
+      : this.props.history.push("/");
   }
 
   getUserArr = () => {

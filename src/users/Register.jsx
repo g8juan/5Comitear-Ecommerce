@@ -104,6 +104,7 @@ export default function SignUp({
                 required
                 fullWidth
                 id="email"
+                type='email'
                 label="Correo electrónico"
                 name="email"
                 autoComplete="email"
@@ -148,7 +149,7 @@ export default function SignUp({
                 fullWidth
                 name="phone"
                 label="Telefono"
-                type="phone"
+                type="number"
                 id="phone"
                 onChange={onChange}
                 value={phone}
