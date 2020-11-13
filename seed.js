@@ -1,4 +1,4 @@
-const {User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser} = require("./models/index");
+const { User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser } = require("./models/index");
 
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
@@ -49,13 +49,13 @@ async function seed() {
     console.log("users generated!");
 
     Category.bulkCreate([
-      {name: "calzado"},
-      {name: "informal"},
-      {name: "formal"},
-      {name: "verano"},
-      {name: "invierno"},
+      { name: "calzado" },
+      { name: "informal" },
+      { name: "formal" },
+      { name: "verano" },
+      { name: "invierno" },
     ])
-      .then(() => console.log("categories generated!"))
+      .then(() => console.log("Categories generated!"))
       .catch((err) => console.log(err));
 
     Product.bulkCreate([
@@ -167,32 +167,32 @@ async function seed() {
   await createUsersProductsOrdersAndCategories();
 
   OrderProduct.bulkCreate([
-    /*Orden 1*/ {orderId: 1, productId: 1, quantity: 1},
-    /*Orden 2*/ {orderId: 2, productId: 4, quantity: 1},
-    /*Orden 3*/ {orderId: 3, productId: 1, quantity: 1},{orderId: 3, productId: 4, quantity: 1},
-    /*Orden 4*/ {orderId: 4, productId: 1, quantity: 1},{orderId: 4, productId: 2, quantity: 1}, {orderId: 4, productId: 3, quantity: 1},
-    /*Orden 5*/ {orderId: 5, productId: 3, quantity: 5},
-    /*Orden 6*/ {orderId: 6, productId: 3, quantity: 2},
-    /*Orden 7*/ {orderId: 7, productId: 3, quantity: 3},
+    /*Orden 1*/ { orderId: 1, productId: 1, quantity: 1 },
+    /*Orden 2*/ { orderId: 2, productId: 4, quantity: 1 },
+    /*Orden 3*/ { orderId: 3, productId: 1, quantity: 1 }, { orderId: 3, productId: 4, quantity: 1 },
+    /*Orden 4*/ { orderId: 4, productId: 1, quantity: 1 }, { orderId: 4, productId: 2, quantity: 1 }, { orderId: 4, productId: 3, quantity: 1 },
+    /*Orden 5*/ { orderId: 5, productId: 3, quantity: 5 },
+    /*Orden 6*/ { orderId: 6, productId: 3, quantity: 2 },
+    /*Orden 7*/ { orderId: 7, productId: 3, quantity: 3 },
   ])
     .then(() => console.log("products in cart generated!"))
     .catch((err) => console.log(err));
 
   CategoryProduct.bulkCreate([
-  /*Categoria Calzado*/ {categoryId: 1, productId: 5}, {categoryId: 1, productId: 6},
-  /*Categoria Informal*/{categoryId: 2, productId: 3}, {categoryId: 2, productId: 5},
-  /*Categoria Formal*/  {categoryId: 3, productId: 1}, {categoryId: 3, productId: 2}, {categoryId: 3, productId: 4}, {categoryId: 3, productId: 6},
-  /*Categoria Verano*/  {categoryId: 4, productId: 2}, {categoryId: 4, productId: 3}, {categoryId: 4, productId: 5},
-  /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 4}, {categoryId: 5, productId: 6}
+  /*Categoria Calzado*/ { categoryId: 1, productId: 5 }, { categoryId: 1, productId: 6 },
+  /*Categoria Informal*/{ categoryId: 2, productId: 3 }, { categoryId: 2, productId: 5 },
+  /*Categoria Formal*/  { categoryId: 3, productId: 1 }, { categoryId: 3, productId: 2 }, { categoryId: 3, productId: 4 }, { categoryId: 3, productId: 6 },
+  /*Categoria Verano*/  { categoryId: 4, productId: 2 }, { categoryId: 4, productId: 3 }, { categoryId: 4, productId: 5 },
+  /*Categoria Invierno*/{ categoryId: 5, productId: 2 }, { categoryId: 5, productId: 4 }, { categoryId: 5, productId: 6 }
   ]).then(() => console.log("products in cart generated!")).catch((err) => console.log(err));
 
   ProductUser.bulkCreate([
-    /*Reviews de producto 1*/ {productId: 1, userId: 1, review: 8}, {productId: 1, userId: 2, review: 8}, {productId: 1, userId: 3, review: 10},
-    /*Reviews de producto 2*/ {productId: 2, userId: 1, review: 8}, {productId: 2, userId: 2, review: 5},
-    /*Reviews de producto 3*/ {productId: 3, userId: 1, review: 7}, {productId: 2, userId: 3, review: 10},
-    /*Reviews de producto 4*/ {productId: 4, userId: 1, review: 4}, {productId: 4, userId: 3, review: 4},
-    /*Reviews de producto 5*/ {productId: 5, userId: 1, review: 7}, {productId: 5, userId: 2, review: 10}, {productId: 5, userId: 3, review: 7},
-    /*Reviews de producto 6*/ {productId: 6, userId: 2, review: 3},
+    /*Reviews de producto 1*/ { productId: 1, userId: 1, review: 8 }, { productId: 1, userId: 2, review: 8 }, { productId: 1, userId: 3, review: 10 },
+    /*Reviews de producto 2*/ { productId: 2, userId: 1, review: 8 }, { productId: 2, userId: 2, review: 5 },
+    /*Reviews de producto 3*/ { productId: 3, userId: 1, review: 7 }, { productId: 2, userId: 3, review: 10 },
+    /*Reviews de producto 4*/ { productId: 4, userId: 1, review: 4 }, { productId: 4, userId: 3, review: 4 },
+    /*Reviews de producto 5*/ { productId: 5, userId: 1, review: 7 }, { productId: 5, userId: 2, review: 10 }, { productId: 5, userId: 3, review: 7 },
+    /*Reviews de producto 6*/ { productId: 6, userId: 2, review: 3 },
   ]).then(() => console.log("product reviews generated!")).catch((err) => console.log(err));
 }
 seed();

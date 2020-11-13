@@ -21,6 +21,11 @@ export const setCardNumber = (number) => ({
   payload: number,
 });
 
+export const setSingleOrder = (singleOrder) => ({
+  type: "SET_SINGLE_ORDER",
+  payload: singleOrder
+})
+
 export const postOrder = (id) => (dispatch) => {
   axios
     .post(`http://localhost:8000/api/orders/new`, { userId: id })
@@ -53,3 +58,9 @@ export const setCard = (number) => (dispatch) => {
   console.log("ENTRANDO A setCard CON number, ", number);
   dispatch(setCardNumber(number));
 };
+
+export const selectSingleOrder = (id) => (dispatch) => {
+  axios.get(`/api/cart/${id}`)
+    .then((res) => dispatch(setSingleOrder(res.data)))
+    .catch(err => console.log(err))
+}

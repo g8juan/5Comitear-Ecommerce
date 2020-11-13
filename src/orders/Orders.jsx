@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Orders = ({ ordersList }) => {
+const Orders = ({ ordersList, handleClick }) => {
   console.log(ordersList, "ordersList");
   return (
     <div>
@@ -31,8 +31,10 @@ const Orders = ({ ordersList }) => {
                     as={Link}
                     to={{
                       pathname: `/orders/${order.id}`,
-                      state: { orderId: order.id },
+                      // state: { orderId: order.id },
                     }}
+                    value={order.id}
+                    onClick={handleClick}
                   >
                     See purchase
                   </Button>
