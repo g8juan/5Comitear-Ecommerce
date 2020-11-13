@@ -31,7 +31,7 @@ export const setSingleOrder = (singleOrder) => ({
   payload: singleOrder,
 });
 
-export const postOrder = (id) => (dispatch) => {
+export const postOrder = (id, email) => (dispatch) => {
   axios
     .post(`http://localhost:8000/api/orders/new`, {
       userId: id,
