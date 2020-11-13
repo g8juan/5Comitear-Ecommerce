@@ -1,7 +1,7 @@
-const {DataTypes, Model} = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const database = require("../database/database.js");
 
-class Product extends Model {}
+class Product extends Model { }
 
 Product.init({
 
@@ -14,13 +14,13 @@ Product.init({
     allowNull: false
   },
   description: {
-    type: DataTypes.TEXT,
-  },
-  thumbnail: {
     type: DataTypes.STRING,
   },
+  thumbnail: {
+    type: DataTypes.TEXT,
+  },
   image: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   stock: {
     type: DataTypes.INTEGER
@@ -28,10 +28,10 @@ Product.init({
   reviews: {
     type: DataTypes.ARRAY(DataTypes.INTEGER),
   },
-  review:{
+  review: {
     type: DataTypes.VIRTUAL,
-    get(){
-      
+    get() {
+
     }
   }
 },
