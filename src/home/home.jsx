@@ -20,7 +20,7 @@ const images = [
   },
   {
     url: 'home-images/home3.jpeg',
-    title: 'LOGIN',
+    title: 'CART',
     width: '33%',
   },
 ];
@@ -135,6 +135,7 @@ export default function Home() {
               width: image.width,
             }}
           >
+            <Link to={`${"/" + image.title.toLowerCase()}`}>
             <span
               className={classes.imageSrc}
               style={{
@@ -153,6 +154,7 @@ export default function Home() {
                 <span className={classes.imageMarked} />
               </Typography>
             </span>
+            </Link>
           </ButtonBase>
         ))}
       </div>
