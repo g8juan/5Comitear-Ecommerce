@@ -65,7 +65,7 @@ const routes = require("./routes");
 app.use("/api", routes);
 
 //Database
-database.sync({ force: true }).then(() => {
+database.sync({ force: false }).then(() => {
   app.listen(process.env.PORT || 8000, () => {
     console.log("SERVER LISTENING AT PORT 8000");
   });
