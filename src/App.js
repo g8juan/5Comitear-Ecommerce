@@ -60,29 +60,30 @@ class App extends React.Component {
         <NavigationBarContainer />
         <Switch>
           <Route exact path="/home" component={Home} />
-
           <Route exact path="/categories" component={CategoriesContainer} />
           <Route exact path="/categories/:id" component={ProductsContainer} />
-
           <Route exact path="/products/" component={ProductsContainer} />
           <Route exact path="/products/:id" component={SingleProductContainer} />
-
           <Route exact path="/register" component={RegisterContainer} />
           <Route exact path="/login" component={LoginContainer} />
-
           <Route exact path="/orders" component={OrdersContainer} />
           <Route exact path="/orders/:id" component={SingleOrderContainer} />
-
           <Route exact path="/cart" component={CartContainer} /> {/*revisar*/}
           <Route exact path="/cart/checkout" component={CheckoutContainer} />
           <Route exact path="/cart/checkout/review" component={ReviewOrderContainer} />
           <Route exact path="/cart/checkout/payment" component={PaymentContainer} />
-
           <Route exact path="/admin/users" component={AdminUsersContainer} />
-          <Route exact path="/admin/products/create" component={AdminCreateProductsContainer} />
-          <Route exact path="/admin/products/update" component={AdminUpdateProductsContainer} />
+          <Route
+            exact
+            path="/admin/products/create"
+            component={AdminCreateProductsContainer}
+          />
+          <Route
+            exact
+            path="/admin/products/update"
+            component={AdminUpdateProductsContainer}
+          />
           {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
-
           <Redirect from="/" to="/home" />
         </Switch>
       </div>

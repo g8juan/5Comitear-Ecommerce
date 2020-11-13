@@ -1,6 +1,5 @@
-require("./database/database");
-//TODO: meter al seed categorias
 const {User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser} = require("./models/index");
+
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
     /*SUDO!*/ await User.create({
@@ -170,11 +169,8 @@ async function seed() {
   OrderProduct.bulkCreate([
     /*Orden 1*/ {orderId: 1, productId: 1, quantity: 1},
     /*Orden 2*/ {orderId: 2, productId: 4, quantity: 1},
-    /*Orden 3*/ {orderId: 3, productId: 1, quantity: 1},
-    {orderId: 3, productId: 4, quantity: 1},
-    /*Orden 4*/ {orderId: 4, productId: 1, quantity: 1},
-    {orderId: 4, productId: 2, quantity: 1},
-    {orderId: 4, productId: 3, quantity: 1},
+    /*Orden 3*/ {orderId: 3, productId: 1, quantity: 1},{orderId: 3, productId: 4, quantity: 1},
+    /*Orden 4*/ {orderId: 4, productId: 1, quantity: 1},{orderId: 4, productId: 2, quantity: 1}, {orderId: 4, productId: 3, quantity: 1},
     /*Orden 5*/ {orderId: 5, productId: 3, quantity: 5},
     /*Orden 6*/ {orderId: 6, productId: 3, quantity: 2},
     /*Orden 7*/ {orderId: 7, productId: 3, quantity: 3},
@@ -198,6 +194,5 @@ async function seed() {
     /*Reviews de producto 5*/ {productId: 5, userId: 1, review: 7}, {productId: 5, userId: 2, review: 10}, {productId: 5, userId: 3, review: 7},
     /*Reviews de producto 6*/ {productId: 6, userId: 2, review: 3},
   ]).then(() => console.log("product reviews generated!")).catch((err) => console.log(err));
-
 }
 seed();

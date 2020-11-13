@@ -1,12 +1,17 @@
 import React from "react";
 import AdminProducts from "../components/AdminProducts";
 import axios from "axios";
+import { getCategories } from "../../categories/categoriesActionCreators";
 import { connect } from "react-redux";
 
 function mapStateToProps(state) {
   return {
     categories: state.categories.categories,
   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { getCategories: () => dispatch(getCategories()) };
 }
 
 class AdminCreateProductsContainer extends React.Component {
@@ -25,6 +30,10 @@ class AdminCreateProductsContainer extends React.Component {
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getCategories();
   }
 
   onChangeHandler(event) {
@@ -78,8 +87,9 @@ class AdminCreateProductsContainer extends React.Component {
             thumbnail: "",
             image: "",
             stock: "",
+            categoryId: 0,
           });
-          //this.props.history.push("/products");
+          this.props.history.push("/products");
         });
     }
   }
@@ -102,4 +112,7 @@ class AdminCreateProductsContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, null)(AdminCreateProductsContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminCreateProductsContainer);
