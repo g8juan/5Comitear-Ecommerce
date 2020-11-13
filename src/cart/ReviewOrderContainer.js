@@ -19,20 +19,29 @@ function mapDispatchToProps(dispatch) {
       dispatch(sendEmail(email, products, order));
     },
     setStatus: (id, status) => dispatch(setStatus(id, status)),
-    postOrder: (userId) => dispatch(postOrder(userId)),
+    postOrder: (userId, email) => dispatch(postOrder(userId, email)),
   };
 }
 
 class ReviewOrderContainer extends React.Component {
   handleClick = (event) => {
-    const { order, products, email, user, sendEmail, setStatus, postOrder } = this.props;
+    const {
+      order,
+      products,
+      email,
+      user,
+      sendEmail,
+      setStatus,
+      postOrder,
+    } = this.props;
     event.preventDefault();
     const enviaEmailyCambiaOrden = async () => {
       await sendEmail(email, products, order);
       await setStatus(order.id, "completed");
-      await postOrder(user.id);
+      await postOrder(user.id, email);
     };
     enviaEmailyCambiaOrden();
+
     this.props.history.push("/home");
   };
 
@@ -52,4 +61,7 @@ class ReviewOrderContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrderContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewOrderContainer);
