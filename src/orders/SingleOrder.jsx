@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SingleOrder = ({ singleOrder }) => {
-  console.log(singleOrder, "singleOrder");
+
   const classes = useStyles();
-  
+
   return (
     <div>
       <div className={classes.title}>
@@ -62,16 +62,14 @@ const SingleOrder = ({ singleOrder }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {singleOrder && singleOrder.products.map((product) => (
+            {singleOrder.products && singleOrder.products.map((product) => (
               <TableRow key={product.name}>
                 <TableCell align="center" component="th" scope="row">
                   {product.name}
                 </TableCell>
-                <TableCell align="center">{product.price}</TableCell>
+                <TableCell align="center">{product.price} $ </TableCell>
                 <TableCell align="center">{product.order_product.quantity}</TableCell>
-                <TableCell align="center">
-                  {product.price * product.order_product.quantity}
-                </TableCell>
+                <TableCell align="center">{product.price * product.order_product.quantity} $ ARS </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -84,7 +82,7 @@ const SingleOrder = ({ singleOrder }) => {
         Tu compra fue enviada a: {singleOrder.address} <PinDropIcon />
       </div>
     </div>
-  );
+  )
 };
 
 export default SingleOrder;

@@ -54,17 +54,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CategoriesContainer);
-
-/*     {this.props.categories.map((category) => {
-          return (
-            <div key={category.id}>
-              <Link to={`${this.props.match.url}/${category.id}`}>
-                <ListItem button>
-                  <ListItemText primary={category.name.toUpperCase()} />
-                </ListItem>
-              </Link>
-              <Divider />
-          
-            </div>
-          );
-        })} */

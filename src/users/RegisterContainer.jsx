@@ -47,7 +47,6 @@ class RegisterContainer extends React.Component {
     const { email, firstName, lastName, password, address, phone } = this.state;
     e.preventDefault();
     this.setState({ loader: true });
-    console.log(this.state.loader, "LOADERRRRRRRRRRRRR");
     if (
       email === "" ||
       firstName === "" ||
@@ -75,16 +74,9 @@ class RegisterContainer extends React.Component {
           this.props.postOrder(data.id, data.email);
           this.props.history.push("/login");
         })
-        .then(() =>
-          this.setState({
-            email: "",
-            firstName: "",
-            lastName: "",
-            password: "",
-            address: "",
-            phone: "",
-          })
-        );
+        .then(() => {
+          
+          this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" })})
     }
   }
 

@@ -3,6 +3,7 @@ const initialState = {
   ordersList: [],
   adminOrdersList: [],
   orderCardNumber: "",
+  singleOrder: {},
 };
 
 export default function usersReducer(state = initialState, action) {
@@ -17,6 +18,8 @@ export default function usersReducer(state = initialState, action) {
       return { ...state, orderCardNumber: action.payload };
     case "SET_ALL_ORDERS":
       return { ...state, ordersList: action.payload };
+    case "SET_SINGLE_ORDER":
+      return { ...state, singleOrder: action.payload };
     default:
       return state;
   }
