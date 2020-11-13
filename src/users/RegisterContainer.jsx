@@ -74,8 +74,8 @@ class RegisterContainer extends React.Component {
           this.props.history.push("/login");
         })
         .then(() => {
-          
-          this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" })})
+          this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" })
+        })
     }
   }
 

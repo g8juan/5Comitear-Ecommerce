@@ -10,7 +10,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -47,52 +46,65 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClic
     <div>
       <h3 className={classes.title}>CART <ShoppingCartIcon /></h3>
       <div className={classes.divTable}>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                {/* <TableCell> THUMBNAIL </TableCell> */}
-                <TableCell align="center">Nombre</TableCell>
-                <TableCell align="center">Precio</TableCell>
-                <TableCell align="center">Cantidad</TableCell>
-                <TableCell align="center">Subtotal</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products && products.map((product) => {
-                subtotal += (product.price * product.quantity)
-                return (
-                  <TableRow key={product.id}>
-                    <TableCell align="center">{product.name}</TableCell>
-                    <TableCell align="center">{formatter.format(product.price)}</TableCell>
-                    <TableCell align="center">
-                      <button onClick={() => decreaseQuantity(product)} className="btn btn-primary btn-sm"> - </button>
-                      <span className={classes.quantity}>{product.quantity}</span>
-                      <button onClick={() => increaseQuantity(product)} className="btn btn-primary btn-sm"> + </button>
-                    </TableCell>
-                    <TableCell align="center">{`${(formatter.format(product.price * product.quantity))}`}
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {products.length > 0 ?
+          (<TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  {/* <TableCell> THUMBNAIL </TableCell> */}
+                  <TableCell align="right">Nombre</TableCell>
+                  <TableCell align="right">Precio</TableCell>
+                  <TableCell align="right">Cantidad</TableCell>
+                  <TableCell align="right">Subtotal</TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products && products.map((product) => {
+                  subtotal += (product.price * product.quantity)
+                  return (
+                    <TableRow key={product.id}>
+                      <TableCell align="right">{product.name}</TableCell>
+                      <TableCell align="right">{formatter.format(product.price)}</TableCell>
+                      <TableCell align="right">
+                        <button onClick={() => decreaseQuantity(product)} className="btn btn-dark btn-sm"> - </button>
+                        <span className={classes.quantity}>{product.quantity}</span>
+                        <button onClick={() => increaseQuantity(product)} className="btn btn-dark btn-sm"> + </button>
+                      </TableCell>
+                      <TableCell align="right">{`${(formatter.format(product.price * product.quantity))}`}</TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          ) : (
+            <div>
+              Agrega productos al carrito!
+            </div>
+          )
+        }
       </div>
       <p> Subtotal: {formatter.format(subtotal)} </p>
-      {userId ? (
-        <Button as={Link} to="/cart/checkout" className="m-1" variant="secondary">Proceed to delivery details</Button>
-      ) :
-        (
-          <div>
-            <p> You need to login first to go to the check out! </p>
-            <Button as={Link} to="/login" className="m-1" variant="secondary">Login</Button>
-          </div>
-        )
+      {
+        userId ? (
+          <Link to='/cart/checkout'>
+            <button onClick={handleClick} variant="contained" value={subtotal} className="btn btn-secondary">Proceed to delivery details</button>
+          </Link>
+        ) : (
+            <div>
+              <p> You need to be loged in to proceed to continue</p>
+              <Link to='/login'>
+                <button variant="contained" className="btn btn-secondary">Go to login</button>
+              </Link>
+            </div>
+          )
       }
       <hr />
-      <Button as={Link} to="/products" className="m-1" variant="secondary">Back to products</Button>
-    </div>
+      <Link to='/products'>
+        <button className="btn btn-secondary">Back to products</button>
+      </Link>
+    </div >
   );
 };
 export default Cart;

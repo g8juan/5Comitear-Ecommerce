@@ -13,7 +13,7 @@ router.get("/", (req, res, next) => {
 router.post("/register", (req, res) => {
   User.create(req.body)
     .then((user) => res.status(201).send(user))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
