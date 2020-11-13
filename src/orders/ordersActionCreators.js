@@ -1,5 +1,6 @@
 import axios from "axios";
 import { success } from "../utils/logs";
+import {getCart} from '../cart/cartActionCreators'
 
 export const setOrder = (order) => ({
   type: "SET_ORDER",
@@ -24,7 +25,7 @@ export const postOrder = (id) => (dispatch) => {
   axios
     .post(`http://localhost:8000/api/orders/new`, { userId: id })
     .then(({ data }) => dispatch(setOrder(data)))
-    .then(() => success("Orden creada con exito"))
+    .then(() => {success("Orden creada con exito")})
     .catch((err) => console.log(err));
 };
 
@@ -32,7 +33,10 @@ export const getOrder = () => (dispatch, getState) => {
   axios
     .get(`/api/orders/${getState().users.user.id}`)
     .then((res) => dispatch(setOrder(res.data)))
+    .then(()=>dispatch(getCart()))
     .catch((err) => console.log(err));
+
+    
 };
 
 export const getOrdersList = () => (dispatch, getState) => {

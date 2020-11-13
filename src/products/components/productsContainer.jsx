@@ -2,12 +2,13 @@ import React from "react";
 import {connect} from 'react-redux'
 import Products from './products'
 import {getProducts} from '../productsActionCreators'
-import {modifyCart} from '../../cart/cartActionCreators'
+import {modifyCart, modifyLSCart} from '../../cart/cartActionCreators'
 
 function mapStateToProps(state) {
   return {
     products: state.products.products,
     userType: state.users.user.userType,
+    user: state.users.user,
   }
 }
 
@@ -15,6 +16,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getProducts: (searchTerm, categoryId) => dispatch(getProducts(searchTerm, categoryId)),
     modifyCart: (product, quantity) => dispatch(modifyCart(product, quantity)),
+    modifyLSCart: (product, quantity) => dispatch(modifyLSCart(product, quantity))
   }
 }
 
@@ -27,11 +29,6 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidMount() {
-
-    const productsJSON = localStorage.getItem("cartProducts")
-    const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
-    console.log("LOCAL STORAGE CART PRODUCTS EN PRODUCTS:41", localStorageProducts)
-
     if (this.props.match.params.id) {
       this.search(parseInt(this.props.match.params.id))
     } else {
@@ -40,11 +37,6 @@ class ProductsContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const productsJSON = localStorage.getItem("cartProducts")
-    const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
-    console.log("LOCAL STORAGE CART PRODUCTS EN PRODUCTS:41", localStorageProducts)
-
-
     if (prevProps.location.search !== this.props.location.search) {
       if (this.props.match.params.id) {
         this.search(parseInt(this.props.match.params.id))
@@ -55,8 +47,8 @@ class ProductsContainer extends React.Component {
   }
 
   handleClick = (product) => {
-    console.log("HANDLECLICK PRODUCT", product)
-    this.props.modifyCart(product, 1)
+    if (this.props.user.id) this.props.modifyCart(product, 1)
+    else this.props.modifyLSCart(product, 1)
   }
 
   render() {

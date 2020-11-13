@@ -69,9 +69,9 @@ const ReviewOrder = ({ handleClick, order, products, email, cardNumber }) => {
                   {product.name}
                 </TableCell>
                 <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.order_product.quantity}</TableCell>
+                <TableCell align="center">{product.quantity}</TableCell>
                 <TableCell align="center">
-                  {product.price * product.order_product.quantity}
+                  {product.price * product.quantity}
                 </TableCell>
               </TableRow>
             ))}
