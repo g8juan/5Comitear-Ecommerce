@@ -10,27 +10,28 @@ async function seed() {
     address: "Tu casa",
     phone: "1111111111",
     userType: "3",
-  }).then(() => console.log("Por favor espere, estbleciendo conexión cuántica")).catch((err) => console.log(err));
+  })
+      .then(() => console.log("Por favor espere, estbleciendo conexión cuántica")).catch((err) => console.log(err));
 
   /*SUDO!*/ await User.create({
-    firstName: "Juan",
-    lastName: "Loza",
-    email: "juana@gmail.com",
-    password: "1",
-    address: "Pachanga 3032",
-    phone: "2332432",
-    userType: "3",
-  }).then(() => console.log("Por favor espere, estbleciendo conexión cuántica")).catch((err) => console.log(err));
+        firstName: "Juan",
+        lastName: "Loza",
+        email: "juana@gmail.com",
+        password: "1",
+        address: "Pachanga 3032",
+        phone: "2332432",
+        userType: "3",
+      }).then(() => console.log("Por favor espere, estbleciendo conexión cuántica")).catch((err) => console.log(err));
 
     /*Admin*/ await User.create({
-    firstName: "Cristian",
-    lastName: "Mendoza",
-    email: "cristian@gmail.com",
-    password: "1",
-    address: "Aston 1311",
-    phone: "43432432",
-    userType: "2",
-  })
+        firstName: "Cristian",
+        lastName: "Mendoza",
+        email: "cristian@gmail.com",
+        password: "1",
+        address: "Aston 1311",
+        phone: "43432432",
+        userType: "2",
+      })
       .then(() => console.log("Generando super usuario con telemetría cósmica"))
       .catch((err) => console.log(err));
     /*User*/ await User.create({

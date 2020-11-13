@@ -1,5 +1,5 @@
 import React from "react";
-import AdminUpdateProducts from "../components/AdminUpdateCategory";
+import AdminUpdateCategory from "../components/AdminUpdateCategory";
 import { connect } from "react-redux";
 import { updateCategoryName } from "../../categories/categoriesActionCreators";
 
@@ -41,8 +41,8 @@ class AdminUpdateCategoryContainer extends React.Component {
 
   render() {
     return (
-      <AdminUpdateProducts
-        name={this.state.name}
+      <AdminUpdateCategory
+        //name={this.state.name}
         onChange={this.onChangeHandler}
         onSubmit={this.onSubmitHandler}
       />

@@ -64,8 +64,12 @@ export default function SingleProduct({ singleProduct, userType, handleDelete, a
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {singleProduct.description}
-            <br />
+            <br/>
             Price: $ {singleProduct.price} ARS
+          </Typography>
+          <br/>
+          <Typography variant="body2" color="textSecondary" component="p">
+            stock: {singleProduct.stock}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -81,6 +85,7 @@ export default function SingleProduct({ singleProduct, userType, handleDelete, a
             Edit Product
           </Button>
         ) : (
+            singleProduct.stock >= "1" ? 
             <div>
               <Button size="small" variant="secondary" className={classes.buttons} onClick={() => {
                 handleClick()
@@ -103,6 +108,10 @@ export default function SingleProduct({ singleProduct, userType, handleDelete, a
                 }
               />
             </div>
+            :
+            <Button size="small" variant="danger" className={classes.buttons}>
+              Out of stock
+            </Button>
           )}
         <CustomizedRatings reviews={singleProduct.reviews} />
         <Button size="small" variant="secondary" className={classes.buttons}>
@@ -110,7 +119,12 @@ export default function SingleProduct({ singleProduct, userType, handleDelete, a
         </Button>
         {userType === "2" || userType === "3" ? (
           <div>
-            <DeleteIcon className={classes.buttonDelete}
+          <DeleteIcon className={classes.buttonDelete} 
+          onClick={() => handleDelete(singleProduct.id)}
+          />
+          {/* {!singleProduct.id ?
+            <DeleteIcon
+              className={classes.buttonDelete}
               onClick={() => handleDelete(singleProduct)}
             />
             {/* {!singleProduct.id ?

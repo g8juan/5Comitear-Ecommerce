@@ -90,15 +90,26 @@ export default function Products({ products, addToCart, userType }) {
                       <br />
                 Price: $ {product.price} ARS
                 </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+            stock: {product.stock}
+          </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions >
+                  
+                {userType === "1" ? 
+                product.stock >= "1" ? 
                   <Button onClick={() => {
                     handleClick()
                     addToCart(product)
                   }} size="small" color="primary" className={classes.buttons}>
                     Add to cart
                   </Button>
+                  :
+                  <Button size="small" variant="danger" className={classes.buttons}>
+                  Out of stock
+                  </Button>
+                  : null}
                   <Snackbar
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                     open={open}
