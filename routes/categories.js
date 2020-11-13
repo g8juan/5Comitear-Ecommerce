@@ -3,16 +3,34 @@ const { Category, Product, CategoryProduct } = require("../models/index");
 
 router.get("/", (req, res) => {
   Category.findAll().then((categories) => {
-    console.log(categories);
     res.send(categories);
   });
 });
 
 router.post("/", (req, res) => {
-  Category.create(req.body).then((category) => res.send(category));
+  Category.create(req.body)
+    .then((category) => res.send(category))
+    .catch((err) => res.sendStatus(500));
+});
+
+router.put("/edit", (req, res) => {
+  console.log("soy req body", req.body);
+  Category.update(
+    { name: req.body.name },
+    { where: { id: req.body.id }, returning: true, plain: true }
+  )
+    .then((category) => res.send(category[1]))
+    .catch((err) => console.log(err));
+});
+
+router.post("/delete", (req, res) => {
+  Category.destroy({ where: { id: req.body.id } }).then(() =>
+    res.send("category deleted")
+  );
 });
 
 router.get("/singleCategory", (req, res) => {
+  console.log("soy req query", req.query);
   Category.findByPk(req.query.id).then((category) => res.send(category));
 });
 

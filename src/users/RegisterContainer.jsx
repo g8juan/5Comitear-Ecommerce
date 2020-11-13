@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postOrder: (userId) => dispatch(postOrder(userId)),
+    postOrder: (userId, email) => dispatch(postOrder(userId, email)),
   };
 };
 
@@ -47,7 +47,6 @@ class RegisterContainer extends React.Component {
     const { email, firstName, lastName, password, address, phone } = this.state;
     e.preventDefault();
     this.setState({ loader: true });
-    console.log(this.state.loader, "LOADERRRRRRRRRRRRR");
     if (
       email === "" ||
       firstName === "" ||
@@ -71,12 +70,13 @@ class RegisterContainer extends React.Component {
         })
         .then(({ data }) => {
           success("USUARIO REGISTRADO CON EXITO. ID:", data.id);
-          this.props.postOrder(data.id);
+          console.log(data.email);
+          this.props.postOrder(data.id, data.email);
           this.props.history.push("/login");
         })
         .then(() => {
-          
-          this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" })})
+          this.setState({ email: "", firstName: "", lastName: "", password: "", address: "", phone: "" })
+        })
     }
   }
 

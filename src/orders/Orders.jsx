@@ -2,8 +2,7 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Orders = ({ ordersList }) => {
-  console.log(ordersList, "ordersList");
+const Orders = ({ ordersList, handleClick }) => {
   return (
     <div>
       <Table striped bordered hover variant="dark">
@@ -31,8 +30,10 @@ const Orders = ({ ordersList }) => {
                     as={Link}
                     to={{
                       pathname: `/orders/${order.id}`,
-                      state: { orderId: order.id },
+                      // state: { orderId: order.id },
                     }}
+                    value={order.id}
+                    onClick={handleClick}
                   >
                     See purchase
                   </Button>

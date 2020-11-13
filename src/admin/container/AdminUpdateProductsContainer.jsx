@@ -43,9 +43,7 @@ class AdminUpdateProductsContainer extends React.Component {
 
   onChangeHandler(e) {
     let value = e.target.value;
-    this.setState({ [e.target.id]: value }, () =>
-      console.log("category id", this.state.categoryId)
-    );
+    this.setState({ [e.target.id]: value });
   }
 
   onSubmitHandler(e) {

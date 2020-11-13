@@ -26,7 +26,7 @@ export const login = (user) => async (dispatch) => {
   } catch (err) {
     dispatch(setErrorLogin(true));
   }
-  dispatch(getOrder());
+  dispatch(getOrder())
 };
 
 export const logOut = () => (dispatch) => {

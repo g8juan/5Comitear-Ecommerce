@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Cart from "./Cart";
-import { getCart, modifyCart, setAmount } from "./cartActionCreators";
+import { getCart, modifyCart, setAmount, modifyLSCart } from "./cartActionCreators";
 // import Steper from '../utils/steper/steper'
 
 function mapStateToProps(state) {
@@ -17,54 +17,47 @@ function mapDispatchToProps(dispatch) {
     getCart: (orderId) => dispatch(getCart(orderId)),
     modifyCart: (product, quantity) => dispatch(modifyCart(product, quantity)),
     setAmount: (subtotal, orderId) => dispatch(setAmount(subtotal, orderId)),
+    modifyLSCart: (product, quantity) => dispatch(modifyLSCart(product, quantity)),
   };
 }
 
 class CartContainer extends React.Component {
+
   componentDidMount() {
-    console.log(localStorage.getItem("cartProducts"))
-    if (this.props.userId) this.props.getCart(this.props.orderId)
-    else this.props.getCart()
+    if (this.props.userId) this.props.getCart()
   }
-
-  componentDidUpdate({ orderId }) {
-    if (this.props.orderId !== orderId)
-      this.props.getCart(this.props.orderId)
-  }
-
-  componentWillUnmount(){
-    this.props.cart.forEach(e=>{
-      this.props.modifyCart(e);
-    })
-  }
-
-  //TODO:
-  //if(this.props.location.state) this.props.getCart(this.props.location.state.orderId)
-  //Esta linea iba en los componentDidUpdate y componentDidUpdate para renderizar la vista mis compras. Pasarle la vista de resumen de compra que hicieron Juan y Yenien
-
-  increaseQuantity = (product) => this.props.modifyCart(product, 1);
-  decreaseQuantity = (product) => this.props.modifyCart(product, -1);
 
   handleClick = (event) => {
-    console.log("ENTRANDO AL HANDLECLICK");
     event.preventDefault();
     const subtotal = event.target.value;
     this.props.setAmount(subtotal, this.props.orderId);
     if (subtotal > 0) this.props.history.push("/cart/checkout");
   };
 
+  increaseQuantity = (product) => {
+    if (this.props.userId) this.props.modifyCart(product, 1)
+    else this.props.modifyLSCart(product, 1)
+  };
+  decreaseQuantity = (product) => {
+    if (this.props.userId) this.props.modifyCart(product, -1)
+    else this.props.modifyLSCart(product, -1)
+  };
+
   render() {
-    console.log(this.props)
+    const cartJSON = localStorage.getItem("cartProducts");
+    const LScart = cartJSON ? JSON.parse(cartJSON) : [];
 
     return (
       <div>
         {/* <Steper /> */}
         <Cart
-          products={this.props.cart}
+          products={this.props.userId ? this.props.cart : LScart}
           increaseQuantity={this.increaseQuantity}
           decreaseQuantity={this.decreaseQuantity}
           handleDelete={this.handleDelete}
           handleClick={this.handleClick}
+          LSproducts={LScart}
+          userId={this.props.userId}
         />
       </div>
     );

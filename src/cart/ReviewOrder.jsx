@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -43,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     margin: '1.5rem',
     fontSize: '1.5rem'
+  },
+  buttons: {
+    margin: '2rem'
   }
 }));
 
@@ -69,9 +73,9 @@ const ReviewOrder = ({ handleClick, order, products, email, cardNumber }) => {
                   {product.name}
                 </TableCell>
                 <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.order_product.quantity}</TableCell>
+                <TableCell align="center">{product.quantity}</TableCell>
                 <TableCell align="center">
-                  {product.price * product.order_product.quantity}
+                  {product.price * product.quantity}
                 </TableCell>
               </TableRow>
             ))}
@@ -83,8 +87,15 @@ const ReviewOrder = ({ handleClick, order, products, email, cardNumber }) => {
       <div className={classes.infoDivs}>Metodo de pago: {lastNumbers} <CreditCardIcon /> </div>
       <Button
         variant="contained"
+        color='secondary'
+        className={classes.buttons}
+      > <Link to='/cart/checkout/payment' style={{ color: 'white' }}>
+          Back to payment details</Link>
+      </Button>
+      <Button
+        variant="contained"
         color="primary"
-        className={classes.submit}
+        className={classes.buttons}
         onClick={handleClick}
       > Confirmar compra </Button>
     </div>

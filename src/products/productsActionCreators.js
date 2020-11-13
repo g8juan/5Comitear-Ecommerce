@@ -47,6 +47,7 @@ export const deleteSingleProduct = (singleProductId) => (dispatch) => {
     .then(res => res.data)
     .then(deletedProduct => dispatch(actionDeletedProduct(deletedProduct)))
 }
+
 export const updateCategory = (productAndCategory) => (dispatch) => {
   console.log("soy product and category", productAndCategory);
   axios

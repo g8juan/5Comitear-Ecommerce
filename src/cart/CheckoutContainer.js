@@ -26,7 +26,7 @@ class CheckoutContainer extends React.Component {
       province: "",
       city: "",
       street: "",
-      floor: "",
+      error: false
     };
   }
   handleChange = (event) => {
@@ -37,25 +37,26 @@ class CheckoutContainer extends React.Component {
     if (event.target.name === "zip") this.setState({ zip: event.target.value });
     if (event.target.name === "province") this.setState({ province: event.target.value });
     if (event.target.name === "city") this.setState({ city: event.target.value });
-    if (event.target.name === "street and number")
-      this.setState({ street: event.target.value });
-    if (event.target.name === "floor and apartment")
-      this.setState({ floor: event.target.value });
+    if (event.target.name === "street and number") this.setState({ street: event.target.value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
     const { order, setRecipient, setAddress } = this.props;
-    const { firstName, lastName, zip, province, city, street, floor } = this.state;
-    let fullName = firstName + " " + lastName;
-    let fullAddress =
-      street + ", " + floor + ". " + city + " (" + zip + ") " + province + ", Argentina.";
-    const actualizarData = async () => {
-      await setRecipient(order.id, fullName);
-      await setAddress(order.id, fullAddress);
-    };
-    actualizarData();
-    this.props.history.push("./checkout/payment");
+    const { firstName, lastName, zip, province, city, street } = this.state;
+    // eslint-disable-next-line
+    if (firstName == '' || lastName == '' || zip == '' || province == '' || city == '' || street == '') {
+      this.setState({ error: true })
+    } else {
+      let fullName = firstName + " " + lastName;
+      let fullAddress = street + ". " + city + " (" + zip + ") " + province + ", Argentina.";
+      const actualizarData = async () => {
+        await setRecipient(order.id, fullName);
+        await setAddress(order.id, fullAddress);
+      };
+      actualizarData();
+      this.props.history.push("./checkout/payment");
+    }
   };
 
   render() {
@@ -64,7 +65,8 @@ class CheckoutContainer extends React.Component {
         <Checkout
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          user = {this.props.user}
+          user={this.props.user}
+          error={this.state.error}
         />
       </div>
     );

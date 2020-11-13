@@ -1,40 +1,38 @@
 const router = require("express").Router();
-const {OrderProduct, Product, Order} = require("../models/index");
+const { OrderProduct, Product, Order } = require("../models/index");
 
 router.get("/:id", (req, res) => {
   Order.findOne({
-    where: {id: req.params.id},
-    include: [{model: Product}]
+    where: { id: req.params.id },
+    include: [{ model: Product }]
   })
     .then(order => res.send(order))
 });
 
-router.post("/localStorage", (req, res) => {
-
-})
 
 router.post("/modify", async (req, res) => {
-  const {orderId, productId} = req.body;
   console.log("REQ BODY quantity", req.body.quantity)
-  console.log("ITEM QTY", req.body.currentCartQuantity)
-  let quantity = req.body.quantity
-  const itemQty = req.body.currentCartQuantity
-  const foundItem = await OrderProduct.findOne({where: {orderId, productId}});
+  const { orderId, productId, quantity } = req.body;
+  const foundItem = await OrderProduct.findOne({ where: { orderId, productId } });
+
+  //Si no encuentra el producto en la db, lo crea
   if (!foundItem) {
     const product = await OrderProduct.create({
-      quantity:itemQty + quantity,
-      productId: req.body.productId,
-      orderId: req.body.orderId
+      quantity,
+      productId,
+      orderId
     })
     return res.status(200).send(product)
   }
-  // if (foundItem.quantity + quantity === 0) {
-  if (itemQty + quantity === 0) {
+
+  //Se destruye en caso que la cantidad sea menor a 0
+  if (foundItem.quantity + quantity <= 0) {
     await foundItem.destroy()
     return res.status(200).send(null)
   }
-  const product = await foundItem.update({quantity: itemQty + quantity})
-  // const product = await foundItem.update({quantity: foundItem.quantity + quantity})
+
+  //Finalmente, si existe el producto en la db y la cantidad no baja de 0 la updatea.
+  const product = await foundItem.update({ quantity: foundItem.quantity + quantity })
   return res.status(201).send(product);
 })
 
@@ -44,9 +42,9 @@ router.get("/test/:orderId", (req, res) => {
     include: [{
       model: Order,
       attributes: [],
-      through: {attributes: []}, where: {id: req.params.orderId}, required: true
+      through: { attributes: [] }, where: { id: req.params.orderId }, required: true
     }],
-    attributes: {exclude: ['createdAt', 'updatedAt']}
+    attributes: { exclude: ['createdAt', 'updatedAt'] }
   })
     .then(order => res.send(order))
 });
