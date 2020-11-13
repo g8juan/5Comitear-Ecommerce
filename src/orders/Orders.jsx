@@ -3,7 +3,6 @@ import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Orders = ({ ordersList }) => {
-  console.log(ordersList, "ordersList");
   return (
     <div>
       <Table striped bordered hover variant="dark">

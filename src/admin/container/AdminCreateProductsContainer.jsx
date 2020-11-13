@@ -38,9 +38,7 @@ class AdminCreateProductsContainer extends React.Component {
 
   onChangeHandler(event) {
     let value = event.target.value;
-    this.setState({ [event.target.id]: value }, () =>
-      console.log("category", this.state.categoryId)
-    );
+    this.setState({ [event.target.id]: value });
   }
 
   onSubmitHandler(event) {

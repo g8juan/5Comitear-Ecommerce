@@ -20,9 +20,17 @@ export const setCardNumber = (number) => ({
   payload: number,
 });
 
-export const postOrder = (id) => (dispatch) => {
+const setAllOrders = (orders) => ({
+  type: "SET_ALL_ORDERS",
+  payload: orders,
+});
+
+export const postOrder = (id, email) => (dispatch) => {
   axios
-    .post(`http://localhost:8000/api/orders/new`, { userId: id })
+    .post(`http://localhost:8000/api/orders/new`, {
+      userId: id,
+      userEmail: email,
+    })
     .then(({ data }) => dispatch(setOrder(data)))
     .then(() => success("Orden creada con exito"))
     .catch((err) => console.log(err));
@@ -43,6 +51,12 @@ export const getOrdersList = () => (dispatch, getState) => {
     })
     .then(() => success("listado de ordenes traida con exito"))
     .catch((err) => console.log(err));
+};
+
+export const getAllOrders = () => (dispatch) => {
+  axios
+    .get("/api/orders")
+    .then((orders) => dispatch(setAllOrders(orders.data)));
 };
 
 export const setCard = (number) => (dispatch) => {
