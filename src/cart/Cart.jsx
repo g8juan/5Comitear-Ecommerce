@@ -93,7 +93,7 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClic
           </Link>
         ) : (
             <div>
-              <p> You need to be loged in to proceed to continue</p>
+              <p> You need to be loged in to continue</p>
               <Link to='/login'>
                 <button variant="contained" className="btn btn-secondary">Go to login</button>
               </Link>
