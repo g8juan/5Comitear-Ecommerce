@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Order, User } = require("../models/index");
+const { Order } = require("../models/index");
 
 router.get("/", (req, res) => Order.findAll().then((order) => res.send(order)));
 
@@ -95,59 +95,3 @@ router.post("/newCompletedOrder", (req, res) => {
 });
 
 module.exports = router;
-
-///transfer/database cleanup-----------------
-/*
-SELECT * INTO "rejectedOrders"
-FROM orders
-WHERE "orderStatus" = "cancelled"
-------then=>
-DELETE FROM orders
-WHERE "orderStatus" = "cancelled"
-*/
-//Se deberia mover también los elemntos de order_product, moviendola a cancelled_order_product por ej y cambiar el nombre de las claves foraneas.
-/*
-ALTER TABLE `cancelled_order_product`
-DROP FOREIGN KEY `orderId`;
-
-ALTER TABLE `cancelled_order_product`
-ADD CONSTRAINT `cancelled_orderId`
-    FOREIGN KEY (`cancelled_order_productId`) REFERENCES `cancelled_order` (`id`) ON DELETE CASCADE;
-repetir para productId
-*/
-
-//MASS UPDATE DE ITEMS (No es buena practica, mejor actualizar uno a uno a medida que suceden los cambios)
-// update item quantity
-// router.get("/test/:quantity/:orderId/:productId", (req, res) =>{
-//   const {quantity, orderId, productId} = req.params
-//   database.query(`insert into order_product ("quantity","createdAt","updatedAt","productId","orderId") values (?,NOW(),NOW(),?,?)`,{
-//     replacements:[quantity,orderId,productId]
-//   })
-// })
-
-//update several items
-// router.get('/test/', (req, res)=>{
-//   database.query(
-//     `
-//         UPDATE order_product
-//         SET 'orderId' = new.'orderId', 'productId' = new.'productId', 'quantity' = new.'quantity'
-//         from (values ?) AS new('orderId', 'productId', 'quantity')
-//         WHERE employee.id = new.employeeId
-//     `,
-//     {
-//         replacements: [[1, 13, 1],[1, 4, 1],[2, 1, 2],[1, 13, 1]],
-//         type: models.models.sequelize.QueryTypes.INSERT // type: Sequelize.QueryTypes.INSERT o sera database.queryTypes.Insert
-//     }
-//   )
-// }
-
-// router.post("/new", (req, res) => {
-//   database.query(
-//       `INSERT INTO orders ("userId", "ammount", "address", "orderStatus", "createdAt","updatedAt")
-//   VALUES (${req.body.userId}, 0, '', 'pending', NOW(), NOW())`
-//     )
-//     .then(() => {
-//       res.sendStatus(201);
-//     })
-//     .catch((err) => console.log(err));
-// });

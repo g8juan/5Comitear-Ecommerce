@@ -86,7 +86,7 @@ export default function Products({ products, addToCart, userType }) {
                       {product.stock ? product.name : product.name+" *sin stock"}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                      {product.description}
+                      {/* {product.description} */}
                       <br />
                 Price: $ {product.price} ARS
                 </Typography>
