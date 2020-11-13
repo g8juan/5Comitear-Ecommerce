@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AdminCategory({ onChange, onSubmit, name }) {
+export default function AdminCategory({ onChange, onSubmit/* , name */ }) {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">
@@ -75,7 +75,7 @@ export default function AdminCategory({ onChange, onSubmit, name }) {
                 label="Name"
                 autoFocus
                 onChange={onChange}
-                value={name}
+                //value={name}
               />
             </Grid>
             <Button

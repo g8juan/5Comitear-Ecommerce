@@ -2,7 +2,7 @@ import React from "react";
 
 // STYLES
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { makeStyles } from "@material-ui/styles";
+import {makeStyles} from "@material-ui/styles";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,37 +10,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
-  buttonDelete: {
-    margin: '0.5rem',
-    "&:hover": {
-      cursor: "pointer",
-      color: "red",
-    },
-  },
-  quantity: {
-    margin: "1rem",
-  },
-  table: {
-    minWidth: 650,
-  },
-  divTable: {
-    margin: '3rem'
-  },
-  title: {
-    margin: '1.5rem'
-  },
-  subtitle: {
-    margin: '1.5rem'
-  }
+  buttonDelete: { margin: '0.5rem', "&:hover": { cursor: "pointer", color: "red", } },
+  quantity: { margin: "1rem", },
+  table: { minWidth: 650, },
+  divTable: { margin: '3rem' },
+  title: { margin: '1.5rem' },
+  subtitle: { margin: '1.5rem' }
 });
 
-const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClick }) => {
+const Cart = ({increaseQuantity, decreaseQuantity, products, userId, handleClick}) => {
   const classes = useStyles();
   let subtotal = 0;
-  let formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  let formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
 
   return (
     <div>

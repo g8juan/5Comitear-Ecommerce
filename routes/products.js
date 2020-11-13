@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const {Product, Category, ProductUser} = require("../models/index")
+const { Product, Category, ProductUser } = require("../models/index")
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 router.get("/", (req, res, next) => {
   const searchTerm = req.query.searchTerm
   const query = {
-    where: searchTerm ? {name: {[Op.iLike]: `%${searchTerm}%`}} : null,
+    where: searchTerm ? { name: { [Op.iLike]: `%${searchTerm}%` } } : null,
     attributes: {
       exclude: ['createdAt', 'updatedAt']
     }
@@ -15,8 +15,8 @@ router.get("/", (req, res, next) => {
     const categoryId = parseInt(req.query.categoryId)
     query.include = [{
       model: Category,
-      through: {attributes: []},
-      where: {id: categoryId},
+      through: { attributes: [] },
+      where: { id: categoryId },
       required: true
     }]
   }

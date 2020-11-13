@@ -78,14 +78,14 @@ async function seed() {
     ]).then(() => console.log("products generated!"));
 
     await Order.bulkCreate([
-      {userId: 1, ammount: 2000, address: "Zaragoza 3032", orderStatus: "completed", },
-      {userId: 2, ammount: 4800, address: "Uruguay 130", orderStatus: "completed", },
-      {userId: 3, ammount: 6800, address: "Libertador 1037", orderStatus: "completed", },
-      {userId: 1, ammount: 5000, address: "Zaragoza 3032", orderStatus: "completed", },
-      {userId: 4, ammount: 5200, address: "Aston 4002", orderStatus: "pending", },
-      {userId: 2, ammount: 5200, address: "Uruguay 130", orderStatus: "pending", },
-      {userId: 3, ammount: 2000, address: "Libertador 1037", orderStatus: "pending", },
-      {userId: 1, ammount: 3000, address: "San Lorenzo 150", orderStatus: "pending", },
+      {userId: 1, userEmail:"jose@gmail.com", ammount: 2000, address: "Zaragoza 3032", orderStatus: "completed", },
+      {userId: 2, userEmail:"cristian@gmail.com", ammount: 4800, address: "Uruguay 130", orderStatus: "completed", },
+      {userId: 3, userEmail:"juana@gmail.com", ammount: 6800, address: "Libertador 1037", orderStatus: "completed", },
+      {userId: 1, userEmail:"jose@gmail.com", ammount: 5000, address: "Zaragoza 3032", orderStatus: "completed", },
+      {userId: 4, userEmail:"juana@gmail.com", ammount: 5200, address: "Aston 4002", orderStatus: "pending", },
+      {userId: 2, userEmail:"cristian@gmail.com", ammount: 5200, address: "Uruguay 130", orderStatus: "pending", },
+      {userId: 3, userEmail:"juana@gmail.com", ammount: 2000, address: "Libertador 1037", orderStatus: "pending", },
+      {userId: 1, userEmail:"jose@gmail.com", ammount: 3000, address: "San Lorenzo 150", orderStatus: "pending", },
     ])
       .then(() => console.log("orders generated!"))
       .catch((err) => console.log(err));

@@ -23,7 +23,8 @@ class SingleProductContainer extends React.Component {
   }
 
   handleDelete = async (singleProduct) => {
-    await this.props.deleteSingleProduct(singleProduct.id);
+    console.log(singleProduct)
+    await this.props.deleteSingleProduct(singleProduct);
     this.props.history.push("/products");
   };
 
