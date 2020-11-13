@@ -1,7 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Cart from "./Cart";
-import {getCart, modifyCart, setAmount, modifyLSCart} from "./cartActionCreators";
+import { getCart, modifyCart, setAmount, modifyLSCart } from "./cartActionCreators";
 // import Steper from '../utils/steper/steper'
 
 function mapStateToProps(state) {
@@ -57,6 +57,7 @@ class CartContainer extends React.Component {
           handleDelete={this.handleDelete}
           handleClick={this.handleClick}
           LSproducts={LScart}
+          userId={this.props.userId}
         />
       </div>
     );

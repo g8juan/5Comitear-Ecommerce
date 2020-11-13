@@ -1,7 +1,7 @@
 import axios from "axios";
-import {success} from "../utils/logs";
-import {getOrder, resetOrder} from "../orders/ordersActionCreators";
-import {resetCart, getCart} from "../cart/cartActionCreators";
+import { success } from "../utils/logs";
+import { getOrder, resetOrder } from "../orders/ordersActionCreators";
+import { resetCart } from "../cart/cartActionCreators";
 
 export const setLogin = (user) => ({
   type: "SET_LOGIN",
@@ -26,7 +26,7 @@ export const login = (user) => async (dispatch) => {
   } catch (err) {
     dispatch(setErrorLogin(true));
   }
- dispatch(getOrder())
+  dispatch(getOrder())
 };
 
 export const logOut = () => (dispatch) => {

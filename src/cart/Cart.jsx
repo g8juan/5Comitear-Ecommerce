@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // STYLES
-import DeleteIcon from "@material-ui/icons/Delete";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { makeStyles } from "@material-ui/styles";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +10,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   buttonDelete: {
@@ -37,26 +38,24 @@ const useStyles = makeStyles({
   }
 });
 
-const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, handleClick }) => {
+const Cart = ({ increaseQuantity, decreaseQuantity, products, userId, handleClick }) => {
   const classes = useStyles();
   let subtotal = 0;
   let formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
   return (
     <div>
-      <h3 className={classes.title}>Cart Listing</h3>
-      <h6 className={classes.subtitle}> We are small team (5mitear) of creative people working together </h6>
+      <h3 className={classes.title}>CART <ShoppingCartIcon /></h3>
       <div className={classes.divTable}>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 {/* <TableCell> THUMBNAIL </TableCell> */}
-                <TableCell align="right">Nombre</TableCell>
-                <TableCell align="right">Precio</TableCell>
-                <TableCell align="right">Cantidad</TableCell>
-                <TableCell align="right">Subtotal</TableCell>
-                <TableCell align="right"></TableCell>
+                <TableCell align="center">Nombre</TableCell>
+                <TableCell align="center">Precio</TableCell>
+                <TableCell align="center">Cantidad</TableCell>
+                <TableCell align="center">Subtotal</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,17 +63,14 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
                 subtotal += (product.price * product.quantity)
                 return (
                   <TableRow key={product.id}>
-                    {/* <TableCell component="th" scope="row"> {product.thumbnail} </TableCell> */}
-                    <TableCell align="right">{product.name}</TableCell>
-                    <TableCell align="right">{formatter.format(product.price)}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="center">{product.name}</TableCell>
+                    <TableCell align="center">{formatter.format(product.price)}</TableCell>
+                    <TableCell align="center">
                       <button onClick={() => decreaseQuantity(product)} className="btn btn-primary btn-sm"> - </button>
                       <span className={classes.quantity}>{product.quantity}</span>
                       <button onClick={() => increaseQuantity(product)} className="btn btn-primary btn-sm"> + </button>
                     </TableCell>
-                    <TableCell align="right">{`${(formatter.format(product.price * product.quantity))}`}</TableCell>
-                    <TableCell align="right">
-                      <DeleteIcon className={classes.buttonDelete} onClick={() => handleDelete(product)} />
+                    <TableCell align="center">{`${(formatter.format(product.price * product.quantity))}`}
                     </TableCell>
                   </TableRow>
                 )
@@ -84,13 +80,18 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
         </TableContainer>
       </div>
       <p> Subtotal: {formatter.format(subtotal)} </p>
-      <Link to="/cart/checkout" style={{ color: 'white' }}>
-        <button onClick={handleClick} className="btn btn-primary" value={subtotal}> Proceed to delivery details </button>
-      </Link>
+      {userId ? (
+        <Button as={Link} to="/cart/checkout" className="m-1" variant="secondary">Proceed to delivery details</Button>
+      ) :
+        (
+          <div>
+            <p> You need to login first to go to the check out! </p>
+            <Button as={Link} to="/login" className="m-1" variant="secondary">Login</Button>
+          </div>
+        )
+      }
       <hr />
-      <Link to="/products">
-        <button className="btn btn-secondary" value={subtotal}> Back to products </button>
-      </Link>
+      <Button as={Link} to="/products" className="m-1" variant="secondary">Back to products</Button>
     </div>
   );
 };

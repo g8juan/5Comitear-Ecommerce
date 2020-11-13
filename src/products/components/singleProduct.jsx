@@ -59,18 +59,18 @@ export default function SingleProduct({ singleProduct, userType, handleDelete })
             as={Link}
             to="/admin/products/update"
             size="small"
-            color="primary"
+            variant="secondary"
             className={classes.buttons}
           >
             Edit Product
           </Button>
         ) : (
-            <Button size="small" color="primary" className={classes.buttons}>
+            <Button size="small" variant="secondary" className={classes.buttons}>
               Add to cart
             </Button>
           )}
         <CustomizedRatings reviews={singleProduct.reviews} />
-        <Button size="small" color="primary" className={classes.buttons}>
+        <Button size="small" variant="secondary" className={classes.buttons}>
           Reviews
         </Button>
         {userType === "2" || userType === "3" ? (
