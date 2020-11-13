@@ -10,6 +10,11 @@ Order.init(
       model: "users",
       key: "id",
     },
+    userEmail: {
+      type: DataTypes.STRING,
+      model: "users",
+      key: "email",
+    },
     ammount: {
       type: DataTypes.INTEGER,
     },

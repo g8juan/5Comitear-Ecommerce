@@ -119,19 +119,22 @@ async function seed() {
 
     await Order.bulkCreate([
       {
-        userId: 1,
+        userId: 2,
+        userEmail: "zaragoza@zara.com",
         ammount: 2000,
         address: "Zaragoza 3032",
         orderStatus: "completed",
       }, //1 camisa
       {
         userId: 2,
+        userEmail: "zaragoza@zara.com",
         ammount: 4800,
         address: "Uruguay 130",
         orderStatus: "completed",
       }, //1 campera
       {
         userId: 3,
+        userEmail: "libertadores@gmail.com",
         ammount: 6800,
         address: "Libertador 1037",
         orderStatus: "completed",
@@ -139,24 +142,28 @@ async function seed() {
       {
         userId: 2,
         ammount: 5200,
+        userEmail: "zaragoza@zara.com",
         address: "Uruguay 130",
         orderStatus: "pending",
       }, //camisa, pantalon y remera
       {
-        userId: 1,
+        userId: 2,
         ammount: 5000,
+        userEmail: "zaragoza@zara.com",
         address: "Zaragoza 3032",
         orderStatus: "completed",
       }, //5 remeras
       {
         userId: 3,
         ammount: 2000,
+        userEmail: "libertadores@gmail.com",
         address: "Libertador 1037",
         orderStatus: "pending",
       }, //2 remeras
       {
-        userId: 1,
+        userId: 2,
         ammount: 3000,
+        userEmail: "zaragoza@zara.com",
         address: "San Lorenzo 150",
         orderStatus: "pending",
       }, //3 remeras
