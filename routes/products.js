@@ -61,21 +61,6 @@ router.post("/singleProduct", (req, res) => {
     })
 })
 
-router.get("/productsByCategory", (req, res) => {
-  console.log(req.query)
-  Category.findAll({
-    where: { id: req.query.categoryId },
-    attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: [{
-      model: Product,
-      through: { attributes: [] },
-      attributes: {
-        exclude: ['createdAt', 'updatedAt']
-      }
-    }]
-  }).then(order => res.send(order))
-    .catch((err) => console.log(err))
-});
 
 
 

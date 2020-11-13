@@ -21,7 +21,7 @@ app.use(
   })
 ); // popula req.session
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(passport.initialize());
 app.use(passport.session());

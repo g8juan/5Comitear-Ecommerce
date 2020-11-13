@@ -42,10 +42,6 @@ IconContainer.propTypes = {
 };
 
 class CustomizedRatings extends React.Component {
-  // eslint-disable-next-line
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let reviews = this.props.reviews;
@@ -57,8 +53,7 @@ class CustomizedRatings extends React.Component {
     let promedio;
 
     if (reviews) {
-      let input =
-        this.props.reviews.reduce((a, b) => a + b, 0) / this.props.reviews.length / 2;
+      let input = this.props.reviews.reduce((a, b) => a + b, 0) / this.props.reviews.length / 2;
       promedio = Math.round(input * 100) / 100;
       console.log("promedio actualizado", promedio);
     }

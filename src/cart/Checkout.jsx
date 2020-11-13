@@ -126,7 +126,7 @@ const Checkout = ({ handleChange, handleSubmit, error, user }) => {
               </Grid>
               {error ? (
                 <Alert variant="outlined" severity="error" className={classes.buttons}>
-                  Pst! Todos los campos deben estar completos.
+                  Pst! All fields must be filled.
                 </Alert>
               ) : null}
             </Grid>

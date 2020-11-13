@@ -33,7 +33,7 @@ class AdminUpdateCategoryContainer extends React.Component {
   async onSubmitHandler(e) {
     e.preventDefault();
     await this.props.updateCategoryName({
-      id: this.state.id,
+      id: this.props.categorySelected.id,
       name: this.state.name,
     });
     this.props.history.push("/categories");

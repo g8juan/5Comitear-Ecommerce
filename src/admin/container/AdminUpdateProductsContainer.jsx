@@ -6,6 +6,7 @@ import {
   updateCategory,
   updateProduct,
 } from "../../products/productsActionCreators";
+import {getCategories} from '../../categories/categoriesActionCreators'
 
 function mapStateToProps(state) {
   return {
@@ -18,6 +19,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateProduct: (product) => dispatch(updateProduct(product)),
+    getCategories: () => dispatch(getCategories()),
     getProductCategory: (productId) => dispatch(getProductCategory(productId)),
     updateCategory: (updatedCategory) =>
       dispatch(updateCategory(updatedCategory)),
@@ -38,6 +40,7 @@ class AdminUpdateProductsContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getCategories()
     this.props.getProductCategory(this.props.singleProduct.id);
   }
 

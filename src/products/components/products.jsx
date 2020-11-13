@@ -82,8 +82,8 @@ export default function Products({ products, addToCart, userType }) {
                     />
                   </Link>
                   <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      {product.name}
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.stock ? product.name : product.name+" *sin stock"}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {/* {product.description} */}
@@ -97,8 +97,8 @@ export default function Products({ products, addToCart, userType }) {
                 </CardActionArea>
                 <CardActions >
                   
-                {userType === "1" ? 
-                product.stock >= "1" ? 
+                {(userType !== "2" && userType !== "3") ? 
+                product.stock >= 1 ? 
                   <Button onClick={() => {
                     handleClick()
                     addToCart(product)

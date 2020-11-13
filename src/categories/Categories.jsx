@@ -55,40 +55,23 @@ export default function Categories({
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <p className={classes.title}>
-        <DehazeIcon /> CATEGORIES{" "}
-      </p>
+      <p className={classes.title}><DehazeIcon /> CATEGORIES{" "}</p>
       <Divider />
       <div className={classes.title}></div>
       <List component="nav" aria-label="main mailbox folders">
         {categories.map((category) => {
           return (
             <div key={category.id}>
-              <ListItem
-                button
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Link
-                  className={classes.categoryName}
-                  to={`categories/${category.id}`}
-                >
+              <ListItem button style={{display: "flex",justifyContent: "space-between"}} >
+                <Link className={classes.categoryName} to={`categories/${category.id}`} >
                   <ListItemText primary={category.name.toUpperCase()} />
                 </Link>
                 {userType === "3" || userType === "2" ? (
                   <div>
                     <Link to="/admin/category/update">
-                      <EditOutlinedIcon
-                        onClick={() => handleEdit(category.id)}
-                        className={classes.buttonEdit}
-                      />
+                      <EditOutlinedIcon onClick={() => handleEdit(category.id)} className={classes.buttonEdit} />
                     </Link>
-                    <DeleteIcon
-                      className={classes.buttonDelete}
-                      onClick={() => handleDelete(category.id)}
-                    />
+                    <DeleteIcon className={classes.buttonDelete} onClick={() => handleDelete(category.id)} />
                   </div>
                 ) : null}
               </ListItem>
