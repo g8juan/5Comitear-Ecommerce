@@ -6,19 +6,21 @@ const User = require("./User")
 
 const {DataTypes, Model} = require("sequelize");
 
-
+//TABLAS PIVOT
 class OrderProduct extends Model { }
 OrderProduct.init({
   quantity: DataTypes.INTEGER
-}, {
-  sequelize: database, modelName: "order_product", freezeTableName: true
-});
+}, {sequelize: database, modelName: "order_product", freezeTableName: true});
 
 class CategoryProduct extends Model { }
 CategoryProduct.init({},
-  {
-    sequelize: database, modelName: "category_product", freezeTableName: true
-  });
+  {sequelize: database, modelName: "category_product", freezeTableName: true});
+
+class ProductUser extends Model { }
+ProductUser.init({
+  review: DataTypes.INTEGER
+}, {sequelize: database, modelName: "product_user", freezeTableName: true});
+/////////////////////////
 
 Category.belongsToMany(Product, {through: CategoryProduct})
 Product.belongsToMany(Category, {through: CategoryProduct})
@@ -32,7 +34,13 @@ Order.hasMany(OrderProduct)
 User.hasMany(Order)
 Order.belongsTo(User)
 
-module.exports = {Category, Product, Order, User, OrderProduct, CategoryProduct}
+//ProductUser Pivot Table associations
+User.hasMany(ProductUser)
+ProductUser.belongsTo(User)
+Product.hasMany(ProductUser)
+ProductUser.belongsTo(Product)
+
+module.exports = {Category, Product, Order, User, OrderProduct, CategoryProduct, ProductUser}
 
   // orderId: {
   //   type: DataTypes.INTEGER,

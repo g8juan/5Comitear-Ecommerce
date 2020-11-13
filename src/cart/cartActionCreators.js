@@ -18,6 +18,8 @@ export const setCartProduct = (product, userId) => ({
   userId: userId,
 });
 
+//+setLocalStorageCart 
+
 export const getCart = (orderId) => (dispatch, getState) => {
   if (!orderId) {
     const productsJSON = localStorage.getItem("cartProducts");
@@ -129,3 +131,100 @@ export const setStatus = (id, status) => (dispatch) => {
     .then(() => success("Orden actualizada con exito."))
     .catch((err) => console.log(err));
 };
+
+
+/*
+export const modifyCartAPI = async (product, quantity) => {
+  console.log("ENTRA AL MODIFYCARTAPI")
+=======
+  if (!orderId) {
+    const productsJSON = localStorage.getItem("cartProducts");
+    const products = productsJSON ? JSON.parse(productsJSON) : [];
+    console.log("LOCAL STORAGE CART PRODUCTS", products);
+    dispatch(setCart(products));
+  } else
+    axios.get(`/api/cart/${orderId}`).then(({ data }) => {
+      console.log("/API/CART AXIOS DATA", data);
+      dispatch(setCart(data.products));
+    });
+};
+
+export const modifyCartLocalStorage = async (product, quantity) => {
+  const productsJSON = localStorage.getItem("cartProducts");
+  console.log("PRODUCTS JSON", productsJSON);
+  let products = productsJSON ? JSON.parse(productsJSON) : [];
+  console.log("PARSED PRODUCTS JSON", products);
+  let cartProduct = products.find((e) => e.id === product.id);
+  console.log("CART PRODUCT TO ADD/MODIFY: ", cartProduct);
+  if (typeof cartProduct !== "object") {
+    console.log("CART PRODUCT NOT FOUND, ADDING IT...");
+    cartProduct = { ...product, order_product: { quantity: 1 } };
+    console.log("CART PRODUCT ADDED: ", cartProduct);
+  }
+  cartProduct.order_product.quantity += quantity;
+  console.log("CART PRODUCT AFTER ADDING QUANITTY: ", cartProduct);
+  return cartProduct.order_product.quantity > 0 ? cartProduct.order_product : null;
+};
+
+
+
+  const productsJSON = localStorage.getItem("cartProducts")
+  const localStorageProducts = productsJSON ? JSON.parse(productsJSON) : []
+  console.log("LOCAL STORAGE clear")
+  console.log("LOCAL STORAGE CART PRODUCTS", localStorageProducts)
+  localStorage.clear();
+  if (!orderId) {
+    axios.post()
+    dispatch(setCart(localStorageProducts))
+  }
+  else axios.get(`/api/cart/${orderId}`).then((res) => {
+    console.log("AXIOS PARA CONSEGUIR EL CARRITO CON UNA ORDER ID: ",orderId)
+    console.log("SERVER DATA", res.data)
+    if (res.data !== undefined) {
+      console.log("ENTRA AL QUILOMBO")
+      let serverDataCopy = [], localStorageProductsCopy = []
+      if (res.data.products.length){
+        serverDataCopy = [...res.data.products]
+        serverDataCopy.forEach(e=>{
+          e.quantity = e.order_product.quantity
+        })
+      }
+      if (localStorageProducts.length){
+        localStorageProductsCopy = [...localStorageProducts]
+        localStorageProductsCopy.forEach(e=>{
+          e.quantity = e.order_product.quantity
+        })
+      }
+      console.log("serverDataCopy + quantity field added",serverDataCopy)
+      console.log("localStorageProductsCopy + quantity field added",localStorageProductsCopy)
+      let joinedArray = [...serverDataCopy, ...localStorageProductsCopy]
+      console.log("JOINED ARRAY",joinedArray)
+      let dataTotals = Object.values(joinedArray.reduce((a, c) => {
+        if (!a[c.id]) a[c.id] = c 
+        else a[c.id].quantity += c.quantity;
+        return a;
+      }, {}));
+      console.log("DATATOTLAS",dataTotals)
+      for (let i = 0; i < dataTotals.length; i++) {
+        console.log(dataTotals[i])
+        dataTotals[i].order_product.quantity = dataTotals[i].quantity
+      }
+      dispatch(setCart(dataTotals))
+    }
+    else dispatch(setCart(localStorageProducts))
+  });
+}
+
+
+export const modifyCartLocalStorage = async (product, quantity) => {
+  const productsJSON = localStorage.getItem("cartProducts")
+  let products = productsJSON ? JSON.parse(productsJSON) : []
+  let cartProduct = products.find(e => e.id === product.id)
+  if (typeof cartProduct !== "object") {
+    console.log("ENTRO AL CARTPRODUCT ESTA VACIO. CART PRODUCT: ", cartProduct)
+    cartProduct = {...product, order_product: {quantity: 0}}
+  }
+  cartProduct.order_product.quantity += quantity
+  return cartProduct.order_product.quantity > 0 ? cartProduct.order_product : null
+}
+*/
