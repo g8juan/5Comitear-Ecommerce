@@ -2,19 +2,21 @@ import React from "react";
 import {connect} from 'react-redux'
 import Products from './products'
 import {getProducts} from '../productsActionCreators'
-import {modifyCart} from '../../cart/cartActionCreators'
+import {modifyCart, modifyLSCart} from '../../cart/cartActionCreators'
 
 function mapStateToProps(state) {
   return {
     products: state.products.products,
     userType: state.users.user.userType,
+    user: state.users.user,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getProducts: (searchTerm, categoryId) => dispatch(getProducts(searchTerm, categoryId)),
-    modifyCart: (product) => dispatch(modifyCart(product)),
+    modifyCart: (product, quantity) => dispatch(modifyCart(product, quantity)),
+    modifyLSCart: (product, quantity) => dispatch(modifyLSCart(product, quantity))
   }
 }
 
@@ -45,7 +47,8 @@ class ProductsContainer extends React.Component {
   }
 
   handleClick = (product) => {
-    this.props.modifyCart(product)
+    if (this.props.user.id) this.props.modifyCart(product, 1)
+    else this.props.modifyLSCart(product, 1)
   }
 
   render() {
@@ -54,4 +57,3 @@ class ProductsContainer extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
-

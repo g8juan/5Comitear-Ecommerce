@@ -41,6 +41,7 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
   const classes = useStyles();
   let subtotal = 0;
   let formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
   return (
     <div>
       <h3 className={classes.title}>Cart Listing</h3>
@@ -60,7 +61,7 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
             </TableHead>
             <TableBody>
               {products && products.map((product) => {
-                subtotal += (product.price * product.order_product.quantity)
+                subtotal += (product.price * product.quantity)
                 return (
                   <TableRow key={product.id}>
                     {/* <TableCell component="th" scope="row"> {product.thumbnail} </TableCell> */}
@@ -68,10 +69,10 @@ const Cart = ({ increaseQuantity, decreaseQuantity, products, handleDelete, hand
                     <TableCell align="right">{formatter.format(product.price)}</TableCell>
                     <TableCell align="right">
                       <button onClick={() => decreaseQuantity(product)} className="btn btn-primary btn-sm"> - </button>
-                      <span className={classes.quantity}>{product.order_product.quantity}</span>
+                      <span className={classes.quantity}>{product.quantity}</span>
                       <button onClick={() => increaseQuantity(product)} className="btn btn-primary btn-sm"> + </button>
                     </TableCell>
-                    <TableCell align="right">{`${(formatter.format(product.price * product.order_product.quantity))}`}</TableCell>
+                    <TableCell align="right">{`${(formatter.format(product.price * product.quantity))}`}</TableCell>
                     <TableCell align="right">
                       <DeleteIcon className={classes.buttonDelete} onClick={() => handleDelete(product)} />
                     </TableCell>
