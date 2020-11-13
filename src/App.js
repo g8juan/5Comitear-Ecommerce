@@ -24,7 +24,6 @@ import AdminUsersContainer from "./admin/container/AdminUsersContainer";
 import SingleOrderContainer from "./orders/SingleOrderContainer";
 import AdminCreateProductsContainer from "./admin/container/AdminCreateProductsContainer";
 import AdminUpdateProductsContainer from "./admin/container/AdminUpdateProductsContainer";
-//import AdminCreateCategoryContainer from "./admin/container/AdminCreateCategoryContainer";
 
 function mapStateToProps(state) {
   return {
@@ -80,7 +79,6 @@ class App extends React.Component {
           <Route exact path="/admin/users" component={AdminUsersContainer} />
           <Route exact path="/admin/products/create" component={AdminCreateProductsContainer} />
           <Route exact path="/admin/products/update" component={AdminUpdateProductsContainer} />
-          {/* <Route path="/admin/category/create" component={AdminCreateCategoryContainer} /> */}
 
           <Redirect from="/" to="/home" />
         </Switch>

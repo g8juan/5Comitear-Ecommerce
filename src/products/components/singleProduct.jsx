@@ -50,8 +50,12 @@ export default function SingleProduct({
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {singleProduct.description}
-            <br />
+            <br/>
             Price: $ {singleProduct.price} ARS
+          </Typography>
+          <br/>
+          <Typography variant="body2" color="textSecondary" component="p">
+            stock: {singleProduct.stock}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -67,9 +71,14 @@ export default function SingleProduct({
             Edit Product
           </Button>
         ) : (
-          <Button size="small" color="primary" className={classes.buttons}>
-            Add to cart
-          </Button>
+          singleProduct.stock >= "1" ? 
+            <Button size="small" color="primary" className={classes.buttons}>
+              Add to cart
+            </Button>
+          :
+            <Button size="small" variant="danger" className={classes.buttons}>
+              Out of stock
+            </Button>
         )}
         <Button size="small" color="primary" className={classes.buttons}>
           Reviews

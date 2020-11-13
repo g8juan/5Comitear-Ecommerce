@@ -1,52 +1,41 @@
 require("./database/database");
 //TODO: meter al seed categorias
-<<<<<<< HEAD
-const {User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser} = require("./models/index");
-=======
-const {
-  User,
-  Product,
-  Order,
-  OrderProduct,
-  Category,
-  CategoryProduct,
-} = require("./models/index");
->>>>>>> af80a4b1c45b7bfb2edcf856e5263e83eba0481f
+const { User, Product, Order, OrderProduct, Category, CategoryProduct, ProductUser } = require("./models/index");
 async function seed() {
   async function createUsersProductsOrdersAndCategories() {
     /*SUDO!*/ await User.create({
-      firstName: "Admin",
-      lastName: "3",
-      email: "admin3@admin.com",
-      password: "admin",
-      address: "Pachanga 3032",
-      phone: "2332432",
-      userType: "3",
-    })
+    firstName: "Admin",
+    lastName: "3",
+    email: "admin3@admin.com",
+    password: "admin",
+    address: "Pachanga 3032",
+    phone: "2332432",
+    userType: "3",
+  })
       .then(() =>
         console.log("Por favor espere, estbleciendo conexión cuántica")
       )
       .catch((err) => console.log(err));
     /*Admin*/ await User.create({
-      firstName: "Cristian",
-      lastName: "Mendoza",
-      email: "cristian@gmail.com",
-      password: "1",
-      address: "Aston 1311",
-      phone: "43432432",
-      userType: "2",
-    })
+        firstName: "Cristian",
+        lastName: "Mendoza",
+        email: "cristian@gmail.com",
+        password: "1",
+        address: "Aston 1311",
+        phone: "43432432",
+        userType: "2",
+      })
       .then(() => console.log("Generando super usuario con telemetría cósmica"))
       .catch((err) => console.log(err));
     /*User*/ await User.create({
-      firstName: "Jose",
-      lastName: "Perez",
-      email: "jose@gmail.com",
-      password: "1",
-      address: "Machacay 8042",
-      phone: "7522432",
-      userType: "1",
-    })
+        firstName: "Jose",
+        lastName: "Perez",
+        email: "jose@gmail.com",
+        password: "1",
+        address: "Machacay 8042",
+        phone: "7522432",
+        userType: "1",
+      })
       .then(() =>
         console.log("Fusión molecular completada, por favor espere...")
       )
@@ -64,62 +53,12 @@ async function seed() {
       .catch((err) => console.log(err));
 
     Product.bulkCreate([
-      {
-        name: "camisa",
-        price: 2000,
-        description: "una bella camisa",
-        thumbnail: "https://i.imgur.com/BY9MiuQ.png",
-        image: "una bella image",
-        stock: 4,
-        reviews: [7, 6, 9, 10, 9, 10],
-      },
-      {
-        name: "pantalon",
-        price: 2200,
-        description: "un pantalon gris",
-        thumbnail: "https://i.imgur.com/XTQuyir.png",
-        image: "una bella imagen de pantalon",
-        stock: 14,
-        reviews: [8, 8],
-      },
-      {
-        name: "remera",
-        price: 1000,
-        description: "una remera dark",
-        thumbnail: "https://i.imgur.com/af9yLS4.png",
-        image: "una bella image",
-        stock: 6,
-        reviews: [7, 5, 6],
-      },
-      {
-        name: "campera",
-        price: 4800,
-        description: "una campera muy abrigada",
-        thumbnail: "https://i.imgur.com/JEDAPAg.png",
-        image: "una bella imagen de campera",
-        stock: 2,
-        reviews: [8, 10, 10],
-      },
-      {
-        name: "zapatillas deportivas",
-        price: 3000,
-        description: "zapatillas nike",
-        thumbnail:
-          "https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw0b96861e/products/NI_AO0352-005/NI_AO0352-005-1.JPG",
-        image: "NIKE ;)",
-        stock: 2,
-        reviews: [8, 10, 10, 7, 8],
-      },
-      {
-        name: "botas de cuero",
-        price: 8000,
-        description: "botas de cuero",
-        thumbnail:
-          "https://bizarro.vteximg.com.br/arquivos/ids/619020-1000-1000/BOTAS-CA%C3%91A-MEDIA-MUJER-B166-CUERO-DOMINGUEZ_23321.jpg",
-        image: "botas de cuero flama",
-        stock: 2,
-        reviews: [8, 10, 8, 10, 6],
-      },
+      { name: "camisa", price: 2000, description: "una bella camisa", thumbnail: "https://i.imgur.com/BY9MiuQ.png", image: "una bella image", stock: 4, reviews: [7, 6, 9, 10, 9, 10], },
+      { name: "pantalon", price: 2200, description: "un pantalon gris", thumbnail: "https://i.imgur.com/XTQuyir.png", image: "una bella imagen de pantalon", stock: 14, reviews: [8, 8], },
+      { name: "remera", price: 1000, description: "una remera dark", thumbnail: "https://i.imgur.com/af9yLS4.png", image: "una bella image", stock: 6, reviews: [7, 5, 6], },
+      { name: "campera", price: 4800, description: "una campera muy abrigada", thumbnail: "https://i.imgur.com/JEDAPAg.png", image: "una bella imagen de campera", stock: 2, reviews: [8, 10, 10], },
+      { name: "zapatillas deportivas", price: 3000, description: "zapatillas nike", thumbnail: "https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw0b96861e/products/NI_AO0352-005/NI_AO0352-005-1.JPG", image: "NIKE ;)", stock: 2, reviews: [8, 10, 10, 7, 8], },
+      { name: "botas de cuero", price: 8000, description: "botas de cuero", thumbnail: "https://bizarro.vteximg.com.br/arquivos/ids/619020-1000-1000/BOTAS-CA%C3%91A-MEDIA-MUJER-B166-CUERO-DOMINGUEZ_23321.jpg", image: "botas de cuero flama", stock: 2, reviews: [8, 10, 8, 10, 6], },
     ]).then(() => console.log("products generated!"));
 
     await Order.bulkCreate([
@@ -187,41 +126,21 @@ async function seed() {
     .catch((err) => console.log(err));
 
   CategoryProduct.bulkCreate([
-<<<<<<< HEAD
-  /*Categoria Calzado*/ {categoryId: 1, productId: 5}, {categoryId: 1, productId: 6},
-  /*Categoria Informal*/{categoryId: 2, productId: 3}, {categoryId: 2, productId: 5},
-  /*Categoria Formal*/  {categoryId: 3, productId: 1}, {categoryId: 3, productId: 2}, {categoryId: 3, productId: 4}, {categoryId: 3, productId: 6},
-  /*Categoria Verano*/  {categoryId: 4, productId: 2}, {categoryId: 4, productId: 3}, {categoryId: 4, productId: 5},
-  /*Categoria Invierno*/{categoryId: 5, productId: 2}, {categoryId: 5, productId: 4}, {categoryId: 5, productId: 6}
+  /*Categoria Calzado*/ { categoryId: 1, productId: 5 }, { categoryId: 1, productId: 6 },
+  /*Categoria Informal*/{ categoryId: 2, productId: 3 }, { categoryId: 2, productId: 5 },
+  /*Categoria Formal*/  { categoryId: 3, productId: 1 }, { categoryId: 3, productId: 2 }, { categoryId: 3, productId: 4 }, { categoryId: 3, productId: 6 },
+  /*Categoria Verano*/  { categoryId: 4, productId: 2 }, { categoryId: 4, productId: 3 }, { categoryId: 4, productId: 5 },
+  /*Categoria Invierno*/{ categoryId: 5, productId: 2 }, { categoryId: 5, productId: 4 }, { categoryId: 5, productId: 6 }
   ]).then(() => console.log("products in cart generated!")).catch((err) => console.log(err));
 
   ProductUser.bulkCreate([
-    /*Reviews de producto 1*/ {productId: 1, userId: 1, review: 8}, {productId: 1, userId: 2, review: 8}, {productId: 1, userId: 3, review: 10},
-    /*Reviews de producto 2*/ {productId: 2, userId: 1, review: 8}, {productId: 2, userId: 2, review: 5},
-    /*Reviews de producto 3*/ {productId: 3, userId: 1, review: 7}, {productId: 2, userId: 3, review: 10},
-    /*Reviews de producto 4*/ {productId: 4, userId: 1, review: 4}, {productId: 4, userId: 3, review: 4}, 
-    /*Reviews de producto 5*/ {productId: 5, userId: 1, review: 7}, {productId: 5, userId: 2, review: 10}, {productId: 5, userId: 3, review: 7},
-    /*Reviews de producto 6*/ {productId: 6, userId: 2, review: 3}, 
+    /*Reviews de producto 1*/ { productId: 1, userId: 1, review: 8 }, { productId: 1, userId: 2, review: 8 }, { productId: 1, userId: 3, review: 10 },
+    /*Reviews de producto 2*/ { productId: 2, userId: 1, review: 8 }, { productId: 2, userId: 2, review: 5 },
+    /*Reviews de producto 3*/ { productId: 3, userId: 1, review: 7 }, { productId: 2, userId: 3, review: 10 },
+    /*Reviews de producto 4*/ { productId: 4, userId: 1, review: 4 }, { productId: 4, userId: 3, review: 4 },
+    /*Reviews de producto 5*/ { productId: 5, userId: 1, review: 7 }, { productId: 5, userId: 2, review: 10 }, { productId: 5, userId: 3, review: 7 },
+    /*Reviews de producto 6*/ { productId: 6, userId: 2, review: 3 },
   ]).then(() => console.log("product reviews generated!")).catch((err) => console.log(err));
 
-=======
-    /*Categoria Calzado*/ { categoryId: 1, productId: 5 },
-    { categoryId: 1, productId: 6 },
-    /*Categoria Informal*/ { categoryId: 2, productId: 3 },
-    { categoryId: 2, productId: 5 },
-    /*Categoria Formal*/ { categoryId: 3, productId: 1 },
-    { categoryId: 3, productId: 2 },
-    { categoryId: 3, productId: 4 },
-    { categoryId: 3, productId: 6 },
-    /*Categoria Verano*/ { categoryId: 4, productId: 2 },
-    { categoryId: 4, productId: 3 },
-    { categoryId: 4, productId: 5 },
-    /*Categoria Invierno*/ { categoryId: 5, productId: 2 },
-    { categoryId: 5, productId: 4 },
-    { categoryId: 5, productId: 6 },
-  ])
-    .then(() => console.log("products in cart generated!"))
-    .catch((err) => console.log(err));
->>>>>>> af80a4b1c45b7bfb2edcf856e5263e83eba0481f
 }
 seed();
