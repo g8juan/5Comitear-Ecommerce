@@ -1,9 +1,9 @@
-## ------------------------------(unauthenticated user)
-## List of Features of the 5comitear E-Commerce Project.
-Made for Educational Project at Plataforma5 Coding Bootcamp.(unauthenticated user)
-## ------------------------------(unauthenticated user)
+## --------------------------------------------------------------------------------|
+## List of Features of the 5comitear E-Commerce Project.                           |
+Made for Educational Project at Plataforma5 Coding Bootcamp.(unauthenticated user) |
+## --------------------------------------------------------------------------------|
 
-## Visitante Features (unauthenticated user)
+## Visitante Features
 
 Todos los usuarios que visiten tu 5commitear E-Commerce Project deberia poder realizar las siguientes actividades:
 
