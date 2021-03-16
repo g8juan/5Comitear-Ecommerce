@@ -1,6 +1,6 @@
 ## --------------------------------------------------------------------------------|
 ## List of Features of the 5comitear E-Commerce Project.                           |
-Made for Educational Project at Plataforma5 Coding Bootcamp.(unauthenticated user) |
+Made for Educational Project at Plataforma5 Coding Bootcamp.                       |
 ## --------------------------------------------------------------------------------|
 
 ## Visitante Features
